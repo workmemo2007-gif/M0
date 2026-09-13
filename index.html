@@ -52,7 +52,7 @@
         body {
             background-color: var(--bg-body);
             color: var(--text-main);
-            padding-bottom: 220px;
+            padding-bottom: 240px;
             overflow-x: hidden;
             min-height: 100vh;
         }
@@ -606,16 +606,17 @@
     </div>
 
     <script>
-        // رابط نشر Google Apps Script الجديد الخاص بك
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwkCbbNtflJ9KzHc9uTtKns5cYmdWIcRnNWquGHXKnBd4-nKH0E-WQWsEPr6fxsMPPXsQ/exec';
 
-        // مطابقة الأقسام مع قيم عمود Category في ملف جديد منيو m1
+        // قائمة الأقسام الشاملة من CSV
         const categories = [
             { id: 'المقبلات', name: 'المقبلات', icon: 'fa-cheese' },
             { id: 'صلصات', name: 'صلصات', icon: 'fa-pepper-hot' },
             { id: 'المشروبات', name: 'المشروبات', icon: 'fa-glass-martini-alt' },
             { id: 'شاورما الدجاج', name: 'شاورما الدجاج', icon: 'fa-drumstick-bite' },
-            { id: 'شاورما اللحم', name: 'شاورما اللحم', icon: 'fa-utensils' }
+            { id: 'شاورما اللحم', name: 'شاورما اللحم', icon: 'fa-utensils' },
+            { id: 'فروج', name: 'فروج', icon: 'fa-fire-burner' },
+            { id: 'ريزو', name: 'ريزو', icon: 'fa-bowl-rice' }
         ];
 
         let dishes = []; 
@@ -629,7 +630,19 @@
             
             try {
                 const response = await fetch(GOOGLE_SCRIPT_URL);
-                dishes = await response.json();
+                const rawData = await response.json();
+
+                // توحيد مسميات الحقول لضمان التوافق التام مع CSV (Image, Category, desc, ID, price, name)
+                dishes = rawData.map(item => ({
+                    id: item.ID || item.id,
+                    category: item.Category || item.category,
+                    name: item.name || item.Name,
+                    price: item.price || item.Price,
+                    img: item.Image || item.image || item.img || 'https://via.placeholder.com/300',
+                    desc: item.desc || item.description || '',
+                    tag: item.tag || item.Tag || ''
+                }));
+
                 renderDishes();
             } catch (error) {
                 console.error("خطأ في جلب الأطباق:", error);
@@ -668,7 +681,7 @@
                 return `
                     <div class="dish-card">
                         <div class="dish-img-wrapper">
-                            <img src="${dish.img || 'https://via.placeholder.com/300'}" alt="${dish.name}" class="dish-img" loading="lazy">
+                            <img src="${dish.img}" alt="${dish.name}" class="dish-img" loading="lazy">
                             ${dish.tag ? `<span class="dish-tag">${dish.tag}</span>` : ''}
                         </div>
                         <div class="dish-details">
@@ -741,7 +754,7 @@
         }
 
         function callWaiter() {
-            const phoneNumber = "07893035416";
+            const phoneNumber = "9647893035416";
             const message = encodeURIComponent("مرحباً، أود نداء النادل إلى الطاولة يرجى المساعدة.");
             window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
         }
@@ -770,7 +783,7 @@
         }
 
         async function sendOrder() {
-            const targetPhone = "077236813660";
+            const targetPhone = "9647723681366"; 
             const cartItemIds = Object.keys(cart);
 
             if (cartItemIds.length === 0) {
@@ -844,7 +857,7 @@
                 fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify(payload)
                 });
             } catch (err) {
