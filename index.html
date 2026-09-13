@@ -623,10 +623,9 @@
     </div>
 
     <script>
-        // رابط Google Apps Script الخاص بك
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwXqDHERgK3pZMhK_1K-VgrFlIKf4-tmGMrRdT6GudwXfaXuaJIWVsDfq9u1rpDC1jZZg/exec';
+        // الرابط الجديد الخاص بك لجلب الأطباق وإرسال الطلبات
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwMe0tpyRpAVY3sQoS7DxH_t3HstiPk4DQvxUk3XUAPrwbJXM9q3YyWEBPCIkU9mZw1eA/exec';
 
-        // Data Structure for Menu
         const categories = [
             { id: 'grill', name: 'مشويات', icon: 'fa-drumstick-bite' },
             { id: 'appetizer', name: 'مقبلات', icon: 'fa-cheese' },
@@ -636,38 +635,26 @@
             { id: 'offers', name: 'العروض الخاصة', icon: 'fa-tags' }
         ];
 
-        const dishes = [
-            // Grill
-            { id: 1, category: 'grill', name: 'كباب لحم عراقي', price: 14000, desc: '3 أسياخ كباب لحم غنم طازج مع خضار مشوية وخبز تنور', img: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&w=600&q=80', tag: 'الأكثر طلباً' },
-            { id: 2, category: 'grill', name: 'شيش طاووق', price: 12000, desc: 'قطع دجاج متبلة بالخلطة الملكية المشوية على الفحم', img: 'https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=600&q=80', tag: '' },
-            { id: 3, category: 'grill', name: 'مشاوي مشكل ملكي', price: 28000, desc: 'تشكيلة كباب، تكاع، طاووق وشيش أضلع مع الأرز والخضار', img: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80', tag: 'توفير' },
-            
-            // Appetizers
-            { id: 4, category: 'appetizer', name: 'حمص باللحمة والسنوبر', price: 6000, desc: 'حمص بطحينة ناعم يعلوه لحم مفروم مقلي وسنوبر محمص', img: 'https://images.unsplash.com/photo-1577968897966-3d4325b36b61?auto=format&fit=crop&w=600&q=80', tag: '' },
-            { id: 5, category: 'appetizer', name: 'متبل باذنجان مشوي', price: 4500, desc: 'باذنجان مشوي على الفحم مع الطحينة وزيت الزيتون الصافي', img: 'https://images.unsplash.com/photo-1541529086526-db283c563270?auto=format&fit=crop&w=600&q=80', tag: '' },
-            { id: 6, category: 'appetizer', name: 'سلطة تبولة ملكية', price: 5000, desc: 'بقدونس طازج، طماطم، برغل وزيت زيتون مع حب الرمان', img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80', tag: 'طازج' },
-
-            // Mains
-            { id: 7, category: 'mains', name: 'قوزي لحم غنم', price: 22000, desc: 'كتف غنم محمر يقدم فوق أرز المكسرات مع المرق العراقي', img: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80', tag: 'توقيع الشيف' },
-            { id: 8, category: 'mains', name: 'سمك مسكوف عراقي', price: 25000, desc: 'سمك كطان مشوي على طريقة المسكوف التقليدية مع التتبيلة الخاصة', img: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=600&q=80', tag: 'شعبي' },
-
-            // Drinks
-            { id: 9, category: 'drinks', name: 'عصير رمان طازج', price: 3500, desc: 'رمان طبيعي 100% معصر طازج عند الطلب', img: 'https://images.unsplash.com/photo-1621263764928-df1444c5e859?auto=format&fit=crop&w=600&q=80', tag: '' },
-            { id: 10, category: 'drinks', name: 'كوكتيل الملكي الخاص', price: 5000, desc: 'مزج بين طبقات المانجو، الفراولة والأفوكادو مع العسل والعش', img: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80', tag: 'مميز' },
-
-            // Desserts
-            { id: 11, category: 'desserts', name: 'كنافة نابلسية بالجبن', price: 6500, desc: 'كنافة ساخنة محشوة بجبن العكاوي الذائب مع القطر والفستق', img: 'https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80', tag: 'ساخن' },
-            { id: 12, category: 'desserts', name: 'بقلاوة بالفستق الحلبي', price: 7000, desc: 'رقائق الجلاش الهشة المحشوة بكمية سخية من الفستق الحلبي', img: 'https://images.unsplash.com/photo-1519676867240-f03562e64548?auto=format&fit=crop&w=600&q=80', tag: '' },
-
-            // Special Offers
-            { id: 13, category: 'offers', name: 'عرض الوجبة العائلية', price: 45000, desc: '1 كغم مشاوي مشكل + 2 مقبلات + أرز + لتر عصائر متنوعة', img: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80', tag: 'خصم 20%' }
-        ];
-
+        let dishes = []; 
         let activeCategory = 'grill';
-        let cart = {}; // { dishId: quantity }
+        let cart = {}; 
         let currentOrderType = 'inhouse';
 
-        // Render Category Chips
+        // جلب الأطباق ديناميكياً من Google Sheets
+        async function fetchDishes() {
+            const grid = document.getElementById('menuGrid');
+            grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">جاري تحميل الأطباق من القائمة...</p>';
+            
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL);
+                dishes = await response.json();
+                renderDishes();
+            } catch (error) {
+                console.error("خطأ في جلب الأطباق:", error);
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: red; padding: 40px;">حدث خطأ أثناء تحميل المنيو. يرجى التحديث لاحقاً.</p>';
+            }
+        }
+
         function renderCategories() {
             const container = document.getElementById('categoriesContainer');
             container.innerHTML = categories.map(cat => `
@@ -677,7 +664,6 @@
             `).join('');
         }
 
-        // Select Active Category
         function selectCategory(catId) {
             activeCategory = catId;
             renderCategories();
@@ -686,12 +672,11 @@
             document.getElementById('currentCategoryTitle').textContent = catObj ? catObj.name : 'الأطباق';
         }
 
-        // Render Dishes Grid
         function renderDishes() {
             const grid = document.getElementById('menuGrid');
             const filteredDishes = dishes.filter(d => d.category === activeCategory);
 
-            if(filteredDishes.length === 0) {
+            if (!filteredDishes || filteredDishes.length === 0) {
                 grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">لا توجد وجبات في هذا القسم حالياً.</p>`;
                 return;
             }
@@ -701,25 +686,25 @@
                 return `
                     <div class="dish-card">
                         <div class="dish-img-wrapper">
-                            <img src="${dish.img}" alt="${dish.name}" class="dish-img" loading="lazy">
+                            <img src="${dish.img || 'https://via.placeholder.com/300'}" alt="${dish.name}" class="dish-img" loading="lazy">
                             ${dish.tag ? `<span class="dish-tag">${dish.tag}</span>` : ''}
                         </div>
                         <div class="dish-details">
                             <div class="dish-header">
                                 <h3 class="dish-name">${dish.name}</h3>
-                                <div class="dish-price">${dish.price.toLocaleString()} د.ع</div>
+                                <div class="dish-price">${Number(dish.price).toLocaleString()} د.ع</div>
                             </div>
-                            <p class="dish-desc">${dish.desc}</p>
+                            <p class="dish-desc">${dish.desc || ''}</p>
                             <div class="dish-actions">
                                 ${qty === 0 ? `
-                                    <button class="add-to-cart-btn" onclick="updateQty(${dish.id}, 1)">
+                                    <button class="add-to-cart-btn" onclick="updateQty('${dish.id}', 1)">
                                         <i class="fas fa-plus"></i> إضافة للطلب
                                     </button>
                                 ` : `
                                     <div class="qty-controls">
-                                        <button class="qty-btn" onclick="updateQty(${dish.id}, -1)">-</button>
+                                        <button class="qty-btn" onclick="updateQty('${dish.id}', -1)">-</button>
                                         <span class="qty-value">${qty}</span>
-                                        <button class="qty-btn" onclick="updateQty(${dish.id}, 1)">+</button>
+                                        <button class="qty-btn" onclick="updateQty('${dish.id}', 1)">+</button>
                                     </div>
                                 `}
                             </div>
@@ -729,7 +714,6 @@
             }).join('');
         }
 
-        // Update Cart Quantity
         function updateQty(dishId, change) {
             const current = cart[dishId] || 0;
             const updated = current + change;
@@ -742,17 +726,16 @@
             updateCartSummary();
         }
 
-        // Update Floating Cart Summary
         function updateCartSummary() {
             let totalItems = 0;
             let totalPrice = 0;
 
             Object.keys(cart).forEach(id => {
                 const qty = cart[id];
-                const dish = dishes.find(d => d.id === parseInt(id));
+                const dish = dishes.find(d => String(d.id) === String(id));
                 if (dish) {
                     totalItems += qty;
-                    totalPrice += dish.price * qty;
+                    totalPrice += Number(dish.price) * qty;
                 }
             });
 
@@ -760,7 +743,6 @@
             document.getElementById('cartTotal').textContent = `${totalPrice.toLocaleString()} د.ع`;
         }
 
-        // Theme Toggle Functionality
         function toggleTheme() {
             document.body.classList.toggle('dark-mode');
             const isDark = document.body.classList.contains('dark-mode');
@@ -776,14 +758,12 @@
             }
         }
 
-        // Call Waiter Function
         function callWaiter() {
             const phoneNumber = "07893035416";
             const message = encodeURIComponent("مرحباً، أود نداء النادل إلى الطاولة يرجى المساعدة.");
             window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
         }
 
-        // Switch Order Type (In-House / Delivery)
         function setOrderType(type) {
             currentOrderType = type;
             const btnInHouse = document.getElementById('btnInHouse');
@@ -807,7 +787,6 @@
             }
         }
 
-        // Send Order to Google Sheets & WhatsApp
         async function sendOrder() {
             const targetPhone = "077236813660";
             const cartItemIds = Object.keys(cart);
@@ -820,7 +799,6 @@
             let customerInfo = {};
             let whatsappMessage = "مرحباً، أود إرسال طلب جديد عبر المنيو الإلكتروني:\n\n";
 
-            // Add Order Type Info
             if (currentOrderType === 'inhouse') {
                 const table = document.getElementById('tableNum').value;
                 if (!table) {
@@ -859,9 +837,9 @@
             let itemsSummaryList = [];
 
             cartItemIds.forEach((id, index) => {
-                const dish = dishes.find(d => d.id === parseInt(id));
+                const dish = dishes.find(d => String(d.id) === String(id));
                 const qty = cart[id];
-                const itemTotal = dish.price * qty;
+                const itemTotal = Number(dish.price) * qty;
                 totalPrice += itemTotal;
                 whatsappMessage += `${index + 1}. ${dish.name} x${qty} - (${itemTotal.toLocaleString()} د.ع)\n`;
                 itemsSummaryList.push(`${dish.name} (x${qty})`);
@@ -869,7 +847,6 @@
 
             whatsappMessage += `\n💰 *المجموع الكلي:* ${totalPrice.toLocaleString()} د.ع`;
 
-            // إعداد البيانات المرسلة لـ Google Sheets
             const payload = {
                 timestamp: new Date().toLocaleString('ar-IQ'),
                 orderType: customerInfo.type,
@@ -881,7 +858,6 @@
                 totalPrice: totalPrice
             };
 
-            // إرسال البيانات إلى Google Sheets بدون تعطيل تجربة المستخدم
             try {
                 fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
@@ -890,17 +866,15 @@
                     body: JSON.stringify(payload)
                 });
             } catch (err) {
-                console.error("خطأ في الربط مع Google Sheets:", err);
+                console.error("خطأ في حفظ الطلب في Google Sheets:", err);
             }
 
-            // توجيه المستخدم إلى واتساب
             window.open(`https://wa.me/${targetPhone}?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
         }
 
-        // Initialize App
         document.addEventListener('DOMContentLoaded', () => {
             renderCategories();
-            renderDishes();
+            fetchDishes();
         });
     </script>
 </body>
