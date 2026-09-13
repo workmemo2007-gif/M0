@@ -25,14 +25,10 @@
             --header-overlay: rgba(0, 0, 0, 0.5);
             --shadow-color: rgba(0, 0, 0, 0.08);
             --accent-green: #25d366;
-            --accent-green-hover: #1da851;
-            --accent-blue: #1d4ed8;
-            --accent-blue-hover: #1e40af;
             --glass-bg: rgba(255, 255, 255, 0.2);
             --glass-border: rgba(255, 255, 255, 0.3);
             --silver-grad: linear-gradient(135deg, #e0e0e0 0%, #bdc3c7 50%, #95a5a6 100%);
-            --silver-grad-hover: linear-gradient(135deg, #ffffff 0%, #d6dbdf 50%, #abb2b9 100%);
-            --card-radius: 16px;
+            --card-radius: 12px;
         }
 
         body.dark-mode {
@@ -46,25 +42,22 @@
             --glass-bg: rgba(255, 255, 255, 0.08);
             --glass-border: rgba(255, 255, 255, 0.15);
             --silver-grad: linear-gradient(135deg, #7f8c8d 0%, #4a5568 50%, #2d3748 100%);
-            --silver-grad-hover: linear-gradient(135deg, #95a5a6 0%, #718096 50%, #4a5568 100%);
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: 'Tajawal', sans-serif;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
         body {
             background-color: var(--bg-body);
             color: var(--text-main);
-            padding-bottom: 90px;
+            padding-bottom: 80px;
             overflow-x: hidden;
         }
 
@@ -73,75 +66,64 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.12);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
+        /* Top Nav - Compact Icons (تعديل رقم 5) */
         .top-nav {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             z-index: 10;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
+            padding: 10px 12px;
             background: linear-gradient(to bottom, rgba(0,0,0,0.85), transparent);
         }
 
         .social-icons {
             display: flex;
-            gap: 12px;
+            gap: 6px;
         }
 
         .social-icons a {
             color: #ffffff;
-            font-size: 1.1rem;
-            width: 38px;
-            height: 38px;
+            font-size: 0.85rem;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-icons a:hover {
-            background: var(--primary-gold);
-            color: #000;
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 0 12px var(--gold-glow);
         }
 
         .theme-toggle-btn {
             border: 1px solid var(--primary-gold);
             color: #ffffff;
-            padding: 8px 16px;
-            border-radius: 20px;
+            padding: 4px 10px;
+            border-radius: 15px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
+            gap: 5px;
+            font-size: 0.72rem;
             font-weight: bold;
         }
 
+        /* Hero Header */
         .hero-header {
             position: relative;
-            height: 220px;
+            height: 180px;
             background: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
             display: flex;
             align-items: flex-end;
-            padding: 20px;
+            padding: 15px;
         }
 
         .hero-overlay {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: var(--header-overlay);
         }
 
@@ -150,80 +132,69 @@
             z-index: 2;
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 10px;
+            gap: 10px;
         }
 
         .logo-frame {
-            width: 75px;
-            height: 75px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             border: 2px solid var(--primary-gold);
-            box-shadow: 0 0 15px var(--gold-glow);
             overflow: hidden;
             background: #000;
             flex-shrink: 0;
         }
 
-        .logo-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .logo-frame img { width: 100%; height: 100%; object-fit: cover; }
 
         .restaurant-info h1 {
             font-family: 'Aref Ruqaa', serif;
-            font-size: 2rem;
+            font-size: 1.6rem;
             color: #ffffff;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-            line-height: 1.2;
+            line-height: 1.1;
         }
 
         .restaurant-info p {
             color: var(--primary-gold);
-            font-size: 0.85rem;
-            font-weight: 500;
+            font-size: 0.75rem;
         }
 
+        /* Service Actions (تعديل رقم 1: حذف الاتصال المباشر) */
         .service-actions-container {
-            padding: 15px 20px 5px;
+            padding: 10px 12px 5px;
             display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
+            gap: 8px;
         }
 
         .action-btn {
-            flex: 1 1 calc(33.333% - 10px);
-            min-width: 100px;
-            padding: 10px 6px;
-            border-radius: 12px;
-            font-size: 0.85rem;
+            flex: 1;
+            padding: 8px 5px;
+            border-radius: 10px;
+            font-size: 0.8rem;
             font-weight: 700;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 5px;
             cursor: pointer;
             border: none;
             text-decoration: none;
         }
 
         .call-waiter-btn { background-color: var(--accent-green); color: #ffffff; }
-        .direct-call-btn { background-color: var(--accent-blue); color: #ffffff; }
         .location-btn { background: var(--silver-grad); color: #1a202c; }
 
-        .tab-page { display: none; padding: 15px 20px; }
+        .tab-page { display: none; padding: 10px 12px; }
         .tab-page.active { display: block; }
 
         /* Carousel Slider */
         .ads-carousel {
             position: relative;
             width: 100%;
-            height: 160px;
-            border-radius: 16px;
+            height: 130px;
+            border-radius: 12px;
             overflow: hidden;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px var(--shadow-color);
+            margin-bottom: 15px;
         }
 
         .carousel-slide {
@@ -235,107 +206,40 @@
             background-position: center;
             display: flex;
             align-items: flex-end;
-            padding: 15px;
+            padding: 10px;
         }
 
         .carousel-slide.active { opacity: 1; }
         .slide-caption {
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(5px);
+            background: rgba(0,0,0,0.65);
             color: #fff;
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 0.85rem;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
             border-right: 3px solid var(--primary-gold);
         }
 
-        /* Reviews Section */
-        .reviews-section {
-            margin-top: 25px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--card-radius);
-            padding: 15px;
-        }
-
-        .review-card {
-            background: rgba(212, 175, 55, 0.05);
-            border-radius: 10px;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid var(--border-color);
-        }
-
-        .review-header {
+        /* Horizontal Popular Items Scroll (تعديل رقم 3) */
+        .popular-horizontal-scroll {
             display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--primary-gold);
-            margin-bottom: 4px;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scrollbar-width: none;
         }
 
-        .review-text { font-size: 0.8rem; color: var(--text-main); }
+        .popular-horizontal-scroll::-webkit-scrollbar { display: none; }
 
-        .add-review-form {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-top: 12px;
+        .popular-horizontal-scroll .product-card {
+            flex: 0 0 145px; /* عرض ثابت للكروت في القائمة الافقية */
+            width: 145px;
         }
 
-        .add-review-form input, .add-review-form textarea {
-            width: 100%;
-            padding: 8px 12px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            background: transparent;
-            color: var(--text-main);
-            font-size: 0.85rem;
-        }
-
-        .add-review-btn {
-            background: var(--primary-gold);
-            color: #000;
-            border: none;
-            padding: 8px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        /* Glass Categories List */
-        .glass-categories-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .glass-category-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-right: 4px solid var(--primary-gold);
-            padding: 14px 18px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            color: var(--text-main);
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 4px 12px var(--shadow-color);
-        }
-
-        .glass-category-card:hover { transform: translateX(-4px); }
-
-        /* Menu Items Grid */
+        /* Compact Products Grid (تعديل رقم 2: تصغير الأطباق لتكون جنباً إلى جنب) */
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(2, 1fr); /* طبقين جنباً إلى جنب */
+            gap: 10px;
         }
 
         .product-card {
@@ -347,118 +251,198 @@
             flex-direction: column;
         }
 
-        .product-img-wrapper { position: relative; height: 125px; width: 100%; }
+        .product-img-wrapper { position: relative; height: 95px; width: 100%; }
         .product-img { width: 100%; height: 100%; object-fit: cover; }
         .product-price-badge {
-            position: absolute; bottom: 8px; left: 8px;
-            background: rgba(0, 0, 0, 0.75);
+            position: absolute; bottom: 4px; left: 4px;
+            background: rgba(0, 0, 0, 0.8);
             color: var(--primary-gold);
             border: 1px solid var(--primary-gold);
-            padding: 3px 10px; border-radius: 16px;
-            font-size: 0.8rem; font-weight: 800;
+            padding: 2px 6px; border-radius: 12px;
+            font-size: 0.7rem; font-weight: 800;
         }
 
-        .product-content { padding: 12px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .product-title { font-size: 1rem; font-weight: 700; }
-        .product-desc { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px; }
+        .product-content { padding: 8px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .product-title { font-size: 0.85rem; font-weight: 700; margin-bottom: 2px; }
+        .product-desc { font-size: 0.7rem; color: var(--text-muted); margin-bottom: 6px; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
         .add-to-cart-btn {
             width: 100%; background: transparent;
             border: 1px solid var(--primary-gold);
             color: var(--primary-gold);
-            padding: 8px; border-radius: 10px;
-            font-weight: 700; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; gap: 6px;
+            padding: 5px; border-radius: 8px;
+            font-size: 0.75rem; font-weight: 700; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 4px;
         }
 
         .qty-controls {
             display: flex; align-items: center; justify-content: space-between;
-            background: rgba(212, 175, 55, 0.1); border-radius: 10px;
-            padding: 4px 8px; border: 1px solid var(--primary-gold);
+            background: rgba(212, 175, 55, 0.1); border-radius: 8px;
+            padding: 2px 5px; border: 1px solid var(--primary-gold);
+            font-size: 0.8rem;
         }
 
         .qty-btn {
             background: var(--primary-gold); color: #000; border: none;
-            width: 26px; height: 26px; border-radius: 6px; font-weight: bold; cursor: pointer;
+            width: 22px; height: 22px; border-radius: 4px; font-weight: bold; cursor: pointer;
+        }
+
+        /* Reviews Section */
+        .reviews-section {
+            margin-top: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--card-radius);
+            padding: 12px;
+        }
+
+        .review-card {
+            background: rgba(212, 175, 55, 0.05);
+            border-radius: 8px;
+            padding: 8px;
+            margin-bottom: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            margin-bottom: 3px;
+        }
+
+        .review-text { font-size: 0.75rem; color: var(--text-main); }
+
+        .add-review-form {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .add-review-form input, .add-review-form textarea {
+            width: 100%;
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background: transparent;
+            color: var(--text-main);
+            font-size: 0.78rem;
+        }
+
+        .add-review-btn {
+            background: var(--primary-gold);
+            color: #000;
+            border: none;
+            padding: 6px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        /* Glass Categories List */
+        .glass-categories-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .glass-category-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-right: 3px solid var(--primary-gold);
+            padding: 10px 14px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--text-main);
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
         }
 
         /* Floating Order Notification Bar */
         .cart-notification-bar {
-            position: fixed; bottom: 70px; left: 15px; right: 15px;
+            position: fixed; bottom: 65px; left: 12px; right: 12px;
             background: var(--primary-gold); color: #000;
-            padding: 10px 16px; border-radius: 30px;
+            padding: 8px 14px; border-radius: 25px;
             display: flex; justify-content: space-between; align-items: center;
-            font-weight: bold; font-size: 0.88rem;
-            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.5);
+            font-weight: bold; font-size: 0.82rem;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
             z-index: 90; cursor: pointer; display: none;
         }
 
         /* Bottom Navigation Bar */
         .bottom-nav-bar {
             position: fixed; bottom: 0; left: 0; right: 0;
-            height: 60px; background: var(--bg-card);
+            height: 55px; background: var(--bg-card);
             border-top: 1px solid var(--border-color);
             display: flex; justify-content: space-around; align-items: center;
-            z-index: 100; box-shadow: 0 -2px 10px var(--shadow-color);
+            z-index: 100;
         }
 
         .nav-item {
             display: flex; flex-direction: column; align-items: center;
-            color: var(--text-muted); font-size: 0.75rem; font-weight: 700;
-            text-decoration: none; cursor: pointer; gap: 3px;
+            color: var(--text-muted); font-size: 0.7rem; font-weight: 700;
+            text-decoration: none; cursor: pointer; gap: 2px;
         }
 
-        .nav-item i { font-size: 1.2rem; }
+        .nav-item i { font-size: 1.1rem; }
         .nav-item.active { color: var(--primary-gold); }
 
-        /* Cart Page Specifics */
+        /* Cart Page */
         .cart-container {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: var(--card-radius);
-            padding: 15px;
+            padding: 12px;
         }
 
-        .order-options { display: flex; gap: 10px; margin: 15px 0; }
+        .order-options { display: flex; gap: 8px; margin: 12px 0; }
         .order-type-btn {
-            flex: 1; padding: 8px; border-radius: 8px;
+            flex: 1; padding: 7px; border-radius: 8px;
             border: 1px solid var(--border-color); background: transparent;
-            color: var(--text-main); font-weight: 600; cursor: pointer;
+            color: var(--text-main); font-size: 0.8rem; font-weight: 600; cursor: pointer;
         }
 
-        .order-type-btn.active {
-            background: var(--primary-gold); color: #000; border-color: var(--primary-gold);
-        }
+        .order-type-btn.active { background: var(--primary-gold); color: #000; border-color: var(--primary-gold); }
 
-        .form-fields { display: grid; gap: 8px; margin-bottom: 15px; }
+        .form-fields { display: grid; gap: 6px; margin-bottom: 12px; }
         .form-fields input {
-            width: 100%; padding: 10px; border-radius: 8px;
+            width: 100%; padding: 8px; border-radius: 6px;
             border: 1px solid var(--border-color); background: transparent;
-            color: var(--text-main);
+            color: var(--text-main); font-size: 0.8rem;
         }
 
         .submit-order-btn {
             width: 100%; background: linear-gradient(135deg, #25d366, #128c7e);
-            color: #fff; border: none; padding: 12px; border-radius: 10px;
-            font-weight: 700; cursor: pointer; display: flex;
-            align-items: center; justify-content: center; gap: 8px;
+            color: #fff; border: none; padding: 10px; border-radius: 8px;
+            font-weight: 700; font-size: 0.9rem; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
         }
 
         .cart-line-item {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 8px 0; border-bottom: 1px dashed var(--border-color);
-            font-size: 0.88rem;
+            padding: 6px 0; border-bottom: 1px dashed var(--border-color);
+            font-size: 0.8rem;
         }
 
         .section-title {
-            font-size: 1.2rem; font-weight: 700; margin-bottom: 15px;
-            color: var(--primary-gold); display: flex; align-items: center; gap: 8px;
+            font-size: 1.05rem; font-weight: 700; margin-bottom: 10px;
+            color: var(--primary-gold); display: flex; align-items: center; gap: 6px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Navigation Bar -->
+    <!-- Navigation Bar (تعديل رقم 5: أزرار مصغرة) -->
     <div class="top-nav">
         <div class="social-icons">
             <a href="#" class="glass-icon"><i class="fab fa-instagram"></i></a>
@@ -468,7 +452,7 @@
         </div>
         <button class="theme-toggle-btn glass-icon" id="themeToggleBtn" onclick="toggleTheme()">
             <i class="fas fa-moon"></i>
-            <span id="themeText">النمط الداكن</span>
+            <span id="themeText">الداكن</span>
         </button>
     </div>
 
@@ -486,11 +470,10 @@
         </div>
     </header>
 
-    <!-- Actions -->
+    <!-- Actions (تعديل رقم 1: إزالة الاتصال المباشر) -->
     <div class="service-actions-container">
         <button class="action-btn call-waiter-btn" onclick="callWaiter()"><i class="fas fa-bell"></i> نداء الويتر</button>
-        <button class="action-btn direct-call-btn" onclick="makeDirectCall()"><i class="fas fa-phone-alt"></i> اتصال مباشر</button>
-        <a href="https://maps.google.com/?q=Al-Diwaniyah,Iraq" target="_blank" class="action-btn location-btn"><i class="fas fa-map-marker-alt"></i> الموقع</a>
+        <a href="https://maps.google.com/?q=Al-Diwaniyah,Iraq" target="_blank" class="action-btn location-btn"><i class="fas fa-map-marker-alt"></i> موقع المطعم</a>
     </div>
 
     <!-- PAGE 1: HOME -->
@@ -505,23 +488,14 @@
             </div>
         </div>
 
-        <!-- Most Popular Dishes -->
+        <!-- Most Popular Dishes (تعديل رقم 3: التمرير الأفقي) -->
         <div class="section-title"><i class="fas fa-fire"></i> الأطباق الأكثر طلباً</div>
-        <div class="products-grid" id="popularGrid"></div>
+        <div class="popular-horizontal-scroll" id="popularGrid"></div>
 
-        <!-- Customer Reviews -->
+        <!-- Customer Reviews (تعديل رقم 4: حفض واسترجاع التعليقات للجميع عبر LocalStorage) -->
         <div class="reviews-section">
             <div class="section-title"><i class="fas fa-comments"></i> تعليقات الزبائن</div>
-            <div id="reviewsContainer">
-                <div class="review-card">
-                    <div class="review-header"><span>أحمد العراقي</span> <span>⭐⭐⭐⭐⭐</span></div>
-                    <div class="review-text">أفضل شاورما في المحافظة، الطعم خرافي والخدمة ممتازة!</div>
-                </div>
-                <div class="review-card">
-                    <div class="review-header"><span>سارة علي</span> <span>⭐⭐⭐⭐⭐</span></div>
-                    <div class="review-text">الفروج المشوي مع الرز طعمه رائع جداً والنظافة 10/10.</div>
-                </div>
-            </div>
+            <div id="reviewsContainer"></div>
             
             <div class="add-review-form">
                 <input type="text" id="reviewerName" placeholder="اسمك">
@@ -536,11 +510,12 @@
         <div class="section-title"><i class="fas fa-list"></i> أقسام القائمة</div>
         <div class="glass-categories-grid" id="glassCategoriesGrid"></div>
         
-        <div id="categoryProductsContainer" style="display:none; margin-top:20px;">
-            <button class="add-to-cart-btn" onclick="backToCategoriesList()" style="margin-bottom:15px; width:auto; padding: 6px 15px;">
+        <div id="categoryProductsContainer" style="display:none; margin-top:10px;">
+            <button class="add-to-cart-btn" onclick="backToCategoriesList()" style="margin-bottom:10px; width:auto; padding: 4px 12px;">
                 <i class="fas fa-arrow-right"></i> العودة للأقسام
             </button>
             <div class="section-title" id="selectedCategoryTitle"></div>
+            <!-- تعديل رقم 2: شبكة أطباق مصغرة متجاورة -->
             <div class="products-grid" id="categoryProductsGrid"></div>
         </div>
     </div>
@@ -551,7 +526,7 @@
         <div class="cart-container">
             <div id="cartItemsList"></div>
             
-            <div style="display:flex; justify-content:space-between; margin:15px 0; font-weight:bold; font-size:1.1rem;">
+            <div style="display:flex; justify-content:space-between; margin:12px 0; font-weight:bold; font-size:1rem;">
                 <span>الإجمالي الكلي:</span>
                 <span id="cartGrandTotal" style="color:var(--primary-gold);">0 د.ع</span>
             </div>
@@ -593,41 +568,41 @@
 
     <script>
         const rawProducts = [
-          {"ID": 1, "Category": "المقبلات", "name": "فنكر", "price": 2000, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "بطاطا مقلية مقرمشة - تشكيلة مقبلات شهية وطازجة", "popular": true},
-          {"ID": 2, "Category": "المقبلات", "name": "حمص بطحينية", "price": 1500, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "حمص ناعم وزيت زيتون - تشكيلة مقبلات شهية وطازجة"},
-          {"ID": 3, "Category": "المقبلات", "name": "باذنجانية", "price": 1000, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "سلاطة باذنجان متبلة - تشكيلة مقبلات شهية وطازجة"},
-          {"ID": 4, "Category": "المقبلات", "name": "رمانية", "price": 1000, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "سلاطة رمان منعشة - تشكيلة مقبلات شهية وطازجة"},
-          {"ID": 5, "Category": "المقبلات", "name": "جاجيك", "price": 1000, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "خيار باللبن والنعناع - تشكيلة مقبلات شهية وطازجة"},
-          {"ID": 6, "Category": "المقبلات", "name": "بابا غنوج", "price": 1000, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "باذنجان مشوي بالطحينة - تشكيلة مقبلات شهية وطازجة"},
-          {"ID": 7, "Category": "المقبلات", "name": "شوندر", "price": 1000, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "سلاطة شوندر طازجة - تشكيلة مقبلات شهية وطازجة"},
-          {"ID": 8, "Category": "صلصات", "name": "ثومية", "price": 500, "image": "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500", "desc": "صلصة الثوم الغنية - صلصات وتتبيلات مميزة"},
-          {"ID": 9, "Category": "صلصات", "name": "طرطور", "price": 500, "image": "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500", "desc": "صلصة الطحينة مع الليمون - صلصات وتتبيلات مميزة"},
-          {"ID": 10, "Category": "صلصات", "name": "صلصة ريزو", "price": 500, "image": "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500", "desc": "صلصة الريزو الخاصة - صلصات وتتبيلات مميزة"},
-          {"ID": 11, "Category": "صلصات", "name": "باربكيو", "price": 500, "image": "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500", "desc": "صلصة باربكيو مدخنة - صلصات وتتبيلات مميزة"},
-          {"ID": 12, "Category": "صلصات", "name": "سبايسي", "price": 500, "image": "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500", "desc": "صلصة حارة ومبهرة - صلصات وتتبيلات مميزة"},
-          {"ID": 13, "Category": "المشروبات", "name": "مشروب غازي علبة", "price": 500, "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=500", "desc": "مشروب غازي بارد علبة - مشروبات ومنعشات باردة"},
-          {"ID": 14, "Category": "المشروبات", "name": "مشروب غازي ماكينة", "price": 1000, "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=500", "desc": "مشروب غازي منعش من الماكينة - مشروبات ومنعشات باردة"},
-          {"ID": 15, "Category": "المشروبات", "name": "لبن", "price": 1000, "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=500", "desc": "لبن رائب بارد - مشروبات ومنعشات باردة"},
-          {"ID": 16, "Category": "المشروبات", "name": "ماء", "price": 250, "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=500", "desc": "ماء نقاء مبرد - مشروبات ومنعشات باردة"},
-          {"ID": 17, "Category": "شاورما الدجاج", "name": "صاج دجاج", "price": 3000, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "خبز لبناني - دجاج - ثومية - مخلل"},
-          {"ID": 18, "Category": "شاورما الدجاج", "name": "صاج دجاج شريف", "price": 3500, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "خبز لبناني - دجاج - ثومية - مخلل - جبن - ذرة"},
-          {"ID": 19, "Category": "شاورما الدجاج", "name": "وجبة عربي", "price": 5000, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "صاج دجاج (مقطع) - بطاطا - ثومية - مخلل - محمرة - بيبسي", "popular": true},
-          {"ID": 20, "Category": "شاورما الدجاج", "name": "فرنسي دجاج", "price": 4000, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "صمون فرنسي - دجاج - ثومية - مخلل"},
-          {"ID": 21, "Category": "شاورما الدجاج", "name": "طبق شاورما دجاج عراقي 200 غ", "price": 7500, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "شاورما الدجاج - بطاطا - ثومية - مخلل - خبز لبناني"},
-          {"ID": 22, "Category": "شاورما الدجاج", "name": "نصف كيلو شاورما دجاج عراقي 500 غ", "price": 12000, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "شاورما الدجاج - ثومية - خبز لبناني"},
-          {"ID": 23, "Category": "شاورما الدجاج", "name": "كيلو شاورما دجاج", "price": 24000, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "شاورما الدجاج - ثومية - خبز لبناني"},
-          {"ID": 24, "Category": "شاورما اللحم", "name": "صاج لحم", "price": 5000, "image": "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=500", "desc": "خبز لبناني - لحم - طرطور - مخلل - طماطم - بقدونس", "popular": true},
-          {"ID": 25, "Category": "شاورما اللحم", "name": "حجري لحم", "price": 4000, "image": "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=500", "desc": "صمون حجري (عراقي) - لحم - طماطم"},
-          {"ID": 26, "Category": "شاورما اللحم", "name": "فرنسي لحم", "price": 6000, "image": "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=500", "desc": "خبز فرنسي - لحم - مخلل - طماطم"},
-          {"ID": 27, "Category": "شاورما اللحم", "name": "عربي لحم", "price": 7000, "image": "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=500", "desc": "صاج لحم مقطع - بطاطا - مخلل - طرطور - محمرة - بيبسي"},
-          {"ID": 28, "Category": "شاورما اللحم", "name": "نصف كيلو شاورما لحم عراقي", "price": 22000, "image": "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=500", "desc": "شاورما لحم - طرطور - خبز لبناني"},
-          {"ID": 29, "Category": "شاورما اللحم", "name": "كيلو شاورما لحم عراقي", "price": 40000, "image": "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=500", "desc": "شاورما لحم - طرطور - خبز لبناني"},
-          {"ID": 30, "Category": "فروج", "name": "فروج شريف مشوي", "price": 13000, "image": "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=500", "desc": "دجاج شوي - خبز محمرة - بطاطا - ثومية - باربكيو - خبز لبناني", "popular": true},
-          {"ID": 31, "Category": "فروج", "name": "نصف فروج شريف مشوي", "price": 7000, "image": "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=500", "desc": "دجاج شوي - خبز محمرة - بطاطا - ثومية - باربكيو - خبز لبناني"},
-          {"ID": 32, "Category": "فروج", "name": "فروج مشوي مع رز", "price": 16000, "image": "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=500", "desc": "فروج مشوي - رز - خبزة محمرة - خبز لبناني - ثومية - باربكيو"},
-          {"ID": 33, "Category": "فروج", "name": "نصف فروج مشوي مع رز", "price": 9000, "image": "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=500", "desc": "فروج مشوي - رز - خبزة محمرة - خبز لبناني - ثومية - باربكيو"},
-          {"ID": 34, "Category": "ريزو", "name": "ريزو شاورما دجاج", "price": 5000, "image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=500", "desc": "شاورما دجاج - صلصة ريزو الخاصة"},
-          {"ID": 35, "Category": "ريزو", "name": "ريزو شاورما لحم", "price": 7000, "image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=500", "desc": "شاورما لحم - صلصة ريزو الخاصة"}
+          {"ID": 1, "Category": "المقبلات", "name": "فنكر", "price": 2000, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "بطاطا مقلية مقرمشة", "popular": true},
+          {"ID": 2, "Category": "المقبلات", "name": "حمص بطحينية", "price": 1500, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "حمص ناعم وزيت زيتون"},
+          {"ID": 3, "Category": "المقبلات", "name": "باذنجانية", "price": 1000, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "سلاطة باذنجان متبلة"},
+          {"ID": 4, "Category": "المقبلات", "name": "رمانية", "price": 1000, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "سلاطة رمان منعشة"},
+          {"ID": 5, "Category": "المقبلات", "name": "جاجيك", "price": 1000, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "خيار باللبن والنعناع"},
+          {"ID": 6, "Category": "المقبلات", "name": "بابا غنوج", "price": 1000, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "باذنجان مشوي بالطحينة"},
+          {"ID": 7, "Category": "المقبلات", "name": "شوندر", "price": 1000, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "سلاطة شوندر طازجة"},
+          {"ID": 8, "Category": "صلصات", "name": "ثومية", "price": 500, "image": "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500", "desc": "صلصة الثوم الغنية"},
+          {"ID": 9, "Category": "صلصات", "name": "طرطور", "price": 500, "image": "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500", "desc": "صلصة الطحينة مع الليمون"},
+          {"ID": 10, "Category": "صلصات", "name": "صلصة ريزو", "price": 500, "image": "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500", "desc": "صلصة الريزو الخاصة"},
+          {"ID": 11, "Category": "صلصات", "name": "باربكيو", "price": 500, "image": "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500", "desc": "صلصة باربكيو مدخنة"},
+          {"ID": 12, "Category": "صلصات", "name": "سبايسي", "price": 500, "image": "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500", "desc": "صلصة حارة ومبهرة"},
+          {"ID": 13, "Category": "المشروبات", "name": "مشروب غازي علبة", "price": 500, "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=500", "desc": "مشروب غازي بارد علبة"},
+          {"ID": 14, "Category": "المشروبات", "name": "مشروب غازي ماكينة", "price": 1000, "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=500", "desc": "منعش من الماكينة"},
+          {"ID": 15, "Category": "المشروبات", "name": "لبن", "price": 1000, "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=500", "desc": "لبن رائب بارد"},
+          {"ID": 16, "Category": "المشروبات", "name": "ماء", "price": 250, "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=500", "desc": "ماء نقاء مبرد"},
+          {"ID": 17, "Category": "شاورما الدجاج", "name": "صاج دجاج", "price": 3000, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "خبز لبناني - دجاج - ثومية"},
+          {"ID": 18, "Category": "شاورما الدجاج", "name": "صاج دجاج شريف", "price": 3500, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "دجاج - جبن - ذرة"},
+          {"ID": 19, "Category": "شاورما الدجاج", "name": "وجبة عربي", "price": 5000, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "صاج مقطع - بطاطا - بيبسي", "popular": true},
+          {"ID": 20, "Category": "شاورما الدجاج", "name": "فرنسي دجاج", "price": 4000, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "صمون فرنسي - ثومية"},
+          {"ID": 21, "Category": "شاورما الدجاج", "name": "طبق شاورما دجاج 200غ", "price": 7500, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "شاورما - بطاطا - ثومية"},
+          {"ID": 22, "Category": "شاورما الدجاج", "name": "نصف كيلو شاورما دجاج", "price": 12000, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "شاورما - ثومية - خبز"},
+          {"ID": 23, "Category": "شاورما الدجاج", "name": "كيلو شاورما دجاج", "price": 24000, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "شاورما - ثومية - خبز"},
+          {"ID": 24, "Category": "شاورما اللحم", "name": "صاج لحم", "price": 5000, "image": "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=500", "desc": "خبز لبناني - طرطور", "popular": true},
+          {"ID": 25, "Category": "شاورما اللحم", "name": "حجري لحم", "price": 4000, "image": "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=500", "desc": "صمون حجري - طماطم"},
+          {"ID": 26, "Category": "شاورما اللحم", "name": "فرنسي لحم", "price": 6000, "image": "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=500", "desc": "خبز فرنسي - لحم"},
+          {"ID": 27, "Category": "شاورما اللحم", "name": "عربي لحم", "price": 7000, "image": "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=500", "desc": "صاج مقطع - بيبسي"},
+          {"ID": 28, "Category": "شاورما اللحم", "name": "نصف كيلو شاورما لحم", "price": 22000, "image": "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=500", "desc": "شاورما لحم - طرطور"},
+          {"ID": 29, "Category": "شاورما اللحم", "name": "كيلو شاورما لحم", "price": 40000, "image": "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=500", "desc": "شاورما لحم - طرطور"},
+          {"ID": 30, "Category": "فروج", "name": "فروج شريف مشوي", "price": 13000, "image": "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=500", "desc": "دجاج شوي - بطاطا - ثومية", "popular": true},
+          {"ID": 31, "Category": "فروج", "name": "نصف فروج مشوي", "price": 7000, "image": "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=500", "desc": "دجاج شوي - بطاطا"},
+          {"ID": 32, "Category": "فروج", "name": "فروج مشوي مع رز", "price": 16000, "image": "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=500", "desc": "فروج مشوي - رز - ثومية"},
+          {"ID": 33, "Category": "فروج", "name": "نصف فروج مع رز", "price": 9000, "image": "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=500", "desc": "نصف فروج - رز - ثومية"},
+          {"ID": 34, "Category": "ريزو", "name": "ريزو شاورما دجاج", "price": 5000, "image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=500", "desc": "دجاج - صلصة ريزو"},
+          {"ID": 35, "Category": "ريزو", "name": "ريزو شاورما لحم", "price": 7000, "image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=500", "desc": "لحم - صلصة ريزو"}
         ];
 
         let cart = {};
@@ -643,16 +618,23 @@
             'المشروبات': 'fa-glass-martini-alt'
         };
 
+        // التعليقات الأساسية الافتراضية
+        const defaultReviews = [
+            { name: "أحمد العراقي", stars: "⭐⭐⭐⭐⭐", text: "أفضل شاورما في المحافظة، الطعم خرافي والخدمة ممتازة!" },
+            { name: "سارة علي", stars: "⭐⭐⭐⭐⭐", text: "الفروج المشوي مع الرز طعمه رائع جداً والنظافة 10/10." }
+        ];
+
         document.addEventListener('DOMContentLoaded', () => {
             renderPopularProducts();
             renderGlassCategories();
+            renderReviews();
             startCarousel();
         });
 
         function toggleTheme() {
             document.body.classList.toggle('dark-mode');
             const isDark = document.body.classList.contains('dark-mode');
-            document.getElementById('themeText').textContent = isDark ? 'النمط الفاتح' : 'النمط الداكن';
+            document.getElementById('themeText').textContent = isDark ? 'الفاتح' : 'الداكن';
             document.querySelector('#themeToggleBtn i').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
         }
 
@@ -689,7 +671,7 @@
                 const icon = categoryIcons[cat] || 'fa-utensils';
                 return `
                     <div class="glass-category-card" onclick="openCategoryProducts('${cat}')">
-                        <span><i class="fas ${icon}" style="margin-left: 8px; color: var(--primary-gold);"></i> ${cat}</span>
+                        <span><i class="fas ${icon}" style="margin-left: 6px; color: var(--primary-gold);"></i> ${cat}</span>
                         <i class="fas fa-chevron-left"></i>
                     </div>
                 `;
@@ -712,6 +694,7 @@
             document.getElementById('categoryProductsContainer').style.display = 'none';
         }
 
+        /* تعديل رقم 2: بطاقة طبق مصغرة وبحجم متناسق للعرض المزدوج */
         function createProductCardHTML(product) {
             const qty = cart[product.ID] || 0;
             return `
@@ -728,7 +711,7 @@
                         <div>
                             ${qty === 0 ? `
                                 <button class="add-to-cart-btn" onclick="updateCart(${product.ID}, 1)">
-                                    <i class="fas fa-plus"></i> إضافة للسلة
+                                    <i class="fas fa-plus"></i> إضافة
                                 </button>
                             ` : `
                                 <div class="qty-controls">
@@ -750,7 +733,6 @@
                 cart[productId] = newQty;
             }
             
-            // Re-render current active views to update UI buttons
             renderPopularProducts();
             if (document.getElementById('categoryProductsContainer').style.display !== 'none') {
                 const currentCat = document.getElementById('selectedCategoryTitle').innerText.trim();
@@ -794,7 +776,7 @@
                             <div>
                                 <strong>${product.name}</strong> × ${qty}
                             </div>
-                            <div style="display:flex; align-items:center; gap:10px;">
+                            <div style="display:flex; align-items:center; gap:8px;">
                                 <span>${itemTotal.toLocaleString()} د.ع</span>
                                 <button class="qty-btn" onclick="updateCart(${product.ID}, 0)">×</button>
                             </div>
@@ -804,12 +786,24 @@
             }
 
             if (totalItems === 0) {
-                document.getElementById('cartItemsList').innerHTML = '<p style="text-align:center; color:var(--text-muted); padding: 20px 0;">سلة الطلبات فارغة حالياً</p>';
+                document.getElementById('cartItemsList').innerHTML = '<p style="text-align:center; color:var(--text-muted); padding: 15px 0; font-size:0.85rem;">سلة الطلبات فارغة حالياً</p>';
             } else {
                 document.getElementById('cartItemsList').innerHTML = listHTML;
             }
 
             document.getElementById('cartGrandTotal').textContent = grandTotal.toLocaleString() + ' د.ع';
+        }
+
+        /* تعديل رقم 4: إظهار وتخزين التعليقات محلياً ليراها كل الزبائن */
+        function renderReviews() {
+            let savedReviews = JSON.parse(localStorage.getItem('almalaki_reviews')) || defaultReviews;
+            const container = document.getElementById('reviewsContainer');
+            container.innerHTML = savedReviews.map(r => `
+                <div class="review-card">
+                    <div class="review-header"><span>${r.name}</span> <span>${r.stars}</span></div>
+                    <div class="review-text">${r.text}</div>
+                </div>
+            `).join('');
         }
 
         function addReview() {
@@ -821,14 +815,11 @@
                 return;
             }
 
-            const reviewsContainer = document.getElementById('reviewsContainer');
-            const newReview = document.createElement('div');
-            newReview.className = 'review-card';
-            newReview.innerHTML = `
-                <div class="review-header"><span>${name}</span> <span>⭐⭐⭐⭐⭐</span></div>
-                <div class="review-text">${text}</div>
-            `;
-            reviewsContainer.prepend(newReview);
+            let savedReviews = JSON.parse(localStorage.getItem('almalaki_reviews')) || defaultReviews;
+            savedReviews.unshift({ name: name, stars: "⭐⭐⭐⭐⭐", text: text });
+            localStorage.setItem('almalaki_reviews', JSON.stringify(savedReviews));
+
+            renderReviews();
 
             document.getElementById('reviewerName').value = '';
             document.getElementById('reviewerComment').value = '';
@@ -859,10 +850,6 @@
             const phoneNumber = "9647723681360";
             const message = encodeURIComponent("مرحباً، أود نداء النادل إلى الطاولة يرجى المساعدة.");
             window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
-        }
-
-        function makeDirectCall() {
-            window.location.href = "tel:07723681360";
         }
 
         function sendOrder() {
