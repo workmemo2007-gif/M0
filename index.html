@@ -29,6 +29,11 @@
             --glass-border: rgba(255, 255, 255, 0.3);
             --silver-grad: linear-gradient(135deg, #e0e0e0 0%, #bdc3c7 50%, #95a5a6 100%);
             --card-radius: 12px;
+            
+            /* ألوان الأوف وايت والإطار الذهبي للأقسام */
+            --off-white-bg: #fdfbf7;
+            --off-white-text: #2c2416;
+            --gold-border: #d4af37;
         }
 
         body.dark-mode {
@@ -42,6 +47,11 @@
             --glass-bg: rgba(255, 255, 255, 0.08);
             --glass-border: rgba(255, 255, 255, 0.15);
             --silver-grad: linear-gradient(135deg, #7f8c8d 0%, #4a5568 50%, #2d3748 100%);
+            
+            /* ألوان الأوف وايت في الوضع الداكن */
+            --off-white-bg: #1c1a17;
+            --off-white-text: #f5efe6;
+            --gold-border: #e6c200;
         }
 
         html { scroll-behavior: smooth; }
@@ -69,7 +79,7 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
-        /* Top Nav - Compact Icons (تعديل رقم 5) */
+        /* Top Nav */
         .top-nav {
             position: absolute;
             top: 0; left: 0; right: 0;
@@ -159,7 +169,7 @@
             font-size: 0.75rem;
         }
 
-        /* Service Actions (تعديل رقم 1: حذف الاتصال المباشر) */
+        /* Service Actions */
         .service-actions-container {
             padding: 10px 12px 5px;
             display: flex;
@@ -219,7 +229,7 @@
             border-right: 3px solid var(--primary-gold);
         }
 
-        /* Horizontal Popular Items Scroll (تعديل رقم 3) */
+        /* Horizontal Popular Items Scroll */
         .popular-horizontal-scroll {
             display: flex;
             gap: 10px;
@@ -231,17 +241,11 @@
         .popular-horizontal-scroll::-webkit-scrollbar { display: none; }
 
         .popular-horizontal-scroll .product-card {
-            flex: 0 0 145px; /* عرض ثابت للكروت في القائمة الافقية */
+            flex: 0 0 145px;
             width: 145px;
         }
 
-        /* Compact Products Grid (تعديل رقم 2: تصغير الأطباق لتكون جنباً إلى جنب) */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); /* طبقين جنباً إلى جنب */
-            gap: 10px;
-        }
-
+        /* Product Card */
         .product-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -343,29 +347,60 @@
             cursor: pointer;
         }
 
-        /* Glass Categories List */
+        /* ✨ تعديل الأقسام: لون أوف وايت ومحاطة باللون الذهبي ✨ */
         .glass-categories-grid {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
             margin-bottom: 15px;
+            transition: all 0.4s ease;
         }
 
         .glass-category-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-right: 3px solid var(--primary-gold);
-            padding: 10px 14px;
-            border-radius: 10px;
+            background: var(--off-white-bg);
+            border: 2px solid var(--gold-border);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15);
+            padding: 12px 16px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            color: var(--text-main);
-            font-size: 0.88rem;
-            font-weight: 700;
+            color: var(--off-white-text);
+            font-size: 0.95rem;
+            font-weight: 800;
             cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .glass-category-card:active {
+            transform: scale(0.98);
+        }
+
+        .glass-category-card i.cat-icon {
+            margin-left: 8px;
+            color: var(--primary-gold);
+            font-size: 1.1rem;
+        }
+
+        /* ✨ عرض الأطباق بشكل أفقي عند اختيار قسم ✨ */
+        .horizontal-category-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding: 10px 4px 15px 4px;
+            scrollbar-width: none; /* إخفاء شريط التمرير بمتصفحات فايبرفوكس */
+            scroll-snap-type: x mandatory;
+        }
+
+        .horizontal-category-scroll::-webkit-scrollbar {
+            display: none; /* إخفاء شريط التمرير متصفحات كروم */
+        }
+
+        .horizontal-category-scroll .product-card {
+            flex: 0 0 160px;
+            width: 160px;
+            scroll-snap-align: start;
+            box-shadow: 0 4px 15px var(--shadow-color);
         }
 
         /* Floating Order Notification Bar */
@@ -384,7 +419,7 @@
             position: fixed; bottom: 0; left: 0; right: 0;
             height: 55px; background: var(--bg-card);
             border-top: 1px solid var(--border-color);
-            display: flex; justify-content: space-around; align-items: center;
+            display: flex; justify-around: space-around; align-items: center;
             z-index: 100;
         }
 
@@ -442,7 +477,7 @@
 </head>
 <body>
 
-    <!-- Navigation Bar (تعديل رقم 5: أزرار مصغرة) -->
+    <!-- Navigation Bar -->
     <div class="top-nav">
         <div class="social-icons">
             <a href="#" class="glass-icon"><i class="fab fa-instagram"></i></a>
@@ -470,7 +505,7 @@
         </div>
     </header>
 
-    <!-- Actions (تعديل رقم 1: إزالة الاتصال المباشر) -->
+    <!-- Actions -->
     <div class="service-actions-container">
         <button class="action-btn call-waiter-btn" onclick="callWaiter()"><i class="fas fa-bell"></i> نداء الويتر</button>
         <a href="https://maps.google.com/?q=Al-Diwaniyah,Iraq" target="_blank" class="action-btn location-btn"><i class="fas fa-map-marker-alt"></i> موقع المطعم</a>
@@ -488,11 +523,11 @@
             </div>
         </div>
 
-        <!-- Most Popular Dishes (تعديل رقم 3: التمرير الأفقي) -->
+        <!-- Most Popular Dishes -->
         <div class="section-title"><i class="fas fa-fire"></i> الأطباق الأكثر طلباً</div>
         <div class="popular-horizontal-scroll" id="popularGrid"></div>
 
-        <!-- Customer Reviews (تعديل رقم 4: حفض واسترجاع التعليقات للجميع عبر LocalStorage) -->
+        <!-- Customer Reviews -->
         <div class="reviews-section">
             <div class="section-title"><i class="fas fa-comments"></i> تعليقات الزبائن</div>
             <div id="reviewsContainer"></div>
@@ -511,12 +546,12 @@
         <div class="glass-categories-grid" id="glassCategoriesGrid"></div>
         
         <div id="categoryProductsContainer" style="display:none; margin-top:10px;">
-            <button class="add-to-cart-btn" onclick="backToCategoriesList()" style="margin-bottom:10px; width:auto; padding: 4px 12px;">
+            <button class="add-to-cart-btn" onclick="backToCategoriesList()" style="margin-bottom:12px; width:auto; padding: 6px 14px; background: var(--bg-card);">
                 <i class="fas fa-arrow-right"></i> العودة للأقسام
             </button>
             <div class="section-title" id="selectedCategoryTitle"></div>
-            <!-- تعديل رقم 2: شبكة أطباق مصغرة متجاورة -->
-            <div class="products-grid" id="categoryProductsGrid"></div>
+            <!-- الأطباق تعرض بشكل أفقي متحرك عند فتح القسم -->
+            <div class="horizontal-category-scroll" id="categoryProductsGrid"></div>
         </div>
     </div>
 
@@ -607,6 +642,7 @@
 
         let cart = {};
         let currentOrderType = 'inhouse';
+        let currentOpenCategory = '';
 
         const categoryIcons = {
             'شاورما الدجاج': 'fa-drumstick-bite',
@@ -618,7 +654,6 @@
             'المشروبات': 'fa-glass-martini-alt'
         };
 
-        // التعليقات الأساسية الافتراضية
         const defaultReviews = [
             { name: "أحمد العراقي", stars: "⭐⭐⭐⭐⭐", text: "أفضل شاورما في المحافظة، الطعم خرافي والخدمة ممتازة!" },
             { name: "سارة علي", stars: "⭐⭐⭐⭐⭐", text: "الفروج المشوي مع الرز طعمه رائع جداً والنظافة 10/10." }
@@ -671,30 +706,32 @@
                 const icon = categoryIcons[cat] || 'fa-utensils';
                 return `
                     <div class="glass-category-card" onclick="openCategoryProducts('${cat}')">
-                        <span><i class="fas ${icon}" style="margin-left: 6px; color: var(--primary-gold);"></i> ${cat}</span>
+                        <span><i class="fas ${icon} cat-icon"></i> ${cat}</span>
                         <i class="fas fa-chevron-left"></i>
                     </div>
                 `;
             }).join('');
         }
 
+        /* عند النقر على أي قسم: تبتعد بقية الأقسام وتظهر أطباق القسم متحركة أفقياً */
         function openCategoryProducts(catName) {
+            currentOpenCategory = catName;
             document.getElementById('glassCategoriesGrid').style.display = 'none';
             const container = document.getElementById('categoryProductsContainer');
             container.style.display = 'block';
 
-            document.getElementById('selectedCategoryTitle').innerHTML = `<i class="fas ${categoryIcons[catName] || 'fa-utensils'}"></i> ${catName}`;
+            document.getElementById('selectedCategoryTitle').innerHTML = `<i class="fas ${categoryIcons[catName] || 'fa-utensils'}"></i> أطباق ${catName}`;
             
             const catProducts = rawProducts.filter(p => p.Category === catName);
             document.getElementById('categoryProductsGrid').innerHTML = catProducts.map(product => createProductCardHTML(product)).join('');
         }
 
         function backToCategoriesList() {
+            currentOpenCategory = '';
             document.getElementById('glassCategoriesGrid').style.display = 'flex';
             document.getElementById('categoryProductsContainer').style.display = 'none';
         }
 
-        /* تعديل رقم 2: بطاقة طبق مصغرة وبحجم متناسق للعرض المزدوج */
         function createProductCardHTML(product) {
             const qty = cart[product.ID] || 0;
             return `
@@ -734,9 +771,8 @@
             }
             
             renderPopularProducts();
-            if (document.getElementById('categoryProductsContainer').style.display !== 'none') {
-                const currentCat = document.getElementById('selectedCategoryTitle').innerText.trim();
-                const catProducts = rawProducts.filter(p => p.Category === currentCat);
+            if (currentOpenCategory && document.getElementById('categoryProductsContainer').style.display !== 'none') {
+                const catProducts = rawProducts.filter(p => p.Category === currentOpenCategory);
                 document.getElementById('categoryProductsGrid').innerHTML = catProducts.map(product => createProductCardHTML(product)).join('');
             }
             if (document.getElementById('cartPage').classList.contains('active')) {
@@ -794,7 +830,6 @@
             document.getElementById('cartGrandTotal').textContent = grandTotal.toLocaleString() + ' د.ع';
         }
 
-        /* تعديل رقم 4: إظهار وتخزين التعليقات محلياً ليراها كل الزبائن */
         function renderReviews() {
             let savedReviews = JSON.parse(localStorage.getItem('almalaki_reviews')) || defaultReviews;
             const container = document.getElementById('reviewsContainer');
