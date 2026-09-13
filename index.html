@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مطعم الملكي - قائمة الطعام الإلكترونية</title>
+    <title>Digital QR Menu - قائمة الطعام الإلكترونية</title>
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Aref Ruqaa & Tajawal -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -16,29 +16,26 @@
     <style>
         :root {
             --primary-gold: #d4af37;
-            --primary-gold-hover: #b59226;
             --gold-glow: rgba(212, 175, 55, 0.4);
             --bg-body: #f8f9fa;
-            --bg-card: #ffffff;
-            --bg-card-subtle: #f1f3f5;
+            --bg-card: rgba(255, 255, 255, 0.9);
             --text-main: #1f2937;
             --text-muted: #6b7280;
-            --border-color: rgba(212, 175, 55, 0.25);
-            --header-overlay: rgba(0, 0, 0, 0.55);
+            --border-color: rgba(212, 175, 55, 0.3);
+            --header-overlay: rgba(0, 0, 0, 0.45);
             --shadow-color: rgba(0, 0, 0, 0.08);
             --accent-green: #25d366;
             --accent-green-hover: #1da851;
         }
 
         body.dark-mode {
-            --bg-body: #0f1217;
-            --bg-card: #181d24;
-            --bg-card-subtle: #222933;
+            --bg-body: #0d0f12;
+            --bg-card: rgba(22, 27, 34, 0.75);
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
-            --border-color: rgba(212, 175, 55, 0.35);
-            --header-overlay: rgba(0, 0, 0, 0.75);
-            --shadow-color: rgba(0, 0, 0, 0.4);
+            --border-color: rgba(212, 175, 55, 0.4);
+            --header-overlay: rgba(0, 0, 0, 0.7);
+            --shadow-color: rgba(0, 0, 0, 0.5);
         }
 
         * {
@@ -46,17 +43,17 @@
             margin: 0;
             padding: 0;
             font-family: 'Tajawal', sans-serif;
-            transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
         body {
             background-color: var(--bg-body);
             color: var(--text-main);
-            padding-bottom: 240px;
+            padding-bottom: 120px;
             overflow-x: hidden;
-            min-height: 100vh;
         }
 
+        /* Top Bar & Theme Switcher */
         .top-nav {
             position: absolute;
             top: 0;
@@ -67,22 +64,22 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 20px;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.85), transparent);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
         }
 
         .social-icons {
             display: flex;
-            gap: 10px;
+            gap: 12px;
         }
 
         .social-icons a {
             color: #ffffff;
-            font-size: 1rem;
+            font-size: 1.1rem;
             width: 36px;
             height: 36px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(5px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -98,8 +95,8 @@
         }
 
         .theme-toggle-btn {
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
             border: 1px solid var(--primary-gold);
             color: #ffffff;
             padding: 8px 16px;
@@ -109,18 +106,13 @@
             align-items: center;
             gap: 8px;
             font-size: 0.85rem;
-            font-weight: 700;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            font-weight: bold;
         }
 
-        .theme-toggle-btn:hover {
-            background: var(--primary-gold);
-            color: #000;
-        }
-
+        /* Hero Header */
         .hero-header {
             position: relative;
-            height: 250px;
+            height: 260px;
             background: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
             display: flex;
             align-items: flex-end;
@@ -142,7 +134,7 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
 
         .logo-frame {
@@ -173,51 +165,51 @@
         .restaurant-info p {
             color: var(--primary-gold);
             font-size: 0.9rem;
-            font-weight: 600;
+            font-weight: 500;
         }
 
+        /* Service Call Button */
         .service-call-container {
             padding: 15px 20px 5px;
         }
 
         .call-waiter-btn {
             width: 100%;
-            background-color: #1e293b;
-            color: var(--primary-gold);
-            border: 1px solid var(--primary-gold);
-            padding: 12px;
+            background-color: var(--accent-green);
+            color: #ffffff;
+            border: none;
+            padding: 14px;
             border-radius: 12px;
-            font-size: 1rem;
+            font-size: 1.05rem;
             font-weight: 700;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
             transition: all 0.3s ease;
         }
 
         .call-waiter-btn:hover {
-            background-color: var(--primary-gold);
-            color: #1e293b;
+            background-color: var(--accent-green-hover);
             transform: translateY(-2px);
         }
 
+        /* Categories Bar */
         .categories-wrapper {
-            padding: 15px 0;
+            padding: 15px 0 10px;
             position: sticky;
             top: 0;
             z-index: 5;
             background: var(--bg-body);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
         }
 
         .categories-bar {
             display: flex;
             overflow-x: auto;
-            gap: 10px;
+            gap: 12px;
             padding: 0 20px;
             scrollbar-width: none;
         }
@@ -234,189 +226,48 @@
             border: 1px solid var(--border-color);
             color: var(--text-main);
             font-size: 0.9rem;
-            font-weight: 700;
+            font-weight: 600;
             display: flex;
             align-items: center;
             gap: 8px;
             cursor: pointer;
-            user-select: none;
-            transition: all 0.25s ease;
         }
 
         .category-chip.active {
             background: var(--primary-gold);
             color: #000;
             border-color: var(--primary-gold);
-            box-shadow: 0 2px 10px var(--gold-glow);
+            box-shadow: 0 0 10px var(--gold-glow);
         }
 
-        .menu-container {
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: 1.3rem;
-            font-weight: 800;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--primary-gold);
-        }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 18px;
-        }
-
-        .dish-card {
-            background: var(--bg-card);
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-            box-shadow: 0 4px 15px var(--shadow-color);
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
-        }
-
-        .dish-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px var(--shadow-color);
-        }
-
-        .dish-img-wrapper {
-            position: relative;
-            width: 100%;
-            height: 180px;
-            overflow: hidden;
-        }
-
-        .dish-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-
-        .dish-card:hover .dish-img {
-            transform: scale(1.05);
-        }
-
-        .dish-tag {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(5px);
-            color: var(--primary-gold);
-            border: 1px solid var(--primary-gold);
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 700;
-        }
-
-        .dish-details {
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .dish-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 8px;
-            gap: 10px;
-        }
-
-        .dish-name {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: var(--text-main);
-            line-height: 1.3;
-        }
-
-        .dish-price {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: var(--primary-gold);
-            white-space: nowrap;
-        }
-
-        .dish-desc {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-            margin-bottom: 15px;
-            flex-grow: 1;
-        }
-
-        .dish-actions {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: auto;
-            padding-top: 10px;
-            border-top: 1px dashed var(--border-color);
-        }
-
-        .add-to-cart-btn {
-            background: var(--primary-gold);
-            color: #000;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s ease;
-        }
-
-        .add-to-cart-btn:hover {
-            background: var(--primary-gold-hover);
-        }
-
-        .qty-controls {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--bg-card-subtle);
-            padding: 4px 8px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-        }
-
-        .qty-btn {
-            background: var(--primary-gold);
-            color: #000;
-            border: none;
-            width: 24px;
-            height: 24px;
-            border-radius: 6px;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-
-        .qty-value {
-            font-weight: 700;
-            font-size: 0.9rem;
-            min-width: 18px;
+        /* Empty State (No Products Displayed) */
+        .content-placeholder {
             text-align: center;
+            padding: 50px 20px;
+            margin: 20px;
+            background: var(--bg-card);
+            border: 1px dashed var(--border-color);
+            border-radius: 16px;
+            backdrop-filter: blur(8px);
         }
 
+        .content-placeholder i {
+            font-size: 3rem;
+            color: var(--primary-gold);
+            margin-bottom: 15px;
+        }
+
+        .content-placeholder h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .content-placeholder p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Order System & Bottom Cart Floating Bar */
         .cart-bar-container {
             position: fixed;
             bottom: 0;
@@ -430,32 +281,6 @@
             z-index: 100;
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .cart-summary {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .cart-count-badge {
-            background: var(--primary-gold);
-            color: #000;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: 800;
-        }
-
-        .cart-total {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: var(--primary-gold);
         }
 
         .order-options {
@@ -472,7 +297,7 @@
             background: transparent;
             color: var(--text-main);
             font-size: 0.85rem;
-            font-weight: 700;
+            font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -497,15 +322,10 @@
             padding: 10px 12px;
             border-radius: 8px;
             border: 1px solid var(--border-color);
-            background: var(--bg-card-subtle);
+            background: rgba(255, 255, 255, 0.05);
             color: var(--text-main);
             font-size: 0.85rem;
             outline: none;
-            font-weight: 500;
-        }
-
-        .form-fields input:focus {
-            border-color: var(--primary-gold);
         }
 
         .submit-order-btn {
@@ -515,30 +335,25 @@
             border: none;
             padding: 12px;
             border-radius: 10px;
-            font-weight: 800;
+            font-weight: 700;
             font-size: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-            transition: transform 0.2s ease;
-        }
-
-        .submit-order-btn:hover {
-            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
 
+    <!-- Top Navigation with Social Links & Theme Switcher -->
     <div class="top-nav">
         <div class="social-icons">
-            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
-            <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-snapchat-ghost"></i></a>
         </div>
         <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">
             <i class="fas fa-moon"></i>
@@ -546,11 +361,12 @@
         </button>
     </div>
 
+    <!-- Hero Header & Branding -->
     <header class="hero-header">
         <div class="hero-overlay"></div>
         <div class="branding-container">
             <div class="logo-frame">
-                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=300&q=80" alt="Logo">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=300&q=80" alt="Restaurant Logo">
             </div>
             <div class="restaurant-info">
                 <h1>مطعم الملكي</h1>
@@ -559,6 +375,7 @@
         </div>
     </header>
 
+    <!-- Service Call Button -->
     <div class="service-call-container">
         <button class="call-waiter-btn" onclick="callWaiter()">
             <i class="fas fa-bell"></i>
@@ -566,27 +383,27 @@
         </button>
     </div>
 
+    <!-- Categories Horizontal Bar -->
     <div class="categories-wrapper">
-        <div class="categories-bar" id="categoriesContainer"></div>
+        <div class="categories-bar">
+            <div class="category-chip active"><i class="fas fa-drumstick-bite"></i> مشويات</div>
+            <div class="category-chip"><i class="fas fa-cheese"></i> مقبلات</div>
+            <div class="category-chip"><i class="fas fa-utensils"></i> أطباق رئيسية</div>
+            <div class="category-chip"><i class="fas fa-glass-martini-alt"></i> مشروبات</div>
+            <div class="category-chip"><i class="fas fa-ice-cream"></i> حلويات</div>
+            <div class="category-chip"><i class="fas fa-tags"></i> العروض الخاصة</div>
+        </div>
     </div>
 
-    <main class="menu-container">
-        <div class="section-title">
-            <i class="fas fa-utensils"></i>
-            <span id="currentCategoryTitle">الأطباق المتاحة</span>
-        </div>
-        <div class="menu-grid" id="menuGrid"></div>
-    </main>
+    <!-- Placeholder Section (No Dish Products Rendered) -->
+    <div class="content-placeholder">
+        <i class="fas fa-concierge-bell"></i>
+        <h3>أهلاً بكم في مطعمنا</h3>
+        <p>يرجى اختيار نوع الطلب أدناه وإدخال التفاصيل لإرسال الحجز أو الطلب مباشر إلى الإدارة عبر واتساب.</p>
+    </div>
 
+    <!-- Horizontal Order & WhatsApp Cart System -->
     <div class="cart-bar-container">
-        <div class="cart-summary">
-            <div>
-                <span>السلة </span>
-                <span class="cart-count-badge" id="cartBadge">0 وجبات</span>
-            </div>
-            <div class="cart-total" id="cartTotal">0 د.ع</div>
-        </div>
-
         <div class="order-options">
             <button class="order-type-btn active" id="btnInHouse" onclick="setOrderType('inhouse')">
                 <i class="fas fa-chair"></i> داخل المطعم
@@ -596,148 +413,20 @@
             </button>
         </div>
 
+        <!-- Dynamic Form Fields -->
         <div class="form-fields" id="formFields">
             <input type="text" id="tableNum" placeholder="رقم الطاولة (مثال: 5)">
         </div>
 
-        <button class="submit-order-btn" id="submitBtn" onclick="sendOrder()">
+        <button class="submit-order-btn" onclick="sendOrder()">
             <i class="fab fa-whatsapp"></i> إرسال الطلب عبر واتساب
         </button>
     </div>
 
     <script>
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwkCbbNtflJ9KzHc9uTtKns5cYmdWIcRnNWquGHXKnBd4-nKH0E-WQWsEPr6fxsMPPXsQ/exec';
-
-        // قائمة الأقسام الشاملة من CSV
-        const categories = [
-            { id: 'المقبلات', name: 'المقبلات', icon: 'fa-cheese' },
-            { id: 'صلصات', name: 'صلصات', icon: 'fa-pepper-hot' },
-            { id: 'المشروبات', name: 'المشروبات', icon: 'fa-glass-martini-alt' },
-            { id: 'شاورما الدجاج', name: 'شاورما الدجاج', icon: 'fa-drumstick-bite' },
-            { id: 'شاورما اللحم', name: 'شاورما اللحم', icon: 'fa-utensils' },
-            { id: 'فروج', name: 'فروج', icon: 'fa-fire-burner' },
-            { id: 'ريزو', name: 'ريزو', icon: 'fa-bowl-rice' }
-        ];
-
-        let dishes = []; 
-        let activeCategory = 'المقبلات';
-        let cart = {}; 
         let currentOrderType = 'inhouse';
 
-        async function fetchDishes() {
-            const grid = document.getElementById('menuGrid');
-            grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">جاري تحميل الأطباق من القائمة...</p>';
-            
-            try {
-                const response = await fetch(GOOGLE_SCRIPT_URL);
-                const rawData = await response.json();
-
-                // توحيد مسميات الحقول لضمان التوافق التام مع CSV (Image, Category, desc, ID, price, name)
-                dishes = rawData.map(item => ({
-                    id: item.ID || item.id,
-                    category: item.Category || item.category,
-                    name: item.name || item.Name,
-                    price: item.price || item.Price,
-                    img: item.Image || item.image || item.img || 'https://via.placeholder.com/300',
-                    desc: item.desc || item.description || '',
-                    tag: item.tag || item.Tag || ''
-                }));
-
-                renderDishes();
-            } catch (error) {
-                console.error("خطأ في جلب الأطباق:", error);
-                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: red; padding: 40px;">حدث خطأ أثناء تحميل المنيو. يرجى التحديث لاحقاً.</p>';
-            }
-        }
-
-        function renderCategories() {
-            const container = document.getElementById('categoriesContainer');
-            container.innerHTML = categories.map(cat => `
-                <div class="category-chip ${cat.id === activeCategory ? 'active' : ''}" onclick="selectCategory('${cat.id}')">
-                    <i class="fas ${cat.icon}"></i> ${cat.name}
-                </div>
-            `).join('');
-        }
-
-        function selectCategory(catId) {
-            activeCategory = catId;
-            renderCategories();
-            renderDishes();
-            const catObj = categories.find(c => c.id === catId);
-            document.getElementById('currentCategoryTitle').textContent = catObj ? catObj.name : 'الأطباق';
-        }
-
-        function renderDishes() {
-            const grid = document.getElementById('menuGrid');
-            const filteredDishes = dishes.filter(d => d.category === activeCategory);
-
-            if (!filteredDishes || filteredDishes.length === 0) {
-                grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">لا توجد وجبات في هذا القسم حالياً.</p>`;
-                return;
-            }
-
-            grid.innerHTML = filteredDishes.map(dish => {
-                const qty = cart[dish.id] || 0;
-                return `
-                    <div class="dish-card">
-                        <div class="dish-img-wrapper">
-                            <img src="${dish.img}" alt="${dish.name}" class="dish-img" loading="lazy">
-                            ${dish.tag ? `<span class="dish-tag">${dish.tag}</span>` : ''}
-                        </div>
-                        <div class="dish-details">
-                            <div class="dish-header">
-                                <h3 class="dish-name">${dish.name}</h3>
-                                <div class="dish-price">${Number(dish.price).toLocaleString()} د.ع</div>
-                            </div>
-                            <p class="dish-desc">${dish.desc || ''}</p>
-                            <div class="dish-actions">
-                                ${qty === 0 ? `
-                                    <button class="add-to-cart-btn" onclick="updateQty('${dish.id}', 1)">
-                                        <i class="fas fa-plus"></i> إضافة للطلب
-                                    </button>
-                                ` : `
-                                    <div class="qty-controls">
-                                        <button class="qty-btn" onclick="updateQty('${dish.id}', -1)">-</button>
-                                        <span class="qty-value">${qty}</span>
-                                        <button class="qty-btn" onclick="updateQty('${dish.id}', 1)">+</button>
-                                    </div>
-                                `}
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        function updateQty(dishId, change) {
-            const current = cart[dishId] || 0;
-            const updated = current + change;
-            if (updated <= 0) {
-                delete cart[dishId];
-            } else {
-                cart[dishId] = updated;
-            }
-            renderDishes();
-            updateCartSummary();
-        }
-
-        function updateCartSummary() {
-            let totalItems = 0;
-            let totalPrice = 0;
-
-            Object.keys(cart).forEach(id => {
-                const qty = cart[id];
-                const dish = dishes.find(d => String(d.id) === String(id));
-                if (dish) {
-                    totalItems += qty;
-                    totalPrice += Number(dish.price) * qty;
-                }
-            });
-
-            document.getElementById('cartBadge').textContent = `${totalItems} وجبات`;
-            document.getElementById('cartTotal').textContent = `${totalPrice.toLocaleString()} د.ع`;
-        }
-
+        // Theme Toggle Functionality
         function toggleTheme() {
             document.body.classList.toggle('dark-mode');
             const isDark = document.body.classList.contains('dark-mode');
@@ -753,12 +442,14 @@
             }
         }
 
+        // Call Waiter Function
         function callWaiter() {
-            const phoneNumber = "9647893035416";
+            const phoneNumber = "07893035416";
             const message = encodeURIComponent("مرحباً، أود نداء النادل إلى الطاولة يرجى المساعدة.");
             window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
         }
 
+        // Switch Order Type (In-House / Delivery)
         function setOrderType(type) {
             currentOrderType = type;
             const btnInHouse = document.getElementById('btnInHouse');
@@ -782,17 +473,10 @@
             }
         }
 
-        async function sendOrder() {
-            const targetPhone = "9647723681366"; 
-            const cartItemIds = Object.keys(cart);
-
-            if (cartItemIds.length === 0) {
-                alert("يرجى اختيار وجبة واحدة على الأقل قبل إرسال الطلب!");
-                return;
-            }
-
-            let customerInfo = {};
-            let whatsappMessage = "مرحباً، أود إرسال طلب جديد عبر المنيو الإلكتروني:\n\n";
+        // Send Order via WhatsApp
+        function sendOrder() {
+            const targetPhone = "077236813660";
+            let message = "مرحباً، أود إرسال طلب جديد:\n\n";
 
             if (currentOrderType === 'inhouse') {
                 const table = document.getElementById('tableNum').value;
@@ -800,14 +484,7 @@
                     alert("يرجى إدخال رقم الطاولة");
                     return;
                 }
-                customerInfo = {
-                    type: "داخل المطعم",
-                    table: table,
-                    name: "-",
-                    phone: "-",
-                    address: "-"
-                };
-                whatsappMessage += `نوع الطلب: داخل المطعم 🍽️\nرقم الطاولة: ${table}\n`;
+                message += `نوع الطلب: داخل المطعم\nرقم الطاولة: ${table}`;
             } else {
                 const name = document.getElementById('custName').value;
                 const phone = document.getElementById('custPhone').value;
@@ -817,60 +494,11 @@
                     alert("يرجى ملء جميع حقول بيانات التوصيل");
                     return;
                 }
-                customerInfo = {
-                    type: "دليفري",
-                    table: "-",
-                    name: name,
-                    phone: phone,
-                    address: address
-                };
-                whatsappMessage += `نوع الطلب: دليفري 🛵\nالاسم: ${name}\nالهاتف: ${phone}\nالعنوان: ${address}\n`;
+                message += `نوع الطلب: دليفري\nالاسم: ${name}\nالهاتف: ${phone}\nالعنوان: ${address}`;
             }
 
-            whatsappMessage += "\n📋 *تفاصيل الوجبات:*\n";
-            let totalPrice = 0;
-            let itemsSummaryList = [];
-
-            cartItemIds.forEach((id, index) => {
-                const dish = dishes.find(d => String(d.id) === String(id));
-                const qty = cart[id];
-                const itemTotal = Number(dish.price) * qty;
-                totalPrice += itemTotal;
-                whatsappMessage += `${index + 1}. ${dish.name} x${qty} - (${itemTotal.toLocaleString()} د.ع)\n`;
-                itemsSummaryList.push(`${dish.name} (x${qty})`);
-            });
-
-            whatsappMessage += `\n💰 *المجموع الكلي:* ${totalPrice.toLocaleString()} د.ع`;
-
-            const payload = {
-                timestamp: new Date().toLocaleString('ar-IQ'),
-                orderType: customerInfo.type,
-                tableNumber: customerInfo.table,
-                customerName: customerInfo.name,
-                customerPhone: customerInfo.phone,
-                customerAddress: customerInfo.address,
-                items: itemsSummaryList.join('، '),
-                totalPrice: totalPrice
-            };
-
-            try {
-                fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify(payload)
-                });
-            } catch (err) {
-                console.error("خطأ في حفظ الطلب في Google Sheets:", err);
-            }
-
-            window.open(`https://wa.me/${targetPhone}?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
+            window.open(`https://wa.me/${targetPhone}?text=${encodeURIComponent(message)}`, '_blank');
         }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            renderCategories();
-            fetchDishes();
-        });
     </script>
 </body>
 </html>
