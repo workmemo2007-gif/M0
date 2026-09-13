@@ -26,6 +26,10 @@
             --shadow-color: rgba(0, 0, 0, 0.08);
             --accent-green: #25d366;
             --accent-green-hover: #1da851;
+            --glass-bg: rgba(255, 255, 255, 0.2);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --silver-grad: linear-gradient(135deg, #e0e0e0 0%, #bdc3c7 50%, #95a5a6 100%);
+            --silver-grad-hover: linear-gradient(135deg, #ffffff 0%, #d6dbdf 50%, #abb2b9 100%);
             --card-radius: 16px;
         }
 
@@ -37,6 +41,14 @@
             --border-color: rgba(212, 175, 55, 0.4);
             --header-overlay: rgba(0, 0, 0, 0.75);
             --shadow-color: rgba(0, 0, 0, 0.5);
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --silver-grad: linear-gradient(135deg, #7f8c8d 0%, #4a5568 50%, #2d3748 100%);
+            --silver-grad-hover: linear-gradient(135deg, #95a5a6 0%, #718096 50%, #4a5568 100%);
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         * {
@@ -44,7 +56,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Tajawal', sans-serif;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
         }
 
         body {
@@ -52,6 +64,15 @@
             color: var(--text-main);
             padding-bottom: 150px;
             overflow-x: hidden;
+        }
+
+        /* Glassmorphism Icon Styling */
+        .glass-icon {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.12);
         }
 
         /* Top Bar & Theme Switcher */
@@ -76,28 +97,24 @@
         .social-icons a {
             color: #ffffff;
             font-size: 1.1rem;
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(5px);
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            border: 1px solid rgba(255, 255, 255, 0.2);
             transition: all 0.3s ease;
         }
 
         .social-icons a:hover {
             background: var(--primary-gold);
             color: #000;
-            transform: translateY(-2px);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 0 12px var(--gold-glow);
         }
 
         .theme-toggle-btn {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(5px);
             border: 1px solid var(--primary-gold);
             color: #ffffff;
             padding: 8px 16px;
@@ -108,6 +125,10 @@
             gap: 8px;
             font-size: 0.85rem;
             font-weight: bold;
+        }
+
+        .theme-toggle-btn:hover {
+            transform: translateY(-2px);
         }
 
         /* Hero Header */
@@ -169,32 +190,56 @@
             font-weight: 500;
         }
 
-        /* Service Call Button */
-        .service-call-container {
+        /* Service Actions Row */
+        .service-actions-container {
             padding: 15px 20px 5px;
+            display: flex;
+            gap: 12px;
         }
 
-        .call-waiter-btn {
-            width: 100%;
-            background-color: var(--accent-green);
-            color: #ffffff;
-            border: none;
-            padding: 14px;
+        .action-btn {
+            flex: 1;
+            padding: 12px 14px;
             border-radius: 12px;
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             font-weight: 700;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             cursor: pointer;
+            border: none;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .call-waiter-btn {
+            background-color: var(--accent-green);
+            color: #ffffff;
             box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-            transition: all 0.3s ease;
         }
 
         .call-waiter-btn:hover {
             background-color: var(--accent-green-hover);
             transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+        }
+
+        .location-btn {
+            background: var(--silver-grad);
+            color: #1a202c;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        body.dark-mode .location-btn {
+            color: #ffffff;
+        }
+
+        .location-btn:hover {
+            background: var(--silver-grad-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
         }
 
         /* Search Section */
@@ -224,6 +269,12 @@
             font-size: 0.9rem;
             outline: none;
             box-shadow: 0 2px 8px var(--shadow-color);
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 12px var(--gold-glow);
         }
 
         /* Categories Bar */
@@ -233,7 +284,8 @@
             top: 0;
             z-index: 5;
             background: var(--bg-body);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(212, 175, 55, 0.15);
         }
 
@@ -251,7 +303,7 @@
 
         .category-chip {
             flex: 0 0 auto;
-            padding: 10px 18px;
+            padding: 9px 18px;
             border-radius: 25px;
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -263,13 +315,18 @@
             gap: 8px;
             cursor: pointer;
             user-select: none;
+            transition: all 0.3s ease;
+        }
+
+        .category-chip:hover {
+            transform: translateY(-2px);
         }
 
         .category-chip.active {
             background: var(--primary-gold);
             color: #000;
             border-color: var(--primary-gold);
-            box-shadow: 0 0 10px var(--gold-glow);
+            box-shadow: 0 0 12px var(--gold-glow);
         }
 
         /* Menu Grid Section */
@@ -291,8 +348,8 @@
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 16px;
         }
 
         .product-card {
@@ -304,17 +361,18 @@
             display: flex;
             flex-direction: column;
             position: relative;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
         }
 
         .product-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px var(--gold-glow);
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px var(--gold-glow);
         }
 
+        /* Compact Image Area */
         .product-img-wrapper {
             position: relative;
-            height: 170px;
+            height: 125px;
             width: 100%;
             overflow: hidden;
         }
@@ -323,24 +381,30 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.08);
         }
 
         .product-price-badge {
             position: absolute;
-            bottom: 10px;
-            left: 10px;
-            background: rgba(0, 0, 0, 0.85);
+            bottom: 8px;
+            left: 8px;
+            background: rgba(0, 0, 0, 0.75);
             color: var(--primary-gold);
             border: 1px solid var(--primary-gold);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
+            padding: 3px 10px;
+            border-radius: 16px;
+            font-size: 0.8rem;
             font-weight: 800;
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
         }
 
         .product-content {
-            padding: 15px;
+            padding: 12px 14px;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
@@ -348,17 +412,17 @@
         }
 
         .product-title {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 700;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             color: var(--text-main);
         }
 
         .product-desc {
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
-            margin-bottom: 15px;
-            line-height: 1.4;
+            margin-bottom: 12px;
+            line-height: 1.35;
         }
 
         .card-action {
@@ -375,7 +439,7 @@
             color: var(--primary-gold);
             padding: 8px 12px;
             border-radius: 10px;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 700;
             cursor: pointer;
             display: flex;
@@ -388,6 +452,7 @@
         .add-to-cart-btn:hover {
             background: var(--primary-gold);
             color: #000;
+            box-shadow: 0 0 10px var(--gold-glow);
         }
 
         .qty-controls {
@@ -413,6 +478,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: transform 0.1s ease;
+        }
+
+        .qty-btn:active {
+            transform: scale(0.9);
         }
 
         .qty-val {
@@ -442,6 +512,7 @@
             right: 0;
             background: var(--bg-card);
             backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             border-top: 1px solid var(--border-color);
             box-shadow: 0 -5px 25px var(--shadow-color);
             padding: 12px 20px 15px;
@@ -487,12 +558,14 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
+            transition: all 0.2s ease;
         }
 
         .order-type-btn.active {
             background: var(--primary-gold);
             color: #000;
             border-color: var(--primary-gold);
+            box-shadow: 0 0 10px var(--gold-glow);
         }
 
         .form-fields {
@@ -527,6 +600,12 @@
             gap: 8px;
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .submit-order-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
         }
 
         .cart-details-toggle {
@@ -579,12 +658,12 @@
     <!-- Navigation Bar -->
     <div class="top-nav">
         <div class="social-icons">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-tiktok"></i></a>
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-snapchat-ghost"></i></a>
+            <a href="#" class="glass-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="glass-icon"><i class="fab fa-tiktok"></i></a>
+            <a href="#" class="glass-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="glass-icon"><i class="fab fa-snapchat-ghost"></i></a>
         </div>
-        <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">
+        <button class="theme-toggle-btn glass-icon" id="themeToggleBtn" onclick="toggleTheme()">
             <i class="fas fa-moon"></i>
             <span id="themeText">النمط الداكن</span>
         </button>
@@ -604,12 +683,16 @@
         </div>
     </header>
 
-    <!-- Call Waiter -->
-    <div class="service-call-container">
-        <button class="call-waiter-btn" onclick="callWaiter()">
+    <!-- Call Waiter & Restaurant Location Actions -->
+    <div class="service-actions-container">
+        <button class="action-btn call-waiter-btn" onclick="callWaiter()">
             <i class="fas fa-bell"></i>
             اطلب النادل / نداء الويتر
         </button>
+        <a href="https://maps.google.com/?q=Al-Diwaniyah,Iraq" target="_blank" class="action-btn location-btn">
+            <i class="fas fa-map-marker-alt"></i>
+            موقع المطعم
+        </a>
     </div>
 
     <!-- Live Search Bar -->
@@ -880,13 +963,15 @@
         }
 
         function callWaiter() {
-            const phoneNumber = "07893035416";
+            // Updated phone number with Iraqi international country code format (+964)
+            const phoneNumber = "9647723681360";
             const message = encodeURIComponent("مرحباً، أود نداء النادل إلى الطاولة يرجى المساعدة.");
             window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
         }
 
         function sendOrder() {
-            const targetPhone = "077236813660";
+            // Updated phone number with Iraqi international country code format (+964)
+            const targetPhone = "9647723681360";
             const cartIds = Object.keys(cart);
             if (cartIds.length === 0) {
                 alert("يرجى اختيار وجبات وإضافتها للسلة أولاً قبل إرسال الطلب.");
