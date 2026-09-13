@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital QR Menu - قائمة الطعام الإلكترونية</title>
+    <title>مطعم الملكي - قائمة الطعام الإلكترونية</title>
     
     <!-- Google Fonts: Aref Ruqaa & Tajawal -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,23 +18,24 @@
             --primary-gold: #d4af37;
             --gold-glow: rgba(212, 175, 55, 0.4);
             --bg-body: #f8f9fa;
-            --bg-card: rgba(255, 255, 255, 0.9);
+            --bg-card: #ffffff;
             --text-main: #1f2937;
             --text-muted: #6b7280;
             --border-color: rgba(212, 175, 55, 0.3);
-            --header-overlay: rgba(0, 0, 0, 0.45);
+            --header-overlay: rgba(0, 0, 0, 0.5);
             --shadow-color: rgba(0, 0, 0, 0.08);
             --accent-green: #25d366;
             --accent-green-hover: #1da851;
+            --card-radius: 16px;
         }
 
         body.dark-mode {
             --bg-body: #0d0f12;
-            --bg-card: rgba(22, 27, 34, 0.75);
+            --bg-card: #161b22;
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
             --border-color: rgba(212, 175, 55, 0.4);
-            --header-overlay: rgba(0, 0, 0, 0.7);
+            --header-overlay: rgba(0, 0, 0, 0.75);
             --shadow-color: rgba(0, 0, 0, 0.5);
         }
 
@@ -49,7 +50,7 @@
         body {
             background-color: var(--bg-body);
             color: var(--text-main);
-            padding-bottom: 120px;
+            padding-bottom: 150px;
             overflow-x: hidden;
         }
 
@@ -64,7 +65,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 20px;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.85), transparent);
         }
 
         .social-icons {
@@ -196,20 +197,50 @@
             transform: translateY(-2px);
         }
 
+        /* Search Section */
+        .search-container {
+            padding: 10px 20px;
+        }
+
+        .search-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input-wrapper i {
+            position: absolute;
+            right: 15px;
+            color: var(--text-muted);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 45px 12px 15px;
+            border-radius: 25px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--text-main);
+            font-size: 0.9rem;
+            outline: none;
+            box-shadow: 0 2px 8px var(--shadow-color);
+        }
+
         /* Categories Bar */
         .categories-wrapper {
-            padding: 15px 0 10px;
+            padding: 10px 0;
             position: sticky;
             top: 0;
             z-index: 5;
             background: var(--bg-body);
             backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
         }
 
         .categories-bar {
             display: flex;
             overflow-x: auto;
-            gap: 12px;
+            gap: 10px;
             padding: 0 20px;
             scrollbar-width: none;
         }
@@ -231,6 +262,7 @@
             align-items: center;
             gap: 8px;
             cursor: pointer;
+            user-select: none;
         }
 
         .category-chip.active {
@@ -240,34 +272,169 @@
             box-shadow: 0 0 10px var(--gold-glow);
         }
 
-        /* Empty State (No Products Displayed) */
-        .content-placeholder {
-            text-align: center;
-            padding: 50px 20px;
-            margin: 20px;
-            background: var(--bg-card);
-            border: 1px dashed var(--border-color);
-            border-radius: 16px;
-            backdrop-filter: blur(8px);
+        /* Menu Grid Section */
+        .menu-container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .content-placeholder i {
-            font-size: 3rem;
-            color: var(--primary-gold);
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
             margin-bottom: 15px;
+            color: var(--primary-gold);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .content-placeholder h3 {
-            font-size: 1.2rem;
-            margin-bottom: 8px;
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 18px;
         }
 
-        .content-placeholder p {
+        .product-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--card-radius);
+            overflow: hidden;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px var(--gold-glow);
+        }
+
+        .product-img-wrapper {
+            position: relative;
+            height: 170px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-price-badge {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.85);
+            color: var(--primary-gold);
+            border: 1px solid var(--primary-gold);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            backdrop-filter: blur(4px);
+        }
+
+        .product-content {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--text-main);
+        }
+
+        .product-desc {
+            font-size: 0.82rem;
             color: var(--text-muted);
-            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
         }
 
-        /* Order System & Bottom Cart Floating Bar */
+        .card-action {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            background: transparent;
+            border: 1px solid var(--primary-gold);
+            color: var(--primary-gold);
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .add-to-cart-btn:hover {
+            background: var(--primary-gold);
+            color: #000;
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 10px;
+            padding: 4px 8px;
+            border: 1px solid var(--primary-gold);
+        }
+
+        .qty-btn {
+            background: var(--primary-gold);
+            color: #000;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qty-val {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px 20px;
+            grid-column: 1 / -1;
+            color: var(--text-muted);
+        }
+
+        .no-results i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--primary-gold);
+        }
+
+        /* Cart Floating Drawer & Bar */
         .cart-bar-container {
             position: fixed;
             bottom: 0;
@@ -277,16 +444,33 @@
             backdrop-filter: blur(15px);
             border-top: 1px solid var(--border-color);
             box-shadow: 0 -5px 25px var(--shadow-color);
-            padding: 15px 20px;
+            padding: 12px 20px 15px;
             z-index: 100;
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;
         }
 
+        .cart-summary-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .cart-item-count {
+            background: var(--primary-gold);
+            color: #000;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
         .order-options {
             display: flex;
             gap: 10px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .order-type-btn {
@@ -342,12 +526,57 @@
             justify-content: center;
             gap: 8px;
             cursor: pointer;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        }
+
+        .cart-details-toggle {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--primary-gold);
+            cursor: pointer;
+            margin-bottom: 8px;
+            text-decoration: underline;
+        }
+
+        .cart-items-preview {
+            max-height: 120px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 8px;
+            display: none;
+        }
+
+        .cart-items-preview.open {
+            display: block;
+        }
+
+        .cart-line-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.82rem;
+            padding: 4px 0;
+        }
+
+        @media (min-width: 768px) {
+            .hero-header {
+                height: 320px;
+            }
+            .restaurant-info h1 {
+                font-size: 2.8rem;
+            }
+            .cart-bar-container {
+                max-width: 600px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Top Navigation with Social Links & Theme Switcher -->
+    <!-- Navigation Bar -->
     <div class="top-nav">
         <div class="social-icons">
             <a href="#"><i class="fab fa-instagram"></i></a>
@@ -361,12 +590,12 @@
         </button>
     </div>
 
-    <!-- Hero Header & Branding -->
+    <!-- Header -->
     <header class="hero-header">
         <div class="hero-overlay"></div>
         <div class="branding-container">
             <div class="logo-frame">
-                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=300&q=80" alt="Restaurant Logo">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=300&q=80" alt="Logo">
             </div>
             <div class="restaurant-info">
                 <h1>مطعم الملكي</h1>
@@ -375,7 +604,7 @@
         </div>
     </header>
 
-    <!-- Service Call Button -->
+    <!-- Call Waiter -->
     <div class="service-call-container">
         <button class="call-waiter-btn" onclick="callWaiter()">
             <i class="fas fa-bell"></i>
@@ -383,27 +612,46 @@
         </button>
     </div>
 
-    <!-- Categories Horizontal Bar -->
-    <div class="categories-wrapper">
-        <div class="categories-bar">
-            <div class="category-chip active"><i class="fas fa-drumstick-bite"></i> مشويات</div>
-            <div class="category-chip"><i class="fas fa-cheese"></i> مقبلات</div>
-            <div class="category-chip"><i class="fas fa-utensils"></i> أطباق رئيسية</div>
-            <div class="category-chip"><i class="fas fa-glass-martini-alt"></i> مشروبات</div>
-            <div class="category-chip"><i class="fas fa-ice-cream"></i> حلويات</div>
-            <div class="category-chip"><i class="fas fa-tags"></i> العروض الخاصة</div>
+    <!-- Live Search Bar -->
+    <div class="search-container">
+        <div class="search-input-wrapper">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن وجبة أو مشروب..." oninput="filterProducts()">
         </div>
     </div>
 
-    <!-- Placeholder Section (No Dish Products Rendered) -->
-    <div class="content-placeholder">
-        <i class="fas fa-concierge-bell"></i>
-        <h3>أهلاً بكم في مطعمنا</h3>
-        <p>يرجى اختيار نوع الطلب أدناه وإدخال التفاصيل لإرسال الحجز أو الطلب مباشر إلى الإدارة عبر واتساب.</p>
+    <!-- Categories Navigation Bar -->
+    <div class="categories-wrapper">
+        <div class="categories-bar" id="categoriesBar"></div>
     </div>
 
-    <!-- Horizontal Order & WhatsApp Cart System -->
+    <!-- Products Grid Container -->
+    <main class="menu-container">
+        <div class="section-title" id="currentCategoryTitle">
+            <i class="fas fa-utensils"></i> قائمة الطعام
+        </div>
+        <div class="products-grid" id="productsGrid"></div>
+    </main>
+
+    <!-- Floating Order & Cart Bar -->
     <div class="cart-bar-container">
+        <div class="cart-summary-header">
+            <div>
+                <span>سلة الطلب</span>
+                <span class="cart-item-count" id="cartCount">0</span>
+            </div>
+            <div>
+                <span>الإجمالي: </span>
+                <span id="cartTotal" style="color: var(--primary-gold); font-size: 1rem;">0 د.ع</span>
+            </div>
+        </div>
+
+        <div class="cart-details-toggle" onclick="toggleCartDetails()" id="toggleCartBtn">
+            عرض محتويات السلة <i class="fas fa-chevron-up"></i>
+        </div>
+
+        <div class="cart-items-preview" id="cartItemsPreview"></div>
+
         <div class="order-options">
             <button class="order-type-btn active" id="btnInHouse" onclick="setOrderType('inhouse')">
                 <i class="fas fa-chair"></i> داخل المطعم
@@ -413,7 +661,6 @@
             </button>
         </div>
 
-        <!-- Dynamic Form Fields -->
         <div class="form-fields" id="formFields">
             <input type="text" id="tableNum" placeholder="رقم الطاولة (مثال: 5)">
         </div>
@@ -424,32 +671,193 @@
     </div>
 
     <script>
-        let currentOrderType = 'inhouse';
+        // Dataset from CSV
+        const rawProducts = [
+          {"ID": 1, "Category": "المقبلات", "name": "فنكر", "price": 2000, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "بطاطا مقلية مقرمشة - تشكيلة مقبلات شهية وطازجة"},
+          {"ID": 2, "Category": "المقبلات", "name": "حمص بطحينية", "price": 1500, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "حمص ناعم وزيت زيتون - تشكيلة مقبلات شهية وطازجة"},
+          {"ID": 3, "Category": "المقبلات", "name": "باذنجانية", "price": 1000, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "سلاطة باذنجان متبلة - تشكيلة مقبلات شهية وطازجة"},
+          {"ID": 4, "Category": "المقبلات", "name": "رمانية", "price": 1000, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "سلاطة رمان منعشة - تشكيلة مقبلات شهية وطازجة"},
+          {"ID": 5, "Category": "المقبلات", "name": "جاجيك", "price": 1000, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "خيار باللبن والنعناع - تشكيلة مقبلات شهية وطازجة"},
+          {"ID": 6, "Category": "المقبلات", "name": "بابا غنوج", "price": 1000, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "باذنجان مشوي بالطحينة - تشكيلة مقبلات شهية وطازجة"},
+          {"ID": 7, "Category": "المقبلات", "name": "شوندر", "price": 1000, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "سلاطة شوندر طازجة - تشكيلة مقبلات شهية وطازجة"},
+          {"ID": 8, "Category": "صلصات", "name": "ثومية", "price": 500, "image": "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500", "desc": "صلصة الثوم الغنية - صلصات وتتبيلات مميزة"},
+          {"ID": 9, "Category": "صلصات", "name": "طرطور", "price": 500, "image": "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500", "desc": "صلصة الطحينة مع الليمون - صلصات وتتبيلات مميزة"},
+          {"ID": 10, "Category": "صلصات", "name": "صلصة ريزو", "price": 500, "image": "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500", "desc": "صلصة الريزو الخاصة - صلصات وتتبيلات مميزة"},
+          {"ID": 11, "Category": "صلصات", "name": "باربكيو", "price": 500, "image": "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500", "desc": "صلصة باربكيو مدخنة - صلصات وتتبيلات مميزة"},
+          {"ID": 12, "Category": "صلصات", "name": "سبايسي", "price": 500, "image": "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500", "desc": "صلصة حارة ومبهرة - صلصات وتتبيلات مميزة"},
+          {"ID": 13, "Category": "المشروبات", "name": "مشروب غازي علبة", "price": 500, "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=500", "desc": "مشروب غازي بارد علبة - مشروبات ومنعشات باردة"},
+          {"ID": 14, "Category": "المشروبات", "name": "مشروب غازي ماكينة", "price": 1000, "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=500", "desc": "مشروب غازي منعش من الماكينة - مشروبات ومنعشات باردة"},
+          {"ID": 15, "Category": "المشروبات", "name": "لبن", "price": 1000, "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=500", "desc": "لبن رائب بارد - مشروبات ومنعشات باردة"},
+          {"ID": 16, "Category": "المشروبات", "name": "ماء", "price": 250, "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=500", "desc": "ماء نقاء مبرد - مشروبات ومنعشات باردة"},
+          {"ID": 17, "Category": "شاورما الدجاج", "name": "صاج دجاج", "price": 3000, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "خبز لبناني - دجاج - ثومية - مخلل"},
+          {"ID": 18, "Category": "شاورما الدجاج", "name": "صاج دجاج شريف", "price": 3500, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "خبز لبناني - دجاج - ثومية - مخلل - جبن - ذرة"},
+          {"ID": 19, "Category": "شاورما الدجاج", "name": "وجبة عربي", "price": 5000, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "صاج دجاج (مقطع) - بطاطا - ثومية - مخلل - محمرة - بيبسي"},
+          {"ID": 20, "Category": "شاورما الدجاج", "name": "فرنسي دجاج", "price": 4000, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "صمون فرنسي - دجاج - ثومية - مخلل"},
+          {"ID": 21, "Category": "شاورما الدجاج", "name": "طبق شاورما دجاج عراقي 200 غ", "price": 7500, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "شاورما الدجاج - بطاطا - ثومية - مخلل - خبز لبناني"},
+          {"ID": 22, "Category": "شاورما الدجاج", "name": "نصف كيلو شاورما دجاج عراقي 500 غ", "price": 12000, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "شاورما الدجاج - ثومية - خبز لبناني"},
+          {"ID": 23, "Category": "شاورما الدجاج", "name": "كيلو شاورما دجاج", "price": 24000, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "شاورما الدجاج - ثومية - خبز لبناني"},
+          {"ID": 24, "Category": "شاورما اللحم", "name": "صاج لحم", "price": 5000, "image": "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=500", "desc": "خبز لبناني - لحم - طرطور - مخلل - طماطم - بقدونس"},
+          {"ID": 25, "Category": "شاورما اللحم", "name": "حجري لحم", "price": 4000, "image": "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=500", "desc": "صمون حجري (عراقي) - لحم - طماطم"},
+          {"ID": 26, "Category": "شاورما اللحم", "name": "فرنسي لحم", "price": 6000, "image": "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=500", "desc": "خبز فرنسي - لحم - مخلل - طماطم"},
+          {"ID": 27, "Category": "شاورما اللحم", "name": "عربي لحم", "price": 7000, "image": "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=500", "desc": "صاج لحم مقطع - بطاطا - مخلل - طرطور - محمرة - بيبسي"},
+          {"ID": 28, "Category": "شاورما اللحم", "name": "نصف كيلو شاورما لحم عراقي", "price": 22000, "image": "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=500", "desc": "شاورما لحم - طرطور - خبز لبناني"},
+          {"ID": 29, "Category": "شاورما اللحم", "name": "كيلو شاورما لحم عراقي", "price": 40000, "image": "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=500", "desc": "شاورما لحم - طرطور - خبز لبناني"},
+          {"ID": 30, "Category": "فروج", "name": "فروج شريف مشوي", "price": 13000, "image": "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=500", "desc": "دجاج شوي - خبز محمرة - بطاطا - ثومية - باربكيو - خبز لبناني"},
+          {"ID": 31, "Category": "فروج", "name": "نصف فروج شريف مشوي", "price": 7000, "image": "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=500", "desc": "دجاج شوي - خبز محمرة - بطاطا - ثومية - باربكيو - خبز لبناني"},
+          {"ID": 32, "Category": "فروج", "name": "فروج مشوي مع رز", "price": 16000, "image": "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=500", "desc": "فروج مشوي - رز - خبزة محمرة - خبز لبناني - ثومية - باربكيو"},
+          {"ID": 33, "Category": "فروج", "name": "نصف فروج مشوي مع رز", "price": 9000, "image": "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=500", "desc": "فروج مشوي - رز - خبزة محمرة - خبز لبناني - ثومية - باربكيو"},
+          {"ID": 34, "Category": "ريزو", "name": "ريزو شاورما دجاج", "price": 5000, "image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=500", "desc": "شاورما دجاج - صلصة ريزو الخاصة"},
+          {"ID": 35, "Category": "ريزو", "name": "ريزو شاورما لحم", "price": 7000, "image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=500", "desc": "شاورما لحم - صلصة ريزو الخاصة"}
+        ];
 
-        // Theme Toggle Functionality
+        let selectedCategory = 'الكل';
+        let currentOrderType = 'inhouse';
+        let cart = {};
+
+        const categoryIcons = {
+            'الكل': 'fa-th-large',
+            'شاورما الدجاج': 'fa-drumstick-bite',
+            'شاورما اللحم': 'fa-bacon',
+            'فروج': 'fa-fire',
+            'ريزو': 'fa-bowl-rice',
+            'المقبلات': 'fa-cheese',
+            'صلصات': 'fa-pepper-hot',
+            'المشروبات': 'fa-glass-martini-alt'
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCategories();
+            renderProducts();
+        });
+
         function toggleTheme() {
             document.body.classList.toggle('dark-mode');
             const isDark = document.body.classList.contains('dark-mode');
-            const themeText = document.getElementById('themeText');
-            const themeIcon = document.querySelector('#themeToggleBtn i');
+            document.getElementById('themeText').textContent = isDark ? 'النمط الفاتح' : 'النمط الداكن';
+            document.querySelector('#themeToggleBtn i').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+        }
 
-            if (isDark) {
-                themeText.textContent = 'النمط الفاتح';
-                themeIcon.className = 'fas fa-sun';
-            } else {
-                themeText.textContent = 'النمط الداكن';
-                themeIcon.className = 'fas fa-moon';
+        function renderCategories() {
+            const categoriesBar = document.getElementById('categoriesBar');
+            const uniqueCategories = ['الكل', ...new Set(rawProducts.map(p => p.Category))];
+
+            categoriesBar.innerHTML = uniqueCategories.map(cat => {
+                const icon = categoryIcons[cat] || 'fa-utensils';
+                const isActive = cat === selectedCategory ? 'active' : '';
+                return `
+                    <div class="category-chip ${isActive}" onclick="selectCategory('${cat}')">
+                        <i class="fas ${icon}"></i> ${cat}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function selectCategory(cat) {
+            selectedCategory = cat;
+            renderCategories();
+            document.getElementById('currentCategoryTitle').innerHTML = `
+                <i class="fas ${categoryIcons[cat] || 'fa-utensils'}"></i> ${cat === 'الكل' ? 'جميع الوجبات والأطباق' : cat}
+            `;
+            filterProducts();
+        }
+
+        function filterProducts() {
+            const searchTerm = document.getElementById('searchInput').value.trim().toLowerCase();
+            const filtered = rawProducts.filter(p => {
+                const matchesCat = (selectedCategory === 'الكل') || (p.Category === selectedCategory);
+                const matchesSearch = p.name.toLowerCase().includes(searchTerm) || p.desc.toLowerCase().includes(searchTerm);
+                return matchesCat && matchesSearch;
+            });
+            renderProducts(filtered);
+        }
+
+        function renderProducts(items = rawProducts) {
+            const grid = document.getElementById('productsGrid');
+            if (items.length === 0) {
+                grid.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search-minus"></i>
+                        <p>عذراً، لم نجد أي نتائج تطابق بحثك.</p>
+                    </div>
+                `;
+                return;
             }
+
+            grid.innerHTML = items.map(product => {
+                const qty = cart[product.ID] || 0;
+                return `
+                    <div class="product-card">
+                        <div class="product-img-wrapper">
+                            <img src="${product.image}" alt="${product.name}" class="product-img" loading="lazy">
+                            <div class="product-price-badge">${product.price.toLocaleString()} د.ع</div>
+                        </div>
+                        <div class="product-content">
+                            <div>
+                                <h3 class="product-title">${product.name}</h3>
+                                <p class="product-desc">${product.desc}</p>
+                            </div>
+                            <div class="card-action">
+                                ${qty === 0 ? `
+                                    <button class="add-to-cart-btn" onclick="updateCart(${product.ID}, 1)">
+                                        <i class="fas fa-plus"></i> إضافة للطلب
+                                    </button>
+                                ` : `
+                                    <div class="qty-controls">
+                                        <button class="qty-btn" onclick="updateCart(${product.ID}, ${qty - 1})">-</button>
+                                        <span class="qty-val">${qty}</span>
+                                        <button class="qty-btn" onclick="updateCart(${product.ID}, ${qty + 1})">+</button>
+                                    </div>
+                                `}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
         }
 
-        // Call Waiter Function
-        function callWaiter() {
-            const phoneNumber = "07893035416";
-            const message = encodeURIComponent("مرحباً، أود نداء النادل إلى الطاولة يرجى المساعدة.");
-            window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+        function updateCart(productId, newQty) {
+            if (newQty <= 0) {
+                delete cart[productId];
+            } else {
+                cart[productId] = newQty;
+            }
+            renderProducts();
+            updateCartSummary();
         }
 
-        // Switch Order Type (In-House / Delivery)
+        function updateCartSummary() {
+            let totalItems = 0;
+            let totalPrice = 0;
+            let previewHTML = '';
+
+            for (let id in cart) {
+                const product = rawProducts.find(p => p.ID == id);
+                if (product) {
+                    const qty = cart[id];
+                    const itemTotal = qty * product.price;
+                    totalItems += qty;
+                    totalPrice += itemTotal;
+                    previewHTML += `
+                        <div class="cart-line-item">
+                            <span>${product.name} × ${qty}</span>
+                            <span>${itemTotal.toLocaleString()} د.ع</span>
+                        </div>
+                    `;
+                }
+            }
+
+            document.getElementById('cartCount').textContent = totalItems;
+            document.getElementById('cartTotal').textContent = totalPrice.toLocaleString() + ' د.ع';
+            document.getElementById('cartItemsPreview').innerHTML = previewHTML || '<p style="color:var(--text-muted); text-align:center;">السلة فارغة حالياً</p>';
+        }
+
+        function toggleCartDetails() {
+            const preview = document.getElementById('cartItemsPreview');
+            const toggleBtn = document.getElementById('toggleCartBtn');
+            preview.classList.toggle('open');
+            toggleBtn.innerHTML = preview.classList.contains('open') ? 'إخفاء التفاصيل <i class="fas fa-chevron-down"></i>' : 'عرض محتويات السلة <i class="fas fa-chevron-up"></i>';
+        }
+
         function setOrderType(type) {
             currentOrderType = type;
             const btnInHouse = document.getElementById('btnInHouse');
@@ -459,9 +867,7 @@
             if (type === 'inhouse') {
                 btnInHouse.classList.add('active');
                 btnDelivery.classList.remove('active');
-                formFields.innerHTML = `
-                    <input type="text" id="tableNum" placeholder="رقم الطاولة (مثال: 5)">
-                `;
+                formFields.innerHTML = `<input type="text" id="tableNum" placeholder="رقم الطاولة (مثال: 5)">`;
             } else {
                 btnDelivery.classList.add('active');
                 btnInHouse.classList.remove('active');
@@ -473,28 +879,45 @@
             }
         }
 
-        // Send Order via WhatsApp
+        function callWaiter() {
+            const phoneNumber = "07893035416";
+            const message = encodeURIComponent("مرحباً، أود نداء النادل إلى الطاولة يرجى المساعدة.");
+            window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+        }
+
         function sendOrder() {
             const targetPhone = "077236813660";
-            let message = "مرحباً، أود إرسال طلب جديد:\n\n";
+            const cartIds = Object.keys(cart);
+            if (cartIds.length === 0) {
+                alert("يرجى اختيار وجبات وإضافتها للسلة أولاً قبل إرسال الطلب.");
+                return;
+            }
+
+            let message = "مرحباً مطعم الملكي، أود إرسال طلب جديد:\n\n📋 **تفاصيل الطلب:**\n";
+            let grandTotal = 0;
+
+            cartIds.forEach(id => {
+                const product = rawProducts.find(p => p.ID == id);
+                if (product) {
+                    const qty = cart[id];
+                    const itemTotal = qty * product.price;
+                    grandTotal += itemTotal;
+                    message += `• ${product.name} (عدد ${qty}) = ${itemTotal.toLocaleString()} د.ع\n`;
+                }
+            });
+
+            message += `\n💰 **المجموع الكلي:** ${grandTotal.toLocaleString()} د.ع\n\n`;
 
             if (currentOrderType === 'inhouse') {
                 const table = document.getElementById('tableNum').value;
-                if (!table) {
-                    alert("يرجى إدخال رقم الطاولة");
-                    return;
-                }
-                message += `نوع الطلب: داخل المطعم\nرقم الطاولة: ${table}`;
+                if (!table) { alert("يرجى إدخال رقم الطاولة"); return; }
+                message += `🪑 **نوع الطلب:** داخل المطعم\n📍 **رقم الطاولة:** ${table}`;
             } else {
                 const name = document.getElementById('custName').value;
                 const phone = document.getElementById('custPhone').value;
                 const address = document.getElementById('custAddress').value;
-
-                if (!name || !phone || !address) {
-                    alert("يرجى ملء جميع حقول بيانات التوصيل");
-                    return;
-                }
-                message += `نوع الطلب: دليفري\nالاسم: ${name}\nالهاتف: ${phone}\nالعنوان: ${address}`;
+                if (!name || !phone || !address) { alert("يرجى ملء جميع حقول بيانات التوصيل"); return; }
+                message += `🛵 **نوع الطلب:** دليفري / توصيل\n👤 **الاسم:** ${name}\n📞 **رقم الهاتف:** ${phone}\n📍 **العنوان:** ${address}`;
             }
 
             window.open(`https://wa.me/${targetPhone}?text=${encodeURIComponent(message)}`, '_blank');
