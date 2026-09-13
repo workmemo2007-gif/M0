@@ -57,7 +57,6 @@
             min-height: 100vh;
         }
 
-        /* Top Bar & Theme Switcher */
         .top-nav {
             position: absolute;
             top: 0;
@@ -119,7 +118,6 @@
             color: #000;
         }
 
-        /* Hero Header */
         .hero-header {
             position: relative;
             height: 250px;
@@ -178,7 +176,6 @@
             font-weight: 600;
         }
 
-        /* Service Call Button */
         .service-call-container {
             padding: 15px 20px 5px;
         }
@@ -207,7 +204,6 @@
             transform: translateY(-2px);
         }
 
-        /* Categories Bar */
         .categories-wrapper {
             padding: 15px 0;
             position: sticky;
@@ -254,7 +250,6 @@
             box-shadow: 0 2px 10px var(--gold-glow);
         }
 
-        /* Menu Section & Grid */
         .menu-container {
             padding: 20px;
             max-width: 1200px;
@@ -422,7 +417,6 @@
             text-align: center;
         }
 
-        /* Order System & Bottom Cart Floating Bar */
         .cart-bar-container {
             position: fixed;
             bottom: 0;
@@ -539,7 +533,6 @@
 </head>
 <body>
 
-    <!-- Top Navigation with Social Links & Theme Switcher -->
     <div class="top-nav">
         <div class="social-icons">
             <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
@@ -553,7 +546,6 @@
         </button>
     </div>
 
-    <!-- Hero Header & Branding -->
     <header class="hero-header">
         <div class="hero-overlay"></div>
         <div class="branding-container">
@@ -567,7 +559,6 @@
         </div>
     </header>
 
-    <!-- Service Call Button -->
     <div class="service-call-container">
         <button class="call-waiter-btn" onclick="callWaiter()">
             <i class="fas fa-bell"></i>
@@ -575,25 +566,18 @@
         </button>
     </div>
 
-    <!-- Categories Horizontal Bar -->
     <div class="categories-wrapper">
-        <div class="categories-bar" id="categoriesContainer">
-            <!-- Dynamic Chips Generated via JS -->
-        </div>
+        <div class="categories-bar" id="categoriesContainer"></div>
     </div>
 
-    <!-- Dishes Container -->
     <main class="menu-container">
         <div class="section-title">
             <i class="fas fa-utensils"></i>
             <span id="currentCategoryTitle">الأطباق المتاحة</span>
         </div>
-        <div class="menu-grid" id="menuGrid">
-            <!-- Dynamic Cards Generated via JS -->
-        </div>
+        <div class="menu-grid" id="menuGrid"></div>
     </main>
 
-    <!-- Bottom Floating Cart & Order Form -->
     <div class="cart-bar-container">
         <div class="cart-summary">
             <div>
@@ -612,7 +596,6 @@
             </button>
         </div>
 
-        <!-- Dynamic Form Fields -->
         <div class="form-fields" id="formFields">
             <input type="text" id="tableNum" placeholder="رقم الطاولة (مثال: 5)">
         </div>
@@ -623,24 +606,23 @@
     </div>
 
     <script>
-        // الرابط الجديد الخاص بك لجلب الأطباق وإرسال الطلبات
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwMe0tpyRpAVY3sQoS7DxH_t3HstiPk4DQvxUk3XUAPrwbJXM9q3YyWEBPCIkU9mZw1eA/exec';
+        // رابط نشر Google Apps Script الجديد الخاص بك
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwkCbbNtflJ9KzHc9uTtKns5cYmdWIcRnNWquGHXKnBd4-nKH0E-WQWsEPr6fxsMPPXsQ/exec';
 
+        // مطابقة الأقسام مع قيم عمود Category في ملف جديد منيو m1
         const categories = [
-            { id: 'grill', name: 'مشويات', icon: 'fa-drumstick-bite' },
-            { id: 'appetizer', name: 'مقبلات', icon: 'fa-cheese' },
-            { id: 'mains', name: 'أطباق رئيسية', icon: 'fa-utensils' },
-            { id: 'drinks', name: 'مشروبات', icon: 'fa-glass-martini-alt' },
-            { id: 'desserts', name: 'حلويات', icon: 'fa-ice-cream' },
-            { id: 'offers', name: 'العروض الخاصة', icon: 'fa-tags' }
+            { id: 'المقبلات', name: 'المقبلات', icon: 'fa-cheese' },
+            { id: 'صلصات', name: 'صلصات', icon: 'fa-pepper-hot' },
+            { id: 'المشروبات', name: 'المشروبات', icon: 'fa-glass-martini-alt' },
+            { id: 'شاورما الدجاج', name: 'شاورما الدجاج', icon: 'fa-drumstick-bite' },
+            { id: 'شاورما اللحم', name: 'شاورما اللحم', icon: 'fa-utensils' }
         ];
 
         let dishes = []; 
-        let activeCategory = 'grill';
+        let activeCategory = 'المقبلات';
         let cart = {}; 
         let currentOrderType = 'inhouse';
 
-        // جلب الأطباق ديناميكياً من Google Sheets
         async function fetchDishes() {
             const grid = document.getElementById('menuGrid');
             grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">جاري تحميل الأطباق من القائمة...</p>';
