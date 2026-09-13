@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مطعم الملكي - قائمة الطعام الإلكترونية</title>
     
-    <!-- Google Fonts: Aref Ruqaa & Tajawal -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -25,7 +25,7 @@
             --header-overlay: rgba(0, 0, 0, 0.5);
             --shadow-color: rgba(0, 0, 0, 0.08);
             --accent-green: #25d366;
-            --glass-bg: rgba(255, 255, 255, 0.2);
+            --glass-bg: rgba(255, 255, 255, 0.25);
             --glass-border: rgba(255, 255, 255, 0.3);
             --silver-grad: linear-gradient(135deg, #e0e0e0 0%, #bdc3c7 50%, #95a5a6 100%);
             --card-radius: 12px;
@@ -69,7 +69,6 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
-        /* Top Nav - Compact Icons (تعديل رقم 5) */
         .top-nav {
             position: absolute;
             top: 0; left: 0; right: 0;
@@ -111,7 +110,6 @@
             font-weight: bold;
         }
 
-        /* Hero Header */
         .hero-header {
             position: relative;
             height: 180px;
@@ -159,7 +157,6 @@
             font-size: 0.75rem;
         }
 
-        /* Service Actions (تعديل رقم 1: حذف الاتصال المباشر) */
         .service-actions-container {
             padding: 10px 12px 5px;
             display: flex;
@@ -187,7 +184,32 @@
         .tab-page { display: none; padding: 10px 12px; }
         .tab-page.active { display: block; }
 
-        /* Carousel Slider */
+        /* Search Bar Component */
+        .search-container {
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 8px 35px 8px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--text-main);
+            font-size: 0.82rem;
+            outline: none;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-gold);
+            font-size: 0.85rem;
+        }
+
         .ads-carousel {
             position: relative;
             width: 100%;
@@ -219,7 +241,6 @@
             border-right: 3px solid var(--primary-gold);
         }
 
-        /* Horizontal Popular Items Scroll (تعديل رقم 3) */
         .popular-horizontal-scroll {
             display: flex;
             gap: 10px;
@@ -231,14 +252,13 @@
         .popular-horizontal-scroll::-webkit-scrollbar { display: none; }
 
         .popular-horizontal-scroll .product-card {
-            flex: 0 0 145px; /* عرض ثابت للكروت في القائمة الافقية */
+            flex: 0 0 145px;
             width: 145px;
         }
 
-        /* Compact Products Grid (تعديل رقم 2: تصغير الأطباق لتكون جنباً إلى جنب) */
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* طبقين جنباً إلى جنب */
+            grid-template-columns: repeat(2, 1fr);
             gap: 10px;
         }
 
@@ -284,10 +304,9 @@
 
         .qty-btn {
             background: var(--primary-gold); color: #000; border: none;
-            width: 22px; height: 22px; border-radius: 4px; font-weight: bold; cursor: pointer;
+            width: 26px; height: 26px; border-radius: 4px; font-weight: bold; cursor: pointer;
         }
 
-        /* Reviews Section */
         .reviews-section {
             margin-top: 20px;
             background: var(--bg-card);
@@ -343,12 +362,18 @@
             cursor: pointer;
         }
 
-        /* Glass Categories List */
+        /* Glass Categories Styles */
         .glass-categories-grid {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 12px;
             margin-bottom: 15px;
+        }
+
+        .category-block {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
         .glass-category-card {
@@ -356,19 +381,46 @@
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--glass-border);
-            border-right: 3px solid var(--primary-gold);
-            padding: 10px 14px;
+            border-right: 4px solid var(--primary-gold);
+            padding: 12px 14px;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             color: var(--text-main);
-            font-size: 0.88rem;
+            font-size: 0.9rem;
             font-weight: 700;
             cursor: pointer;
         }
 
-        /* Floating Order Notification Bar */
+        .glass-category-card.active {
+            background: rgba(212, 175, 55, 0.15);
+            border-color: var(--primary-gold);
+        }
+
+        .category-chevron {
+            transition: transform 0.3s ease;
+        }
+
+        .glass-category-card.active .category-chevron {
+            transform: rotate(-90deg);
+        }
+
+        .category-products-slider {
+            display: none;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 5px 2px 10px;
+            scrollbar-width: none;
+        }
+
+        .category-products-slider::-webkit-scrollbar { display: none; }
+
+        .category-products-slider .product-card {
+            flex: 0 0 150px;
+            width: 150px;
+        }
+
         .cart-notification-bar {
             position: fixed; bottom: 65px; left: 12px; right: 12px;
             background: var(--primary-gold); color: #000;
@@ -379,7 +431,6 @@
             z-index: 90; cursor: pointer; display: none;
         }
 
-        /* Bottom Navigation Bar */
         .bottom-nav-bar {
             position: fixed; bottom: 0; left: 0; right: 0;
             height: 55px; background: var(--bg-card);
@@ -397,7 +448,6 @@
         .nav-item i { font-size: 1.1rem; }
         .nav-item.active { color: var(--primary-gold); }
 
-        /* Cart Page */
         .cart-container {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -440,19 +490,18 @@
         }
     </style>
 </head>
-<body>
+<body class="dark-mode">
 
-    <!-- Navigation Bar (تعديل رقم 5: أزرار مصغرة) -->
+    <!-- Top Nav -->
     <div class="top-nav">
         <div class="social-icons">
             <a href="#" class="glass-icon"><i class="fab fa-instagram"></i></a>
             <a href="#" class="glass-icon"><i class="fab fa-tiktok"></i></a>
             <a href="#" class="glass-icon"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="glass-icon"><i class="fab fa-snapchat-ghost"></i></a>
         </div>
         <button class="theme-toggle-btn glass-icon" id="themeToggleBtn" onclick="toggleTheme()">
-            <i class="fas fa-moon"></i>
-            <span id="themeText">الداكن</span>
+            <i class="fas fa-sun"></i>
+            <span id="themeText">الفاتح</span>
         </button>
     </div>
 
@@ -470,7 +519,7 @@
         </div>
     </header>
 
-    <!-- Actions (تعديل رقم 1: إزالة الاتصال المباشر) -->
+    <!-- Actions -->
     <div class="service-actions-container">
         <button class="action-btn call-waiter-btn" onclick="callWaiter()"><i class="fas fa-bell"></i> نداء الويتر</button>
         <a href="https://maps.google.com/?q=Al-Diwaniyah,Iraq" target="_blank" class="action-btn location-btn"><i class="fas fa-map-marker-alt"></i> موقع المطعم</a>
@@ -478,29 +527,42 @@
 
     <!-- PAGE 1: HOME -->
     <div id="homePage" class="tab-page active">
-        <!-- Moving Carousel Banner -->
-        <div class="ads-carousel">
-            <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1544025162-d76694265947?w=800');">
-                <div class="slide-caption">🔥 عروض شاورما اللحم العائلية - خصم 20%</div>
-            </div>
-            <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=800');">
-                <div class="slide-caption">🍗 فروج مشوي طازج يومياً على الفحم</div>
-            </div>
+        <!-- Search Bar -->
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن وجبتك المفضلة..." oninput="handleSearch()">
         </div>
 
-        <!-- Most Popular Dishes (تعديل رقم 3: التمرير الأفقي) -->
-        <div class="section-title"><i class="fas fa-fire"></i> الأطباق الأكثر طلباً</div>
-        <div class="popular-horizontal-scroll" id="popularGrid"></div>
+        <div id="searchResultsContainer" style="display: none; margin-bottom: 15px;">
+            <div class="section-title"><i class="fas fa-search"></i> نتائج البحث</div>
+            <div class="products-grid" id="searchResultsGrid"></div>
+        </div>
 
-        <!-- Customer Reviews (تعديل رقم 4: حفض واسترجاع التعليقات للجميع عبر LocalStorage) -->
-        <div class="reviews-section">
-            <div class="section-title"><i class="fas fa-comments"></i> تعليقات الزبائن</div>
-            <div id="reviewsContainer"></div>
-            
-            <div class="add-review-form">
-                <input type="text" id="reviewerName" placeholder="اسمك">
-                <textarea id="reviewerComment" rows="2" placeholder="اكتب تعليقك عن المطعم..."></textarea>
-                <button class="add-review-btn" onclick="addReview()">إضافة تعليق</button>
+        <div id="homeMainContent">
+            <!-- Carousel Banner -->
+            <div class="ads-carousel">
+                <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1544025162-d76694265947?w=800');">
+                    <div class="slide-caption">🔥 عروض شاورما اللحم العائلية - خصم 20%</div>
+                </div>
+                <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=800');">
+                    <div class="slide-caption">🍗 فروج مشوي طازج يومياً على الفحم</div>
+                </div>
+            </div>
+
+            <!-- Most Popular Dishes -->
+            <div class="section-title"><i class="fas fa-fire"></i> الأطباق الأكثر طلباً</div>
+            <div class="popular-horizontal-scroll" id="popularGrid"></div>
+
+            <!-- Customer Reviews -->
+            <div class="reviews-section">
+                <div class="section-title"><i class="fas fa-comments"></i> تعليقات الزبائن</div>
+                <div id="reviewsContainer"></div>
+                
+                <div class="add-review-form">
+                    <input type="text" id="reviewerName" placeholder="اسمك">
+                    <textarea id="reviewerComment" rows="2" placeholder="اكتب تعليقك عن المطعم..."></textarea>
+                    <button class="add-review-btn" onclick="addReview()">إضافة تعليق</button>
+                </div>
             </div>
         </div>
     </div>
@@ -509,15 +571,6 @@
     <div id="categoriesPage" class="tab-page">
         <div class="section-title"><i class="fas fa-list"></i> أقسام القائمة</div>
         <div class="glass-categories-grid" id="glassCategoriesGrid"></div>
-        
-        <div id="categoryProductsContainer" style="display:none; margin-top:10px;">
-            <button class="add-to-cart-btn" onclick="backToCategoriesList()" style="margin-bottom:10px; width:auto; padding: 4px 12px;">
-                <i class="fas fa-arrow-right"></i> العودة للأقسام
-            </button>
-            <div class="section-title" id="selectedCategoryTitle"></div>
-            <!-- تعديل رقم 2: شبكة أطباق مصغرة متجاورة -->
-            <div class="products-grid" id="categoryProductsGrid"></div>
-        </div>
     </div>
 
     <!-- PAGE 3: CART -->
@@ -544,13 +597,13 @@
         </div>
     </div>
 
-    <!-- Floating Count Notification Bar -->
+    <!-- Floating Notification Bar -->
     <div class="cart-notification-bar" id="cartNotificationBar" onclick="switchTab('cart')">
         <span>عرض السلة (<span id="notifyCount">0</span> وجبات)</span>
         <i class="fas fa-chevron-left"></i>
     </div>
 
-    <!-- Bottom Navigation Bar -->
+    <!-- Bottom Nav -->
     <div class="bottom-nav-bar">
         <div class="nav-item active" id="nav-home" onclick="switchTab('home')">
             <i class="fas fa-home"></i>
@@ -568,22 +621,22 @@
 
     <script>
         const rawProducts = [
-          {"ID": 1, "Category": "المقبلات", "name": "فنكر", "price": 2000, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "بطاطا مقلية مقرمشة", "popular": true},
-          {"ID": 2, "Category": "المقبلات", "name": "حمص بطحينية", "price": 1500, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "حمص ناعم وزيت زيتون"},
-          {"ID": 3, "Category": "المقبلات", "name": "باذنجانية", "price": 1000, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "سلاطة باذنجان متبلة"},
-          {"ID": 4, "Category": "المقبلات", "name": "رمانية", "price": 1000, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "سلاطة رمان منعشة"},
-          {"ID": 5, "Category": "المقبلات", "name": "جاجيك", "price": 1000, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "خيار باللبن والنعناع"},
+          {"ID": 1, "Category": "المقبلات", "name": "فنكر", "price": 2000, "image": "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=500", "desc": "بطاطا مقلية مقرمشة", "popular": true},
+          {"ID": 2, "Category": "المقبلات", "name": "حمص بطحينية", "price": 1500, "image": "https://images.unsplash.com/photo-1577968897966-3d4325b36b61?w=500", "desc": "حمص ناعم وزيت زيتون"},
+          {"ID": 3, "Category": "المقبلات", "name": "باذنجانية", "price": 1000, "image": "https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?w=500", "desc": "سلاطة باذنجان متبلة"},
+          {"ID": 4, "Category": "المقبلات", "name": "رمانية", "price": 1000, "image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500", "desc": "سلاطة رمان منعشة"},
+          {"ID": 5, "Category": "المقبلات", "name": "جاجيك", "price": 1000, "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=500", "desc": "خيار باللبن والنعناع"},
           {"ID": 6, "Category": "المقبلات", "name": "بابا غنوج", "price": 1000, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "باذنجان مشوي بالطحينة"},
-          {"ID": 7, "Category": "المقبلات", "name": "شوندر", "price": 1000, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "سلاطة شوندر طازجة"},
+          {"ID": 7, "Category": "المقبلات", "name": "شوندر", "price": 1000, "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500", "desc": "سلاطة شوندر طازجة"},
           {"ID": 8, "Category": "صلصات", "name": "ثومية", "price": 500, "image": "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500", "desc": "صلصة الثوم الغنية"},
           {"ID": 9, "Category": "صلصات", "name": "طرطور", "price": 500, "image": "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500", "desc": "صلصة الطحينة مع الليمون"},
           {"ID": 10, "Category": "صلصات", "name": "صلصة ريزو", "price": 500, "image": "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500", "desc": "صلصة الريزو الخاصة"},
           {"ID": 11, "Category": "صلصات", "name": "باربكيو", "price": 500, "image": "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500", "desc": "صلصة باربكيو مدخنة"},
           {"ID": 12, "Category": "صلصات", "name": "سبايسي", "price": 500, "image": "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500", "desc": "صلصة حارة ومبهرة"},
           {"ID": 13, "Category": "المشروبات", "name": "مشروب غازي علبة", "price": 500, "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=500", "desc": "مشروب غازي بارد علبة"},
-          {"ID": 14, "Category": "المشروبات", "name": "مشروب غازي ماكينة", "price": 1000, "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=500", "desc": "منعش من الماكينة"},
-          {"ID": 15, "Category": "المشروبات", "name": "لبن", "price": 1000, "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=500", "desc": "لبن رائب بارد"},
-          {"ID": 16, "Category": "المشروبات", "name": "ماء", "price": 250, "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=500", "desc": "ماء نقاء مبرد"},
+          {"ID": 14, "Category": "المشروبات", "name": "مشروب غازي ماكينة", "price": 1000, "image": "https://images.unsplash.com/photo-1581006852262-e4307cf6283a?w=500", "desc": "منعش من الماكينة"},
+          {"ID": 15, "Category": "المشروبات", "name": "لبن", "price": 1000, "image": "https://images.unsplash.com/photo-1556881286-fc6915169721?w=500", "desc": "لبن رائب بارد"},
+          {"ID": 16, "Category": "المشروبات", "name": "ماء", "price": 250, "image": "https://images.unsplash.com/photo-1548839140-29a749e1bc4e?w=500", "desc": "ماء نقاء مبرد"},
           {"ID": 17, "Category": "شاورما الدجاج", "name": "صاج دجاج", "price": 3000, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "خبز لبناني - دجاج - ثومية"},
           {"ID": 18, "Category": "شاورما الدجاج", "name": "صاج دجاج شريف", "price": 3500, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "دجاج - جبن - ذرة"},
           {"ID": 19, "Category": "شاورما الدجاج", "name": "وجبة عربي", "price": 5000, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "صاج مقطع - بطاطا - بيبسي", "popular": true},
@@ -618,7 +671,6 @@
             'المشروبات': 'fa-glass-martini-alt'
         };
 
-        // التعليقات الأساسية الافتراضية
         const defaultReviews = [
             { name: "أحمد العراقي", stars: "⭐⭐⭐⭐⭐", text: "أفضل شاورما في المحافظة، الطعم خرافي والخدمة ممتازة!" },
             { name: "سارة علي", stars: "⭐⭐⭐⭐⭐", text: "الفروج المشوي مع الرز طعمه رائع جداً والنظافة 10/10." }
@@ -650,6 +702,30 @@
             }
         }
 
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.trim().toLowerCase();
+            const resultsContainer = document.getElementById('searchResultsContainer');
+            const mainContent = document.getElementById('homeMainContent');
+            const resultsGrid = document.getElementById('searchResultsGrid');
+
+            if (query === '') {
+                resultsContainer.style.display = 'none';
+                mainContent.style.display = 'block';
+                return;
+            }
+
+            const filtered = rawProducts.filter(p => p.name.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query));
+            
+            mainContent.style.display = 'none';
+            resultsContainer.style.display = 'block';
+
+            if (filtered.length === 0) {
+                resultsGrid.innerHTML = '<p style="grid-column: span 2; text-align: center; color: var(--text-muted); padding: 10px;">لا توجد وجبات تطابق بحثك.</p>';
+            } else {
+                resultsGrid.innerHTML = filtered.map(product => createProductCardHTML(product)).join('');
+            }
+        }
+
         function startCarousel() {
             const slides = document.querySelectorAll('.carousel-slide');
             let index = 0;
@@ -667,34 +743,41 @@
 
         function renderGlassCategories() {
             const categories = [...new Set(rawProducts.map(p => p.Category))];
-            document.getElementById('glassCategoriesGrid').innerHTML = categories.map(cat => {
+            
+            document.getElementById('glassCategoriesGrid').innerHTML = categories.map((cat, idx) => {
                 const icon = categoryIcons[cat] || 'fa-utensils';
+                const catProducts = rawProducts.filter(p => p.Category === cat);
+                const productsHTML = catProducts.map(product => createProductCardHTML(product)).join('');
+
                 return `
-                    <div class="glass-category-card" onclick="openCategoryProducts('${cat}')">
-                        <span><i class="fas ${icon}" style="margin-left: 6px; color: var(--primary-gold);"></i> ${cat}</span>
-                        <i class="fas fa-chevron-left"></i>
+                    <div class="category-block">
+                        <div class="glass-category-card" id="cat-card-${idx}" onclick="toggleCategoryAccordion('${idx}')">
+                            <span><i class="fas ${icon}" style="margin-left: 6px; color: var(--primary-gold);"></i> ${cat}</span>
+                            <i class="fas fa-chevron-left category-chevron"></i>
+                        </div>
+                        <div class="category-products-slider" id="cat-slider-${idx}">
+                            ${productsHTML}
+                        </div>
                     </div>
                 `;
             }).join('');
         }
 
-        function openCategoryProducts(catName) {
-            document.getElementById('glassCategoriesGrid').style.display = 'none';
-            const container = document.getElementById('categoryProductsContainer');
-            container.style.display = 'block';
-
-            document.getElementById('selectedCategoryTitle').innerHTML = `<i class="fas ${categoryIcons[catName] || 'fa-utensils'}"></i> ${catName}`;
+        function toggleCategoryAccordion(idx) {
+            const card = document.getElementById(`cat-card-${idx}`);
+            const slider = document.getElementById(`cat-slider-${idx}`);
             
-            const catProducts = rawProducts.filter(p => p.Category === catName);
-            document.getElementById('categoryProductsGrid').innerHTML = catProducts.map(product => createProductCardHTML(product)).join('');
+            const isOpen = slider.style.display === 'flex';
+            
+            if (isOpen) {
+                slider.style.display = 'none';
+                card.classList.remove('active');
+            } else {
+                slider.style.display = 'flex';
+                card.classList.add('active');
+            }
         }
 
-        function backToCategoriesList() {
-            document.getElementById('glassCategoriesGrid').style.display = 'flex';
-            document.getElementById('categoryProductsContainer').style.display = 'none';
-        }
-
-        /* تعديل رقم 2: بطاقة طبق مصغرة وبحجم متناسق للعرض المزدوج */
         function createProductCardHTML(product) {
             const qty = cart[product.ID] || 0;
             return `
@@ -734,11 +817,13 @@
             }
             
             renderPopularProducts();
-            if (document.getElementById('categoryProductsContainer').style.display !== 'none') {
-                const currentCat = document.getElementById('selectedCategoryTitle').innerText.trim();
-                const catProducts = rawProducts.filter(p => p.Category === currentCat);
-                document.getElementById('categoryProductsGrid').innerHTML = catProducts.map(product => createProductCardHTML(product)).join('');
+            
+            if (document.getElementById('searchResultsContainer').style.display !== 'none') {
+                handleSearch();
             }
+
+            renderGlassCategories();
+            
             if (document.getElementById('cartPage').classList.contains('active')) {
                 renderCartDetails();
             }
@@ -794,7 +879,6 @@
             document.getElementById('cartGrandTotal').textContent = grandTotal.toLocaleString() + ' د.ع';
         }
 
-        /* تعديل رقم 4: إظهار وتخزين التعليقات محلياً ليراها كل الزبائن */
         function renderReviews() {
             let savedReviews = JSON.parse(localStorage.getItem('almalaki_reviews')) || defaultReviews;
             const container = document.getElementById('reviewsContainer');
