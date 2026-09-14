@@ -744,18 +744,29 @@
         function renderGlassCategories() {
             const categories = [...new Set(rawProducts.map(p => p.Category))];
             
+            // الاحتفاظ بالقوائم المفتوحة سابقاً
+            const openCategories = [];
+            categories.forEach((cat, idx) => {
+                const slider = document.getElementById(`cat-slider-${idx}`);
+                if (slider && slider.style.display === 'flex') {
+                    openCategories.push(idx);
+                }
+            });
+
             document.getElementById('glassCategoriesGrid').innerHTML = categories.map((cat, idx) => {
                 const icon = categoryIcons[cat] || 'fa-utensils';
                 const catProducts = rawProducts.filter(p => p.Category === cat);
                 const productsHTML = catProducts.map(product => createProductCardHTML(product)).join('');
 
+                const isOpen = openCategories.includes(idx);
+
                 return `
                     <div class="category-block">
-                        <div class="glass-category-card" id="cat-card-${idx}" onclick="toggleCategoryAccordion('${idx}')">
+                        <div class="glass-category-card ${isOpen ? 'active' : ''}" id="cat-card-${idx}" onclick="toggleCategoryAccordion('${idx}')">
                             <span><i class="fas ${icon}" style="margin-left: 6px; color: var(--primary-gold);"></i> ${cat}</span>
                             <i class="fas fa-chevron-left category-chevron"></i>
                         </div>
-                        <div class="category-products-slider" id="cat-slider-${idx}">
+                        <div class="category-products-slider" id="cat-slider-${idx}" style="display: ${isOpen ? 'flex' : 'none'};">
                             ${productsHTML}
                         </div>
                     </div>
@@ -793,14 +804,14 @@
                         </div>
                         <div>
                             ${qty === 0 ? `
-                                <button class="add-to-cart-btn" onclick="updateCart(${product.ID}, 1)">
+                                <button class="add-to-cart-btn" onclick="updateCart(event, ${product.ID}, 1)">
                                     <i class="fas fa-plus"></i> إضافة
                                 </button>
                             ` : `
                                 <div class="qty-controls">
-                                    <button class="qty-btn" onclick="updateCart(${product.ID}, ${qty - 1})">-</button>
+                                    <button class="qty-btn" onclick="updateCart(event, ${product.ID}, ${qty - 1})">-</button>
                                     <span>${qty}</span>
-                                    <button class="qty-btn" onclick="updateCart(${product.ID}, ${qty + 1})">+</button>
+                                    <button class="qty-btn" onclick="updateCart(event, ${product.ID}, ${qty + 1})">+</button>
                                 </div>
                             `}
                         </div>
@@ -809,7 +820,11 @@
             `;
         }
 
-        function updateCart(productId, newQty) {
+        function updateCart(event, productId, newQty) {
+            if (event) {
+                event.stopPropagation();
+            }
+
             if (newQty <= 0) {
                 delete cart[productId];
             } else {
@@ -863,7 +878,7 @@
                             </div>
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <span>${itemTotal.toLocaleString()} د.ع</span>
-                                <button class="qty-btn" onclick="updateCart(${product.ID}, 0)">×</button>
+                                <button class="qty-btn" onclick="updateCart(event, ${product.ID}, 0)">×</button>
                             </div>
                         </div>
                     `;
