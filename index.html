@@ -419,17 +419,19 @@
             width: 150px;
         }
 
-        /* Folder Card Styles - الذهبي المتناسق */
+        /* -------------------------------------------------------------
+           Folder Card Styles (تحديث حركة المجلد + 7 ملفات بألوان مخصصة)
+        ------------------------------------------------------------- */
         .folder-card-wrapper {
             display: flex;
             justify-content: center;
-            margin: 60px 0 30px;
+            margin: 220px 0 40px; /* مساحة علوية كافية لخروج الأقسام السبعة للعلى */
             direction: ltr;
         }
 
         .folder-card {
-          width: 170px;
-          height: 130px;
+          width: 200px;
+          height: 140px;
           perspective: 1200px;
           cursor: pointer;
           display: flex;
@@ -444,7 +446,7 @@
         .hint-wrapper {
           position: absolute;
           top: -40px;
-          right: -50px;
+          right: -40px;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -460,16 +462,11 @@
           color: var(--primary-gold);
           font-size: 11px;
           font-weight: 800;
-          text-decoration: underline;
           letter-spacing: 0.5px;
           white-space: nowrap;
-          position: relative;
-          right: -25px;
-          top: 10px;
-          transform: rotate(45deg);
         }
 
-        .hint-arrow { height: 35px; width: 35px; }
+        .hint-arrow { height: 28px; width: 28px; }
 
         @keyframes floatHint {
           0%, 100% { transform: translateY(0); }
@@ -492,7 +489,7 @@
         }
 
         .folder-toggle:checked ~ .folder-container {
-          transform: rotateX(10deg) rotateY(-5deg);
+          transform: rotateX(12deg);
         }
 
         .folder-back {
@@ -528,24 +525,23 @@
 
         .counter {
           position: absolute;
-          top: -95px;
-          right: -75px;
-          background-color: #d4af37;
-          padding: 4px 8px;
+          top: -30px;
+          right: -10px;
+          background-color: var(--primary-gold);
+          padding: 4px 10px;
           border-radius: 50px;
           display: flex;
           align-items: center;
-          gap: 8px;
-          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.2);
-          transform: scale(0) translateY(20px);
+          gap: 6px;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+          transform: scale(0);
           opacity: 0;
-          transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+          transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
           z-index: 100;
-          pointer-events: auto;
         }
 
         .folder-toggle:checked ~ .folder-container .counter {
-          transform: scale(1) translateY(0);
+          transform: scale(1);
           opacity: 1;
           transition-delay: 0.2s;
         }
@@ -555,116 +551,94 @@
           height: 6px;
           background: #10b981;
           border-radius: 50%;
-          position: relative;
-          box-shadow: 0 0 10px #10b981;
-        }
-
-        .status-dot::after {
-          content: "";
-          position: absolute;
-          top: 0; left: 0;
-          width: 100%; height: 100%;
-          background: #10b981;
-          border-radius: 50%;
-          animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-          0% { transform: scale(1); opacity: 1; }
-          100% { transform: scale(3); opacity: 0; }
         }
 
         .counter-label {
           font-family: "Tajawal", sans-serif;
-          font-size: 9px;
+          font-size: 10px;
           font-weight: 800;
           color: #1a1a1a;
-          text-transform: capitalize;
         }
 
         .counter-number {
           font-family: "Inter", sans-serif;
-          font-size: 12px;
+          font-size: 11px;
           font-weight: 900;
           color: #ffffff;
-          text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
+        /* تنسيق الأقسام السبعة داخل الفايل */
         .file {
           position: absolute;
           bottom: 5px;
-          left: 10%;
-          width: 80%;
-          height: 85px;
-          border-radius: 6px;
+          left: 5%;
+          width: 90%;
+          height: 38px;
+          border-radius: 8px;
           overflow: hidden;
-          box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3), 0 4px 12px rgba(0, 0, 0, 0.3);
-          transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-          z-index: 0;
+          box-shadow: 0 -2px 10px rgba(0,0,0,0.15), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+          transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0 12px;
+          opacity: 0; /* مخفي افتراضياً داخل الفايل */
+          transform: translateY(0) scale(0.9);
         }
 
-        /* تعديل ألوان الملفات لتنسجم مع الطابع الفاخر والذهبي للمطعم */
-        .file-1 { background: #b8860b; z-index: 25; transition-delay: 0.15s; }
-        .file-2 { background: #d4af37; z-index: 24; transition-delay: 0.1s; }
-        .file-3 { background: #aa7c11; z-index: 23; transition-delay: 0.05s; }
-        .file-4 { background: #8b6508; z-index: 22; transition-delay: 0.02s; }
-        .file-5 { background: #5c4305; z-index: 21; transition-delay: 0s; }
+        /* الألوان المخصصة للأقسام السبعة */
+        .file-1 { background: #00b4d8; z-index: 30; } /* سماوي */
+        .file-2 { background: #e63946; z-index: 29; } /* أحمر */
+        .file-3 { background: #1d3557; z-index: 28; } /* أزرق داكن */
+        .file-4 { background: #f77f00; z-index: 27; } /* برتقالي */
+        .file-5 { background: #2a9d8f; z-index: 26; } /* أخضر زمردي */
+        .file-6 { background: #7209b7; z-index: 25; } /* بنفسجي */
+        .file-7 { background: #e76f51; z-index: 24; } /* مرجاني */
 
         .shine {
           position: absolute;
           top: 0; left: -100%;
           width: 50%; height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
           transform: skewX(-20deg);
         }
 
         .folder-toggle:checked ~ .folder-container .shine {
           left: 150%;
-          transition: left 0.8s ease-in-out;
-          transition-delay: 0.3s;
+          transition: left 0.8s ease-in-out 0.3s;
         }
 
         .file-text {
           font-family: "Tajawal", sans-serif;
-          font-size: 10px;
-          color: white;
-          padding: 12px;
+          font-size: 11px;
+          color: #ffffff;
           font-weight: 800;
-          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-          opacity: 0;
-          transform: translateY(5px);
-          transition: all 0.3s ease 0.4s;
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+          direction: rtl;
         }
-
-        .folder-toggle:checked ~ .folder-container .file-text {
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        .folder-toggle:checked ~ .folder-container .file-1 { transform: translateY(-70px) rotate(-10deg) translateX(-15px) translateZ(20px); }
-        .folder-toggle:checked ~ .folder-container .file-2 { transform: translateY(-55px) rotate(8deg) translateX(18px) translateZ(10px); }
-        .folder-toggle:checked ~ .folder-container .file-3 { transform: translateY(-40px) rotate(-15deg) translateX(-8px); }
-        .folder-toggle:checked ~ .folder-container .file-4 { transform: translateY(-25px) rotate(12deg) translateX(12px); }
-        .folder-toggle:checked ~ .folder-container .file-5 { transform: translateY(-10px) rotate(-5deg); }
 
         .file-tag {
-          position: absolute;
-          bottom: 10px; right: 10px;
-          background: rgba(0, 0, 0, 0.6);
-          backdrop-filter: blur(4px);
-          -webkit-backdrop-filter: blur(4px);
-          color: var(--primary-gold);
-          font-family: "Inter", -apple-system, sans-serif;
-          font-size: 8px;
+          background: rgba(0, 0, 0, 0.3);
+          color: #ffffff;
+          font-family: "Inter", sans-serif;
+          font-size: 9px;
           font-weight: 800;
-          padding: 3px 6px;
-          border-radius: 4px;
-          opacity: 0;
-          transform: translateX(10px);
-          transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+          padding: 2px 7px;
+          border-radius: 12px;
         }
 
-        .folder-toggle:checked ~ .folder-container .file-tag { opacity: 1; transform: translateX(0); }
+        /* عند فتح الفايل: خروج الملفات للقسم العلوي واصطفافها شاقولياً واحدة فوق الأخرى */
+        .folder-toggle:checked ~ .folder-container .file {
+          opacity: 1;
+        }
+
+        .folder-toggle:checked ~ .folder-container .file-1 { transform: translateY(-260px); transition-delay: 0.35s; }
+        .folder-toggle:checked ~ .folder-container .file-2 { transform: translateY(-215px); transition-delay: 0.30s; }
+        .folder-toggle:checked ~ .folder-container .file-3 { transform: translateY(-170px); transition-delay: 0.25s; }
+        .folder-toggle:checked ~ .folder-container .file-4 { transform: translateY(-125px); transition-delay: 0.20s; }
+        .folder-toggle:checked ~ .folder-container .file-5 { transform: translateY(-80px);  transition-delay: 0.15s; }
+        .folder-toggle:checked ~ .folder-container .file-6 { transform: translateY(-35px);  transition-delay: 0.10s; }
+        .folder-toggle:checked ~ .folder-container .file-7 { transform: translateY(10px);   transition-delay: 0.05s; }
 
         .cart-notification-bar {
             position: fixed; bottom: 65px; left: 12px; right: 12px;
@@ -1005,12 +979,12 @@
     <div id="categoriesPage" class="tab-page">
         <div class="section-title"><i class="fas fa-list"></i> أقسام القائمة</div>
         
-        <!-- Folder Card 3D Component المعدل بالألوان الذهبية -->
+        <!-- Folder Card Component التجميعي لـ 7 أقسام بألوانها المحددة -->
         <div class="folder-card-wrapper">
             <label class="folder-card">
               <input class="folder-toggle" type="checkbox" />
               <div class="hint-wrapper">
-                <span class="hint-text">اضغط لفتح المجلد</span>
+                <span class="hint-text">انقر هنا لفتح الفايل</span>
                 <svg class="hint-arrow" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="2">
                   <path d="M12 5v14M19 12l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"></path>
                 </svg>
@@ -1019,8 +993,8 @@
               <div class="folder-container">
                 <div class="counter">
                   <div class="status-dot"></div>
-                  <span class="counter-label">الأصناف:</span>
-                  <span class="counter-number" id="totalProductsCount">35</span>
+                  <span class="counter-label">الأقسام:</span>
+                  <span class="counter-number">7</span>
                 </div>
 
                 <div class="folder-back">
@@ -1029,30 +1003,41 @@
                   </svg>
                 </div>
 
+                <!-- 7 ملفات مخفية تخرج للأعلى عند فتح الفايل -->
                 <div class="file file-1">
                   <div class="shine"></div>
-                  <span class="file-text">شاورما دجاج</span>
+                  <span class="file-text">المقبلات</span>
                   <div class="file-tag">7</div>
                 </div>
                 <div class="file file-2">
                   <div class="shine"></div>
-                  <span class="file-text">شاورما لحم</span>
-                  <div class="file-tag">6</div>
+                  <span class="file-text">صلصات</span>
+                  <div class="file-tag">1</div>
                 </div>
                 <div class="file file-3">
                   <div class="shine"></div>
-                  <span class="file-text">فروج مشوي</span>
-                  <div class="file-tag">4</div>
+                  <span class="file-text">شاورما دجاج</span>
+                  <div class="file-tag">5</div>
                 </div>
                 <div class="file file-4">
                   <div class="shine"></div>
-                  <span class="file-text">مقبلات وصلصات</span>
-                  <div class="file-tag">12</div>
+                  <span class="file-text">شاورما لحم</span>
+                  <div class="file-tag">3</div>
                 </div>
                 <div class="file file-5">
                   <div class="shine"></div>
-                  <span class="file-text">مشروبات وريزو</span>
-                  <div class="file-tag">6</div>
+                  <span class="file-text">فروج مشوي</span>
+                  <div class="file-tag">2</div>
+                </div>
+                <div class="file file-6">
+                  <div class="shine"></div>
+                  <span class="file-text">وجبات ريزو</span>
+                  <div class="file-tag">1</div>
+                </div>
+                <div class="file file-7">
+                  <div class="shine"></div>
+                  <span class="file-text">المشروبات</span>
+                  <div class="file-tag">2</div>
                 </div>
 
                 <div class="folder-front-wrapper">
@@ -1213,8 +1198,6 @@
         function renderCategories() {
             const container = document.getElementById('glassCategoriesGrid');
             const categories = [...new Set(rawProducts.map(p => p.Category))];
-            
-            document.getElementById('totalProductsCount').innerText = rawProducts.length;
 
             container.innerHTML = categories.map((cat, idx) => {
                 const prods = rawProducts.filter(p => p.Category === cat);
