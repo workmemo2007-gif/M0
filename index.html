@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Lexend+Deca:wght@400;600&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -471,13 +471,6 @@
             color: var(--text-main); font-size: 0.8rem;
         }
 
-        .submit-order-btn {
-            width: 100%; background: linear-gradient(135deg, #25d366, #128c7e);
-            color: #fff; border: none; padding: 10px; border-radius: 8px;
-            font-weight: 700; font-size: 0.9rem; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; gap: 6px;
-        }
-
         .cart-line-item {
             display: flex; justify-content: space-between; align-items: center;
             padding: 6px 0; border-bottom: 1px dashed var(--border-color);
@@ -487,6 +480,208 @@
         .section-title {
             font-size: 1.05rem; font-weight: 700; margin-bottom: 10px;
             color: var(--primary-gold); display: flex; align-items: center; gap: 6px;
+        }
+
+        /* --- Interactive Checkout Button Styles --- */
+        .interactive-checkout-container {
+            background-color: #ffffff;
+            display: flex;
+            width: 270px;
+            height: 100px;
+            position: relative;
+            border-radius: 8px;
+            transition: 0.3s ease-in-out;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            margin: 15px auto 5px;
+            direction: ltr; /* لضبط الاتجاه الخاص بالأنيميشن */
+        }
+
+        .interactive-checkout-container:hover {
+            transform: scale(1.03);
+        }
+
+        .interactive-checkout-container:hover .left-side {
+            width: 100%;
+        }
+
+        .left-side {
+            background-color: #25d366;
+            width: 120px;
+            height: 100px;
+            border-radius: 4px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.3s;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .right-side {
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            cursor: pointer;
+            justify-content: center;
+            white-space: nowrap;
+            transition: 0.3s;
+            width: 100%;
+            background-color: #ffffff;
+        }
+
+        .right-side:hover {
+            background-color: #f9f7f9;
+        }
+
+        .new {
+            font-size: 18px;
+            font-family: "Tajawal", sans-serif;
+            font-weight: 800;
+            color: #1f2937;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card {
+            width: 60px;
+            height: 40px;
+            background-color: #c7ffbc;
+            border-radius: 6px;
+            position: absolute;
+            display: flex;
+            z-index: 10;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 6px 6px 9px -2px rgba(37, 211, 102, 0.5);
+        }
+
+        .card-line {
+            width: 55px;
+            height: 10px;
+            background-color: #80ea69;
+            border-radius: 2px;
+            margin-top: 6px;
+        }
+
+        .buttons {
+            width: 7px;
+            height: 7px;
+            background-color: #379e1f;
+            box-shadow: 0 -8px 0 0 #26850e, 0 8px 0 0 #56be3e;
+            border-radius: 50%;
+            margin-top: 4px;
+            transform: rotate(90deg);
+            margin: 8px 0 0 -25px;
+        }
+
+        .interactive-checkout-container:hover .card {
+            animation: slide-top 1.2s cubic-bezier(0.645, 0.045, 0.355, 1) both;
+        }
+
+        .interactive-checkout-container:hover .post {
+            animation: slide-post 1s cubic-bezier(0.165, 0.84, 0.44, 1) both;
+        }
+
+        @keyframes slide-top {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-60px) rotate(90deg); }
+            60% { transform: translateY(-60px) rotate(90deg); }
+            100% { transform: translateY(-6px) rotate(90deg); }
+        }
+
+        .post {
+            width: 55px;
+            height: 65px;
+            background-color: #dddde0;
+            position: absolute;
+            z-index: 11;
+            bottom: 10px;
+            top: 100px;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .post-line {
+            width: 40px;
+            height: 8px;
+            background-color: #545354;
+            position: absolute;
+            border-radius: 0px 0px 3px 3px;
+            right: 7px;
+            top: 7px;
+        }
+
+        .post-line:before {
+            content: "";
+            position: absolute;
+            width: 40px;
+            height: 8px;
+            background-color: #757375;
+            top: -7px;
+        }
+
+        .screen {
+            width: 40px;
+            height: 20px;
+            background-color: #ffffff;
+            position: absolute;
+            top: 18px;
+            right: 7px;
+            border-radius: 3px;
+        }
+
+        .numbers {
+            width: 10px;
+            height: 10px;
+            background-color: #838183;
+            box-shadow: 0 -15px 0 0 #838183, 0 15px 0 0 #838183;
+            border-radius: 2px;
+            position: absolute;
+            transform: rotate(90deg);
+            left: 22px;
+            top: 44px;
+        }
+
+        .numbers-line2 {
+            width: 10px;
+            height: 10px;
+            background-color: #aaa9ab;
+            box-shadow: 0 -15px 0 0 #aaa9ab, 0 15px 0 0 #aaa9ab;
+            border-radius: 2px;
+            position: absolute;
+            transform: rotate(90deg);
+            left: 22px;
+            top: 56px;
+        }
+
+        @keyframes slide-post {
+            50% { transform: translateY(0); }
+            100% { transform: translateY(-60px); }
+        }
+
+        .dollar {
+            position: absolute;
+            font-size: 14px;
+            font-family: "Lexend Deca", sans-serif;
+            width: 100%;
+            left: 0;
+            top: 1px;
+            color: #4b953b;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .interactive-checkout-container:hover .dollar {
+            animation: fade-in-fwd 0.3s 1s backwards;
+        }
+
+        @keyframes fade-in-fwd {
+            0% { opacity: 0; transform: translateY(-5px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -593,7 +788,27 @@
                 <input type="text" id="tableNum" placeholder="رقم الطاولة (مثال: 5)">
             </div>
 
-            <button class="submit-order-btn" onclick="sendOrder()"><i class="fab fa-whatsapp"></i> إرسال الطلب عبر واتساب</button>
+            <!-- Interactive Checkout Button -->
+            <div class="interactive-checkout-container" onclick="sendOrder()">
+                <div class="left-side">
+                    <div class="card">
+                        <div class="card-line"></div>
+                        <div class="buttons"></div>
+                    </div>
+                    <div class="post">
+                        <div class="post-line"></div>
+                        <div class="screen">
+                            <div class="dollar">$</div>
+                        </div>
+                        <div class="numbers"></div>
+                        <div class="numbers-line2"></div>
+                    </div>
+                </div>
+                <div class="right-side">
+                    <div class="new"><i class="fab fa-whatsapp" style="color:#25d366;"></i> إتمام الشراء</div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -744,7 +959,6 @@
         function renderGlassCategories() {
             const categories = [...new Set(rawProducts.map(p => p.Category))];
             
-            // الاحتفاظ بالقوائم المفتوحة سابقاً
             const openCategories = [];
             categories.forEach((cat, idx) => {
                 const slider = document.getElementById(`cat-slider-${idx}`);
@@ -979,9 +1193,9 @@
                 if (!table) { alert("يرجى إدخال رقم الطاولة"); return; }
                 message += `🪑 **نوع الطلب:** داخل المطعم\n📍 **رقم الطاولة:** ${table}`;
             } else {
-                const name = document.getElementById('custName').value;
-                const phone = document.getElementById('custPhone').value;
-                const address = document.getElementById('custAddress').value;
+                const name = document.getElementById('custName') ? document.getElementById('custName').value : '';
+                const phone = document.getElementById('custPhone') ? document.getElementById('custPhone').value : '';
+                const address = document.getElementById('custAddress') ? document.getElementById('custAddress').value : '';
                 if (!name || !phone || !address) { alert("يرجى ملء جميع حقول بيانات التوصيل"); return; }
                 message += `🛵 **نوع الطلب:** دليفري / توصيل\n👤 **الاسم:** ${name}\n📞 **رقم الهاتف:** ${phone}\n📍 **العنوان:** ${address}`;
             }
