@@ -184,7 +184,6 @@
         .tab-page { display: none; padding: 10px 12px; }
         .tab-page.active { display: block; }
 
-        /* Search Bar Component */
         .search-container {
             margin-bottom: 12px;
             position: relative;
@@ -363,17 +362,17 @@
         }
 
         /* =========================================================
-           Folder Card 3D Component Styles (Extended to 7 Files)
+           Folder Card 3D Component Styles (Vertically Stacked Files)
            ========================================================= */
         .folder-card-wrapper {
             display: flex;
             justify-content: center;
-            margin: 110px 0 40px;
+            margin: 240px 0 30px; /* توسيع المسافة العلوية لاستيعاب ارتضاع الملفات فوق بعضها */
             direction: ltr;
         }
 
         .folder-card {
-          width: 200px;
+          width: 220px;
           height: 140px;
           perspective: 1200px;
           cursor: pointer;
@@ -389,7 +388,7 @@
         .hint-wrapper {
           position: absolute;
           top: -40px;
-          right: -50px;
+          right: -40px;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -436,9 +435,8 @@
           will-change: transform;
         }
 
-        /* عند فتح الفايل ينزل الإطار والأغلفة للأصل إلى الأسفل وتبرز الملفات للأعلى */
         .folder-toggle:checked ~ .folder-container {
-          transform: translateY(45px) rotateX(25deg) rotateY(-5deg);
+          transform: translateY(50px) rotateX(20deg);
         }
 
         .folder-back {
@@ -475,7 +473,7 @@
         .counter {
           position: absolute;
           top: -95px;
-          right: -75px;
+          right: -60px;
           background-color: #a18cd1;
           padding: 4px 8px;
           border-radius: 50px;
@@ -539,23 +537,23 @@
           bottom: 5px;
           left: 5%;
           width: 90%;
-          height: 90px;
+          height: 75px;
           border-radius: 8px;
           overflow: hidden;
           box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3), 0 4px 12px rgba(0, 0, 0, 0.3);
-          transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+          transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
           z-index: 0;
           direction: rtl;
         }
 
-        /* ألوان بارزة للـ 7 أقسام */
-        .file-1 { background: linear-gradient(135deg, #ff416c, #ff4b2b); z-index: 27; transition-delay: 0.21s; } /* شاورما دجاج */
-        .file-2 { background: linear-gradient(135deg, #f7971e, #ffd200); z-index: 26; transition-delay: 0.18s; } /* شاورما لحم */
-        .file-3 { background: linear-gradient(135deg, #56ab2f, #a8e063); z-index: 25; transition-delay: 0.15s; } /* فروج */
-        .file-4 { background: linear-gradient(135deg, #00c6ff, #0072ff); z-index: 24; transition-delay: 0.12s; } /* ريزو */
-        .file-5 { background: linear-gradient(135deg, #f80759, #bc4e9c); z-index: 23; transition-delay: 0.09s; } /* المقبلات */
-        .file-6 { background: linear-gradient(135deg, #11998e, #38ef7d); z-index: 22; transition-delay: 0.06s; } /* صلصات */
-        .file-7 { background: linear-gradient(135deg, #8e2de2, #4a00e0); z-index: 21; transition-delay: 0.03s; } /* المشروبات */
+        /* ألوان الأقسام الـ 7 */
+        .file-1 { background: linear-gradient(135deg, #ff416c, #ff4b2b); z-index: 27; transition-delay: 0.21s; }
+        .file-2 { background: linear-gradient(135deg, #f7971e, #ffd200); z-index: 26; transition-delay: 0.18s; }
+        .file-3 { background: linear-gradient(135deg, #56ab2f, #a8e063); z-index: 25; transition-delay: 0.15s; }
+        .file-4 { background: linear-gradient(135deg, #00c6ff, #0072ff); z-index: 24; transition-delay: 0.12s; }
+        .file-5 { background: linear-gradient(135deg, #f80759, #bc4e9c); z-index: 23; transition-delay: 0.09s; }
+        .file-6 { background: linear-gradient(135deg, #11998e, #38ef7d); z-index: 22; transition-delay: 0.06s; }
+        .file-7 { background: linear-gradient(135deg, #8e2de2, #4a00e0); z-index: 21; transition-delay: 0.03s; }
 
         .shine {
           position: absolute;
@@ -592,23 +590,24 @@
           transform: translateY(0);
         }
 
-        /* ارتفاعات وبروز الملفات السبعة إلى الأعلى عند فتح الفايل */
-        .folder-toggle:checked ~ .folder-container .file-1 { transform: translateY(-135px) rotate(-14deg) translateX(-25px) translateZ(30px); }
-        .folder-toggle:checked ~ .folder-container .file-2 { transform: translateY(-115px) rotate(10deg) translateX(22px) translateZ(25px); }
-        .folder-toggle:checked ~ .folder-container .file-3 { transform: translateY(-95px) rotate(-8deg) translateX(-15px) translateZ(20px); }
-        .folder-toggle:checked ~ .folder-container .file-4 { transform: translateY(-75px) rotate(12deg) translateX(18px) translateZ(15px); }
-        .folder-toggle:checked ~ .folder-container .file-5 { transform: translateY(-55px) rotate(-10deg) translateX(-10px) translateZ(10px); }
-        .folder-toggle:checked ~ .folder-container .file-6 { transform: translateY(-35px) rotate(6deg) translateX(12px) translateZ(5px); }
-        .folder-toggle:checked ~ .folder-container .file-7 { transform: translateY(-15px) rotate(-4deg); }
+        /* --- ترتيب الملفات بشكل مستقيم رأسياً واحدة فوق الأخرى بدقة --- */
+        .folder-toggle:checked ~ .folder-container .file-1 { transform: translateY(-245px); }
+        .folder-toggle:checked ~ .folder-container .file-2 { transform: translateY(-210px); }
+        .folder-toggle:checked ~ .folder-container .file-3 { transform: translateY(-175px); }
+        .folder-toggle:checked ~ .folder-container .file-4 { transform: translateY(-140px); }
+        .folder-toggle:checked ~ .folder-container .file-5 { transform: translateY(-105px); }
+        .folder-toggle:checked ~ .folder-container .file-6 { transform: translateY(-70px); }
+        .folder-toggle:checked ~ .folder-container .file-7 { transform: translateY(-35px); }
 
-        .folder-toggle:checked ~ .folder-container .file:hover { cursor: pointer; filter: brightness(1.2); }
-        .folder-toggle:checked ~ .folder-container .file-1:hover { transform: translateY(-145px) rotate(-14deg) translateX(-25px) scale(1.05); }
-        .folder-toggle:checked ~ .folder-container .file-2:hover { transform: translateY(-125px) rotate(10deg) translateX(22px) scale(1.05); }
-        .folder-toggle:checked ~ .folder-container .file-3:hover { transform: translateY(-105px) rotate(-8deg) translateX(-15px) scale(1.05); }
-        .folder-toggle:checked ~ .folder-container .file-4:hover { transform: translateY(-85px) rotate(12deg) translateX(18px) scale(1.05); }
-        .folder-toggle:checked ~ .folder-container .file-5:hover { transform: translateY(-65px) rotate(-10deg) translateX(-10px) scale(1.05); }
-        .folder-toggle:checked ~ .folder-container .file-6:hover { transform: translateY(-45px) rotate(6deg) translateX(12px) scale(1.05); }
-        .folder-toggle:checked ~ .folder-container .file-7:hover { transform: translateY(-25px) rotate(-4deg) scale(1.05); }
+        /* التأثير عند التأشير/اللمس */
+        .folder-toggle:checked ~ .folder-container .file:hover { cursor: pointer; filter: brightness(1.15); }
+        .folder-toggle:checked ~ .folder-container .file-1:hover { transform: translateY(-252px) scale(1.03); }
+        .folder-toggle:checked ~ .folder-container .file-2:hover { transform: translateY(-217px) scale(1.03); }
+        .folder-toggle:checked ~ .folder-container .file-3:hover { transform: translateY(-182px) scale(1.03); }
+        .folder-toggle:checked ~ .folder-container .file-4:hover { transform: translateY(-147px) scale(1.03); }
+        .folder-toggle:checked ~ .folder-container .file-5:hover { transform: translateY(-112px) scale(1.03); }
+        .folder-toggle:checked ~ .folder-container .file-6:hover { transform: translateY(-77px) scale(1.03); }
+        .folder-toggle:checked ~ .folder-container .file-7:hover { transform: translateY(-42px) scale(1.03); }
 
         .file-tag {
           position: absolute;
@@ -629,9 +628,8 @@
 
         .folder-toggle:checked ~ .folder-container .file-tag { opacity: 1; }
 
-        /* منطقة عرض أطباق القسم المختار أسفل المجلد */
         .selected-category-dishes {
-            margin-top: 40px;
+            margin-top: 30px;
             display: none;
         }
         .selected-category-dishes.active {
@@ -976,7 +974,7 @@
     <div id="categoriesPage" class="tab-page">
         <div class="section-title"><i class="fas fa-folder-open"></i> أقسام القائمة (انقر على المجلد للأصناف)</div>
         
-        <!-- Folder Card 3D Component with 7 Interactive Colored Files -->
+        <!-- Folder Card 3D Component -->
         <div class="folder-card-wrapper">
             <label class="folder-card">
               <input class="folder-toggle" type="checkbox" id="folderCheckbox" />
@@ -1000,7 +998,7 @@
                   </svg>
                 </div>
 
-                <!-- الملفات السبعة بالألوان البارزة -->
+                <!-- 7 مرتبة بعناية ورأسياً فوق بعضها -->
                 <div class="file file-1" onclick="selectCategory('شاورما الدجاج')">
                   <div class="shine"></div>
                   <span class="file-text"><i class="fas fa-drumstick-bite"></i> شاورما دجاج</span>
@@ -1047,7 +1045,6 @@
             </label>
         </div>
 
-        <!-- أطباق القسم المحظوظ بعد الضغط على أي ملف من الفايل -->
         <div id="selectedCategoryDishes" class="selected-category-dishes">
             <div class="section-title" id="selectedCategoryTitle">
                 <i class="fas fa-utensils"></i> أطباق القسم
@@ -1234,9 +1231,7 @@
             document.getElementById('popularGrid').innerHTML = popularItems.map(product => createProductCardHTML(product)).join('');
         }
 
-        /* عند النقر على أحد الأقسام/الملفات البارزة في الفايل */
         function selectCategory(categoryName) {
-            // التأكد من فتح الفايل
             document.getElementById('folderCheckbox').checked = true;
 
             currentSelectedCategory = categoryName;
@@ -1251,10 +1246,9 @@
             
             container.classList.add('active');
 
-            // التمرير السلس لنزول الشاشة نحو أطباق القسم
             setTimeout(() => {
                 container.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 300);
+            }, 350);
         }
 
         function createProductCardHTML(product) {
