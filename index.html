@@ -184,6 +184,7 @@
         .tab-page { display: none; padding: 10px 12px; }
         .tab-page.active { display: block; }
 
+        /* Search Bar Component */
         .search-container {
             margin-bottom: 12px;
             position: relative;
@@ -361,6 +362,7 @@
             cursor: pointer;
         }
 
+        /* Glass Categories Styles */
         .glass-categories-grid {
             display: flex;
             flex-direction: column;
@@ -419,19 +421,19 @@
             width: 150px;
         }
 
-        /* -------------------------------------------------------------
-           Folder Card Styles (تحديث حركة المجلد + 7 ملفات بألوان مخصصة)
-        ------------------------------------------------------------- */
+        /* =========================================================
+           Folder Card Styles & Interactive Logic (Mergd Code)
+           ========================================================= */
         .folder-card-wrapper {
             display: flex;
             justify-content: center;
-            margin: 220px 0 40px; /* مساحة علوية كافية لخروج الأقسام السبعة للعلى */
+            margin: 60px 0 30px;
             direction: ltr;
         }
 
         .folder-card {
-          width: 200px;
-          height: 140px;
+          width: 170px;
+          height: 130px;
           perspective: 1200px;
           cursor: pointer;
           display: flex;
@@ -441,12 +443,14 @@
           -webkit-tap-highlight-color: transparent;
         }
 
-        .folder-toggle { display: none; }
+        .folder-toggle {
+          display: none;
+        }
 
         .hint-wrapper {
           position: absolute;
           top: -40px;
-          right: -40px;
+          right: -50px;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -458,15 +462,23 @@
         }
 
         .hint-text {
-          font-family: "Tajawal", -apple-system, sans-serif;
-          color: var(--primary-gold);
-          font-size: 11px;
-          font-weight: 800;
+          font-family: "Inter", -apple-system, sans-serif;
+          color: #60a5fa;
+          font-size: 10px;
+          font-weight: 900;
+          text-decoration: underline;
           letter-spacing: 0.5px;
           white-space: nowrap;
+          position: relative;
+          right: -25px;
+          top: 10px;
+          transform: rotate(45deg);
         }
 
-        .hint-arrow { height: 28px; width: 28px; }
+        .hint-arrow {
+          height: 35px;
+          width: 35px;
+        }
 
         @keyframes floatHint {
           0%, 100% { transform: translateY(0); }
@@ -489,7 +501,7 @@
         }
 
         .folder-toggle:checked ~ .folder-container {
-          transform: rotateX(12deg);
+          transform: rotateX(10deg) rotateY(-5deg);
         }
 
         .folder-back {
@@ -525,23 +537,24 @@
 
         .counter {
           position: absolute;
-          top: -30px;
-          right: -10px;
-          background-color: var(--primary-gold);
-          padding: 4px 10px;
+          top: -95px;
+          right: -75px;
+          background-color: #a18cd1;
+          padding: 4px 8px;
           border-radius: 50px;
           display: flex;
           align-items: center;
-          gap: 6px;
-          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-          transform: scale(0);
+          gap: 8px;
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+          transform: scale(0) translateY(20px);
           opacity: 0;
-          transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+          transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
           z-index: 100;
+          pointer-events: auto;
         }
 
         .folder-toggle:checked ~ .folder-container .counter {
-          transform: scale(1);
+          transform: scale(1) translateY(0);
           opacity: 1;
           transition-delay: 0.2s;
         }
@@ -549,96 +562,176 @@
         .status-dot {
           width: 6px;
           height: 6px;
-          background: #10b981;
+          background: #34d399;
           border-radius: 50%;
+          position: relative;
+          box-shadow: 0 0 10px #34d399;
+        }
+
+        .status-dot::after {
+          content: "";
+          position: absolute;
+          top: 0; left: 0;
+          width: 100%; height: 100%;
+          background: #34d399;
+          border-radius: 50%;
+          animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+          0% { transform: scale(1); opacity: 1; }
+          100% { transform: scale(3); opacity: 0; }
         }
 
         .counter-label {
-          font-family: "Tajawal", sans-serif;
-          font-size: 10px;
+          font-family: "Inter", sans-serif;
+          font-size: 8px;
           font-weight: 800;
-          color: #1a1a1a;
+          color: black;
+          text-transform: capitalize;
         }
 
         .counter-number {
           font-family: "Inter", sans-serif;
-          font-size: 11px;
+          font-size: 12px;
           font-weight: 900;
           color: #ffffff;
+          text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
-        /* تنسيق الأقسام السبعة داخل الفايل */
+        .counter:hover {
+          background: rgba(255, 255, 255, 0.2);
+          border-color: #60a5fa;
+          transform: scale(1.1) translateY(-5px) !important;
+          cursor: help;
+        }
+
+        .counter:hover .counter-number {
+          color: #60a5fa;
+          transition: color 0.3s ease;
+        }
+
         .file {
           position: absolute;
           bottom: 5px;
-          left: 5%;
-          width: 90%;
-          height: 38px;
-          border-radius: 8px;
+          left: 10%;
+          width: 80%;
+          height: 85px;
+          border-radius: 6px;
           overflow: hidden;
-          box-shadow: 0 -2px 10px rgba(0,0,0,0.15), inset 0 1px 1px rgba(255, 255, 255, 0.3);
-          transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 0 12px;
-          opacity: 0; /* مخفي افتراضياً داخل الفايل */
-          transform: translateY(0) scale(0.9);
+          box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3), 0 4px 12px rgba(0, 0, 0, 0.3);
+          transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+          z-index: 0;
         }
 
-        /* الألوان المخصصة للأقسام السبعة */
-        .file-1 { background: #00b4d8; z-index: 30; } /* سماوي */
-        .file-2 { background: #e63946; z-index: 29; } /* أحمر */
-        .file-3 { background: #1d3557; z-index: 28; } /* أزرق داكن */
-        .file-4 { background: #f77f00; z-index: 27; } /* برتقالي */
-        .file-5 { background: #2a9d8f; z-index: 26; } /* أخضر زمردي */
-        .file-6 { background: #7209b7; z-index: 25; } /* بنفسجي */
-        .file-7 { background: #e76f51; z-index: 24; } /* مرجاني */
+        .file-1 { background: #ff5f6d; z-index: 25; transition-delay: 0.15s; }
+        .file-2 { background: #ffc371; z-index: 24; transition-delay: 0.1s; }
+        .file-3 { background: #4facfe; z-index: 23; transition-delay: 0.05s; }
+        .file-4 { background: #00f2fe; z-index: 22; transition-delay: 0.02s; }
+        .file-5 { background: #a18cd1; z-index: 21; transition-delay: 0s; }
 
         .shine {
           position: absolute;
           top: 0; left: -100%;
           width: 50%; height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
           transform: skewX(-20deg);
+          transition: none;
         }
 
         .folder-toggle:checked ~ .folder-container .shine {
           left: 150%;
-          transition: left 0.8s ease-in-out 0.3s;
+          transition: left 0.8s ease-in-out;
+          transition-delay: 0.3s;
         }
 
         .file-text {
-          font-family: "Tajawal", sans-serif;
-          font-size: 11px;
-          color: #ffffff;
+          font-family: "Inter", sans-serif;
+          font-size: 9px;
+          color: white;
+          padding: 12px;
           font-weight: 800;
-          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-          direction: rtl;
+          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+          opacity: 0;
+          transform: translateY(5px);
+          transition: all 0.3s ease 0.4s;
+        }
+
+        .folder-toggle:checked ~ .folder-container .file-text {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .folder-toggle:checked ~ .folder-container .file-1 { transform: translateY(-70px) rotate(-10deg) translateX(-15px) translateZ(20px); }
+        .folder-toggle:checked ~ .folder-container .file-2 { transform: translateY(-55px) rotate(8deg) translateX(18px) translateZ(10px); }
+        .folder-toggle:checked ~ .folder-container .file-3 { transform: translateY(-40px) rotate(-15deg) translateX(-8px); }
+        .folder-toggle:checked ~ .folder-container .file-4 { transform: translateY(-25px) rotate(12deg) translateX(12px); }
+        .folder-toggle:checked ~ .folder-container .file-5 { transform: translateY(-10px) rotate(-5deg); }
+
+        .folder-toggle:checked ~ .folder-container .file:hover { cursor: pointer; filter: brightness(1.1); }
+        .folder-toggle:checked ~ .folder-container .file-1:hover { transform: translateY(-80px) rotate(-10deg) translateX(-15px) translateZ(20px); }
+        .folder-toggle:checked ~ .folder-container .file-2:hover { transform: translateY(-65px) rotate(8deg) translateX(18px) translateZ(10px); }
+        .folder-toggle:checked ~ .folder-container .file-3:hover { transform: translateY(-50px) rotate(-15deg) translateX(-8px); }
+        .folder-toggle:checked ~ .folder-container .file-4:hover { transform: translateY(-35px) rotate(12deg) translateX(12px); }
+        .folder-toggle:checked ~ .folder-container .file-5:hover { transform: translateY(-20px) rotate(-5deg); }
+
+        .file-icon {
+          position: absolute;
+          top: 10px; right: 10px;
+          width: 14px; height: 14px;
+          color: rgba(255, 255, 255, 0.4);
+          transition: color 0.3s ease;
         }
 
         .file-tag {
-          background: rgba(0, 0, 0, 0.3);
-          color: #ffffff;
-          font-family: "Inter", sans-serif;
-          font-size: 9px;
-          font-weight: 800;
-          padding: 2px 7px;
-          border-radius: 12px;
+          position: absolute;
+          bottom: 10px; right: 10px;
+          background: rgba(0, 0, 0, 0.5);
+          backdrop-filter: blur(4px);
+          -webkit-backdrop-filter: blur(4px);
+          color: rgba(255, 255, 255, 0.9);
+          font-family: "Inter", -apple-system, sans-serif;
+          font-size: 7px;
+          font-weight: 700;
+          padding: 3px 6px;
+          border-radius: 4px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+          opacity: 0;
+          transform: translateX(10px);
+          transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+          pointer-events: none;
         }
 
-        /* عند فتح الفايل: خروج الملفات للقسم العلوي واصطفافها شاقولياً واحدة فوق الأخرى */
-        .folder-toggle:checked ~ .folder-container .file {
-          opacity: 1;
+        .folder-toggle:checked ~ .folder-container .file:hover .file-icon { color: rgba(255, 255, 255, 0.9); }
+        .folder-toggle:checked ~ .folder-container .file-tag { opacity: 1; }
+
+        .folder-search {
+          position: absolute;
+          top: -40px; left: 10%;
+          width: 30px; height: 25px;
+          background-color: #60a5fa;
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          border-radius: 20px;
+          display: flex; align-items: center;
+          padding: 0 8px;
+          transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+          opacity: 0; z-index: 100;
+          border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .folder-toggle:checked ~ .folder-container .file-1 { transform: translateY(-260px); transition-delay: 0.35s; }
-        .folder-toggle:checked ~ .folder-container .file-2 { transform: translateY(-215px); transition-delay: 0.30s; }
-        .folder-toggle:checked ~ .folder-container .file-3 { transform: translateY(-170px); transition-delay: 0.25s; }
-        .folder-toggle:checked ~ .folder-container .file-4 { transform: translateY(-125px); transition-delay: 0.20s; }
-        .folder-toggle:checked ~ .folder-container .file-5 { transform: translateY(-80px);  transition-delay: 0.15s; }
-        .folder-toggle:checked ~ .folder-container .file-6 { transform: translateY(-35px);  transition-delay: 0.10s; }
-        .folder-toggle:checked ~ .folder-container .file-7 { transform: translateY(10px);   transition-delay: 0.05s; }
+        .search-icon { width: 12px; height: 12px; flex-shrink: 0; }
+        .search-input {
+          background: transparent; border: none;
+          color: #ffffff; font-family: "Inter", sans-serif;
+          font-size: 9px; margin-left: 8px; outline: none;
+          transition: width 0.4s ease;
+        }
+        .search-input::placeholder { color: #ffffff; }
+
+        .folder-toggle:checked ~ .folder-container .folder-search { opacity: 1; top: -80px; width: 80%; }
+        .folder-toggle:checked ~ .folder-container .folder-search:focus-within { width: 90%; background-color: #ff3b30; }
+        .folder-toggle:checked ~ .folder-container .folder-search:focus-within .search-input { width: 100%; }
 
         .cart-notification-bar {
             position: fixed; bottom: 65px; left: 12px; right: 12px;
@@ -659,7 +752,6 @@
         }
 
         .nav-item {
-            flex: 1;
             display: flex; flex-direction: column; align-items: center;
             color: var(--text-muted); font-size: 0.7rem; font-weight: 700;
             text-decoration: none; cursor: pointer; gap: 2px;
@@ -702,7 +794,7 @@
             color: var(--primary-gold); display: flex; align-items: center; gap: 6px;
         }
 
-        /* Interactive Checkout Button */
+        /* --- Interactive Checkout Button Styles --- */
         .interactive-checkout-container {
             background-color: #ffffff;
             display: flex;
@@ -979,13 +1071,13 @@
     <div id="categoriesPage" class="tab-page">
         <div class="section-title"><i class="fas fa-list"></i> أقسام القائمة</div>
         
-        <!-- Folder Card Component التجميعي لـ 7 أقسام بألوانها المحددة -->
+        <!-- Folder Card 3D Component -->
         <div class="folder-card-wrapper">
             <label class="folder-card">
               <input class="folder-toggle" type="checkbox" />
               <div class="hint-wrapper">
-                <span class="hint-text">انقر هنا لفتح الفايل</span>
-                <svg class="hint-arrow" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="2">
+                <span class="hint-text">اضغط لفتح المجلد</span>
+                <svg class="hint-arrow" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2">
                   <path d="M12 5v14M19 12l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"></path>
                 </svg>
               </div>
@@ -993,56 +1085,45 @@
               <div class="folder-container">
                 <div class="counter">
                   <div class="status-dot"></div>
-                  <span class="counter-label">الأقسام:</span>
-                  <span class="counter-number">7</span>
+                  <span class="counter-label">الأصناف:</span>
+                  <span class="counter-number" id="totalProductsCount">35</span>
                 </div>
 
                 <div class="folder-back">
                   <svg viewBox="0 0 170 130" fill="none">
-                    <path d="M0 12C0 5.37258 5.37258 0 12 0H52.5C56.2093 0 59.7046 1.7101 62 4.65085L69.3333 14H158C164.627 14 170 19.3726 170 26V118C170 124.627 164.627 130 158 130H12C5.37258 130 0 124.627 0 118V12Z" fill="#b8860b"></path>
+                    <path d="M0 12C0 5.37258 5.37258 0 12 0H52.5C56.2093 0 59.7046 1.7101 62 4.65085L69.3333 14H158C164.627 14 170 19.3726 170 26V118C170 124.627 164.627 130 158 130H12C5.37258 130 0 124.627 0 118V12Z" fill="#3b82f6"></path>
                   </svg>
                 </div>
 
-                <!-- 7 ملفات مخفية تخرج للأعلى عند فتح الفايل -->
                 <div class="file file-1">
                   <div class="shine"></div>
-                  <span class="file-text">المقبلات</span>
+                  <span class="file-text">شاورما دجاج</span>
                   <div class="file-tag">7</div>
                 </div>
                 <div class="file file-2">
                   <div class="shine"></div>
-                  <span class="file-text">صلصات</span>
-                  <div class="file-tag">1</div>
+                  <span class="file-text">شاورما لحم</span>
+                  <div class="file-tag">6</div>
                 </div>
                 <div class="file file-3">
                   <div class="shine"></div>
-                  <span class="file-text">شاورما دجاج</span>
-                  <div class="file-tag">5</div>
+                  <span class="file-text">فروج مشوي</span>
+                  <div class="file-tag">4</div>
                 </div>
                 <div class="file file-4">
                   <div class="shine"></div>
-                  <span class="file-text">شاورما لحم</span>
-                  <div class="file-tag">3</div>
+                  <span class="file-text">مقبلات وصليصات</span>
+                  <div class="file-tag">12</div>
                 </div>
                 <div class="file file-5">
                   <div class="shine"></div>
-                  <span class="file-text">فروج مشوي</span>
-                  <div class="file-tag">2</div>
-                </div>
-                <div class="file file-6">
-                  <div class="shine"></div>
-                  <span class="file-text">وجبات ريزو</span>
-                  <div class="file-tag">1</div>
-                </div>
-                <div class="file file-7">
-                  <div class="shine"></div>
-                  <span class="file-text">المشروبات</span>
-                  <div class="file-tag">2</div>
+                  <span class="file-text">مشروبات وريزو</span>
+                  <div class="file-tag">6</div>
                 </div>
 
                 <div class="folder-front-wrapper">
                   <svg class="folder-front" viewBox="0 0 170 115" fill="none">
-                    <path d="M0 12C0 5.37258 5.37258 0 12 0H158C164.627 0 170 5.37258 170 12V103C170 109.627 164.627 115 158 115H12C5.37258 115 0 109.627 0 103V12Z" fill="#d4af37"></path>
+                    <path d="M0 12C0 5.37258 5.37258 0 12 0H158C164.627 0 170 5.37258 170 12V103C170 109.627 164.627 115 158 115H12C5.37258 115 0 109.627 0 103V12Z" fill="#60a5fa"></path>
                   </svg>
                   <div class="folder-label"></div>
                 </div>
@@ -1107,7 +1188,7 @@
     <div class="bottom-nav-bar">
         <div class="nav-item active" id="nav-home" onclick="switchTab('home')">
             <i class="fas fa-home"></i>
-            <span>الرئيسية</span>
+            <span>المنزل</span>
         </div>
         <div class="nav-item" id="nav-categories" onclick="switchTab('categories')">
             <i class="fas fa-th-large"></i>
@@ -1121,94 +1202,153 @@
 
     <script>
         const rawProducts = [
-            {"ID": 1, "Category": "المقبلات", "name": "فنكر", "price": 2000, "image": "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=500", "desc": "بطاطا مقلية مقرمشة", "popular": true},
-            {"ID": 2, "Category": "المقبلات", "name": "حمص بطحينية", "price": 1500, "image": "https://images.unsplash.com/photo-1577968897966-3d4325b36b61?w=500", "desc": "حمص ناعم وزيت زيتون"},
-            {"ID": 3, "Category": "المقبلات", "name": "باذنجانية", "price": 1000, "image": "https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?w=500", "desc": "سلاطة باذنجان متبلة"},
-            {"ID": 4, "Category": "المقبلات", "name": "رمانية", "price": 1000, "image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500", "desc": "سلاطة رمان منعشة"},
-            {"ID": 5, "Category": "المقبلات", "name": "جاجيك", "price": 1000, "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=500", "desc": "خيار باللبن والنعناع"},
-            {"ID": 6, "Category": "المقبلات", "name": "بابا غنوج", "price": 1000, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "باذنجان مشوي بالطحينة"},
-            {"ID": 7, "Category": "المقبلات", "name": "شوندر", "price": 1000, "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500", "desc": "سلاطة شوندر طازجة"},
-            {"ID": 8, "Category": "صلصات", "name": "ثومية", "price": 500, "image": "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500", "desc": "صلصة الثوم الغنية"},
-            {"ID": 9, "Category": "شاورما دجاج", "name": "لفه شاورما دجاج صغيرة", "price": 2000, "image": "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=500", "desc": "شاورما دجاج طازجة بالخبز العراقي", "popular": true},
-            {"ID": 10, "Category": "شاورما دجاج", "name": "لفه شاورما دجاج وسط", "price": 3000, "image": "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=500", "desc": "شاورما دجاج الحجم المتوسط"},
-            {"ID": 11, "Category": "شاورما دجاج", "name": "لفه شاورما دجاج كبير", "price": 4000, "image": "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=500", "desc": "شاورما دجاج ملغومة بالتتبيلة الخاصة"},
-            {"ID": 12, "Category": "شاورما دجاج", "name": "قص دجاج ربع كيلو", "price": 6000, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "قص دجاج بدون خبز مع صلصة"},
-            {"ID": 13, "Category": "شاورما دجاج", "name": "قص دجاج نص كيلو", "price": 12000, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "وجبة قص دجاج عائلية نص كيلو"},
-            {"ID": 14, "Category": "شاورما لحم", "name": "لفه شاورما لحم صغيرة", "price": 2000, "image": "https://images.unsplash.com/photo-1544025162-d76694265947?w=500", "desc": "شاورما لحم عراقي طازج", "popular": true},
-            {"ID": 15, "Category": "شاورما لحم", "name": "لفه شاورما لحم وسط", "price": 3000, "image": "https://images.unsplash.com/photo-1544025162-d76694265947?w=500", "desc": "لفه شاورما لحم حجم وسط"},
-            {"ID": 16, "Category": "شاورما لحم", "name": "لفه شاورما لحم كبير", "price": 4000, "image": "https://images.unsplash.com/photo-1544025162-d76694265947?w=500", "desc": "لفه شاورما لحم مشبعة جداً"},
-            {"ID": 17, "Category": "فروج مشوي", "name": "فروج كامل مشوي", "price": 11000, "image": "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=500", "desc": "فروج مشوي على الفحم مع المقبلات", "popular": true},
-            {"ID": 18, "Category": "فروج مشوي", "name": "نصف فروج مشوي", "price": 6000, "image": "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=500", "desc": "نصف دجاجة مشوية طازجة"},
-            {"ID": 19, "Category": "وجبات ريزو", "name": "طبق ريزو دجاج", "price": 5000, "image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=500", "desc": "أرز ريزو مع قطع الدجاج المقرمش والصلصة", "popular": true},
-            {"ID": 20, "Category": "المشروبات", "name": "بيبسي / سفن اب", "price": 500, "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=500", "desc": "مشروب غازي بارد"},
-            {"ID": 21, "Category": "المشروبات", "name": "ماء نقي", "price": 250, "image": "https://images.unsplash.com/photo-1548839140-29a749e1bc4e?w=500", "desc": "عبوة ماء معدني باردة"}
+          {"ID": 1, "Category": "المقبلات", "name": "فنكر", "price": 2000, "image": "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=500", "desc": "بطاطا مقلية مقرمشة", "popular": true},
+          {"ID": 2, "Category": "المقبلات", "name": "حمص بطحينية", "price": 1500, "image": "https://images.unsplash.com/photo-1577968897966-3d4325b36b61?w=500", "desc": "حمص ناعم وزيت زيتون"},
+          {"ID": 3, "Category": "المقبلات", "name": "باذنجانية", "price": 1000, "image": "https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?w=500", "desc": "سلاطة باذنجان متبلة"},
+          {"ID": 4, "Category": "المقبلات", "name": "رمانية", "price": 1000, "image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500", "desc": "سلاطة رمان منعشة"},
+          {"ID": 5, "Category": "المقبلات", "name": "جاجيك", "price": 1000, "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=500", "desc": "خيار باللبن والنعناع"},
+          {"ID": 6, "Category": "المقبلات", "name": "بابا غنوج", "price": 1000, "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500", "desc": "باذنجان مشوي بالطحينة"},
+          {"ID": 7, "Category": "المقبلات", "name": "شوندر", "price": 1000, "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500", "desc": "سلاطة شوندر طازجة"},
+          {"ID": 8, "Category": "صلصات", "name": "ثومية", "price": 500, "image": "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500", "desc": "صلصة الثوم الغنية"},
+          {"ID": 9, "Category": "صلصات", "name": "طرطور", "price": 500, "image": "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500", "desc": "صلصة الطحينة مع الليمون"},
+          {"ID": 10, "Category": "صلصات", "name": "صلصة ريزو", "price": 500, "image": "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500", "desc": "صلصة الريزو الخاصة"},
+          {"ID": 11, "Category": "صلصات", "name": "باربكيو", "price": 500, "image": "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500", "desc": "صلصة باربكيو مدخنة"},
+          {"ID": 12, "Category": "صلصات", "name": "سبايسي", "price": 500, "image": "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=500", "desc": "صلصة حارة ومبهرة"},
+          {"ID": 13, "Category": "المشروبات", "name": "مشروب غازي علبة", "price": 500, "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=500", "desc": "مشروب غازي بارد علبة"},
+          {"ID": 14, "Category": "المشروبات", "name": "مشروب غازي ماكينة", "price": 1000, "image": "https://images.unsplash.com/photo-1581006852262-e4307cf6283a?w=500", "desc": "منعش من الماكينة"},
+          {"ID": 15, "Category": "المشروبات", "name": "لبن", "price": 1000, "image": "https://images.unsplash.com/photo-1556881286-fc6915169721?w=500", "desc": "لبن رائب بارد"},
+          {"ID": 16, "Category": "المشروبات", "name": "ماء", "price": 250, "image": "https://images.unsplash.com/photo-1548839140-29a749e1bc4e?w=500", "desc": "ماء نقاء مبرد"},
+          {"ID": 17, "Category": "شاورما الدجاج", "name": "صاج دجاج", "price": 3000, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "خبز لبناني - دجاج - ثومية"},
+          {"ID": 18, "Category": "شاورما الدجاج", "name": "صاج دجاج شريف", "price": 3500, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "دجاج - جبن - ذرة"},
+          {"ID": 19, "Category": "شاورما الدجاج", "name": "وجبة عربي", "price": 5000, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "صاج مقطع - بطاطا - بيبسي", "popular": true},
+          {"ID": 20, "Category": "شاورما الدجاج", "name": "فرنسي دجاج", "price": 4000, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "صمون فرنسي - ثومية"},
+          {"ID": 21, "Category": "شاورما الدجاج", "name": "طبق شاورما دجاج 200غ", "price": 7500, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "شاورما - بطاطا - ثومية"},
+          {"ID": 22, "Category": "شاورما الدجاج", "name": "نصف كيلو شاورما دجاج", "price": 12000, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "شاورما - ثومية - خبز"},
+          {"ID": 23, "Category": "شاورما الدجاج", "name": "كيلو شاورما دجاج", "price": 24000, "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500", "desc": "شاورما - ثومية - خبز"},
+          {"ID": 24, "Category": "شاورما اللحم", "name": "صاج لحم", "price": 5000, "image": "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=500", "desc": "خبز لبناني - طرطور", "popular": true},
+          {"ID": 25, "Category": "شاورما اللحم", "name": "حجري لحم", "price": 4000, "image": "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=500", "desc": "صمون حجري - طماطم"},
+          {"ID": 26, "Category": "شاورما اللحم", "name": "فرنسي لحم", "price": 6000, "image": "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=500", "desc": "خبز فرنسي - لحم"},
+          {"ID": 27, "Category": "شاورما اللحم", "name": "عربي لحم", "price": 7000, "image": "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=500", "desc": "صاج مقطع - بيبسي"},
+          {"ID": 28, "Category": "شاورما اللحم", "name": "نصف كيلو شاورما لحم", "price": 22000, "image": "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=500", "desc": "شاورما لحم - طرطور"},
+          {"ID": 29, "Category": "شاورما اللحم", "name": "كيلو شاورما لحم", "price": 40000, "image": "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=500", "desc": "شاورما لحم - طرطور"},
+          {"ID": 30, "Category": "فروج", "name": "فروج شريف مشوي", "price": 13000, "image": "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=500", "desc": "دجاج شوي - بطاطا - ثومية", "popular": true},
+          {"ID": 31, "Category": "فروج", "name": "نصف فروج مشوي", "price": 7000, "image": "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=500", "desc": "دجاج شوي - بطاطا"},
+          {"ID": 32, "Category": "فروج", "name": "فروج مشوي مع رز", "price": 16000, "image": "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=500", "desc": "فروج مشوي - رز - ثومية"},
+          {"ID": 33, "Category": "فروج", "name": "نصف فروج مع رز", "price": 9000, "image": "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=500", "desc": "نصف فروج - رز - ثومية"},
+          {"ID": 34, "Category": "ريزو", "name": "ريزو شاورما دجاج", "price": 5000, "image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=500", "desc": "دجاج - صلصة ريزو"},
+          {"ID": 35, "Category": "ريزو", "name": "ريزو شاورما لحم", "price": 7000, "image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=500", "desc": "لحم - صلصة ريزو"}
         ];
 
         let cart = {};
-        let orderType = 'inhouse';
-        let reviews = [
-            { name: "أحمد علي", text: "أفضل شاورما لحم بالديوانية، طعم رائع وتوصيل سريع!" },
-            { name: "حيدر الحلي", text: "خدمة ممتازة ونظافة عالية جداً، ننصح بالفروج المشوي." }
+        let currentOrderType = 'inhouse';
+
+        const categoryIcons = {
+            'شاورما الدجاج': 'fa-drumstick-bite',
+            'شاورما اللحم': 'fa-bacon',
+            'فروج': 'fa-fire',
+            'ريزو': 'fa-bowl-rice',
+            'المقبلات': 'fa-cheese',
+            'صلصات': 'fa-pepper-hot',
+            'المشروبات': 'fa-glass-martini-alt'
+        };
+
+        const defaultReviews = [
+            { name: "أحمد العراقي", stars: "⭐⭐⭐⭐⭐", text: "أفضل شاورما في المحافظة، الطعم خرافي والخدمة ممتازة!" },
+            { name: "سارة علي", stars: "⭐⭐⭐⭐⭐", text: "الفروج المشوي مع الرز طعمه رائع جداً والنظافة 10/10." }
         ];
 
-        // Carousel Logic
-        let currentSlide = 0;
-        function rotateCarousel() {
+        document.addEventListener('DOMContentLoaded', () => {
+            renderPopularProducts();
+            renderGlassCategories();
+            renderReviews();
+            startCarousel();
+            document.getElementById('totalProductsCount').textContent = rawProducts.length;
+        });
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            document.getElementById('themeText').textContent = isDark ? 'الفاتح' : 'الداكن';
+            document.querySelector('#themeToggleBtn i').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-page').forEach(page => page.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+
+            document.getElementById(tabName + 'Page').classList.add('active');
+            document.getElementById('nav-' + tabName).classList.add('active');
+
+            if (tabName === 'cart') {
+                renderCartDetails();
+            }
+        }
+
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.trim().toLowerCase();
+            const resultsContainer = document.getElementById('searchResultsContainer');
+            const mainContent = document.getElementById('homeMainContent');
+            const resultsGrid = document.getElementById('searchResultsGrid');
+
+            if (query === '') {
+                resultsContainer.style.display = 'none';
+                mainContent.style.display = 'block';
+                return;
+            }
+
+            const filtered = rawProducts.filter(p => p.name.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query));
+            
+            mainContent.style.display = 'none';
+            resultsContainer.style.display = 'block';
+
+            if (filtered.length === 0) {
+                resultsGrid.innerHTML = '<p style="grid-column: span 2; text-align: center; color: var(--text-muted); padding: 10px;">لا توجد وجبات تطابق بحثك.</p>';
+            } else {
+                resultsGrid.innerHTML = filtered.map(product => createProductCardHTML(product)).join('');
+            }
+        }
+
+        function startCarousel() {
             const slides = document.querySelectorAll('.carousel-slide');
-            if (slides.length === 0) return;
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add('active');
-        }
-        setInterval(rotateCarousel, 3500);
-
-        // Render Functions
-        function createProductCardHTML(p) {
-            const qty = cart[p.ID] ? cart[p.ID].qty : 0;
-            return `
-                <div class="product-card">
-                    <div class="product-img-wrapper">
-                        <img src="${p.image}" class="product-img" alt="${p.name}">
-                        <div class="product-price-badge">${p.price.toLocaleString()} د.ع</div>
-                    </div>
-                    <div class="product-content">
-                        <div>
-                            <div class="product-title">${p.name}</div>
-                            <div class="product-desc">${p.desc}</div>
-                        </div>
-                        ${qty === 0 ? 
-                            `<button class="add-to-cart-btn" onclick="updateCart(${p.ID}, 1)"><i class="fas fa-plus"></i> إضافة للسلة</button>` :
-                            `<div class="qty-controls">
-                                <button class="qty-btn" onclick="updateCart(${p.ID}, ${qty - 1})">-</button>
-                                <span>${qty}</span>
-                                <button class="qty-btn" onclick="updateCart(${p.ID}, ${qty + 1})">+</button>
-                            </div>`
-                        }
-                    </div>
-                </div>
-            `;
+            let index = 0;
+            setInterval(() => {
+                slides[index].classList.remove('active');
+                index = (index + 1) % slides.length;
+                slides[index].classList.add('active');
+            }, 3500);
         }
 
-        function renderPopular() {
-            const popularGrid = document.getElementById('popularGrid');
+        function renderPopularProducts() {
             const popularItems = rawProducts.filter(p => p.popular);
-            popularGrid.innerHTML = popularItems.map(p => createProductCardHTML(p)).join('');
+            document.getElementById('popularGrid').innerHTML = popularItems.map(product => createProductCardHTML(product)).join('');
         }
 
-        function renderCategories() {
-            const container = document.getElementById('glassCategoriesGrid');
+        function renderGlassCategories() {
             const categories = [...new Set(rawProducts.map(p => p.Category))];
+            
+            const openCategories = [];
+            categories.forEach((cat, idx) => {
+                const slider = document.getElementById(`cat-slider-${idx}`);
+                if (slider && slider.style.display === 'flex') {
+                    openCategories.push(idx);
+                }
+            });
 
-            container.innerHTML = categories.map((cat, idx) => {
-                const prods = rawProducts.filter(p => p.Category === cat);
+            document.getElementById('glassCategoriesGrid').innerHTML = categories.map((cat, idx) => {
+                const icon = categoryIcons[cat] || 'fa-utensils';
+                const catProducts = rawProducts.filter(p => p.Category === cat);
+                const productsHTML = catProducts.map(product => createProductCardHTML(product)).join('');
+
+                const isOpen = openCategories.includes(idx);
+
                 return `
                     <div class="category-block">
-                        <div class="glass-category-card" onclick="toggleCategoryAccordion(${idx})">
-                            <span><i class="fas fa-utensils" style="color:var(--primary-gold); margin-left:6px;"></i> ${cat} (${prods.length})</span>
-                            <i class="fas fa-chevron-left category-chevron" id="chevron-${idx}"></i>
+                        <div class="glass-category-card ${isOpen ? 'active' : ''}" id="cat-card-${idx}" onclick="toggleCategoryAccordion('${idx}')">
+                            <span><i class="fas ${icon}" style="margin-left: 6px; color: var(--primary-gold);"></i> ${cat}</span>
+                            <i class="fas fa-chevron-left category-chevron"></i>
                         </div>
-                        <div class="category-products-slider" id="cat-slider-${idx}">
-                            ${prods.map(p => createProductCardHTML(p)).join('')}
+                        <div class="category-products-slider" id="cat-slider-${idx}" style="display: ${isOpen ? 'flex' : 'none'};">
+                            ${productsHTML}
                         </div>
                     </div>
                 `;
@@ -1216,210 +1356,219 @@
         }
 
         function toggleCategoryAccordion(idx) {
-            const card = document.querySelectorAll('.glass-category-card')[idx];
+            const card = document.getElementById(`cat-card-${idx}`);
             const slider = document.getElementById(`cat-slider-${idx}`);
-            const isVisible = slider.style.display === 'flex';
-
-            slider.style.display = isVisible ? 'none' : 'flex';
-            if (isVisible) {
+            
+            const isOpen = slider.style.display === 'flex';
+            
+            if (isOpen) {
+                slider.style.display = 'none';
                 card.classList.remove('active');
             } else {
+                slider.style.display = 'flex';
                 card.classList.add('active');
             }
         }
 
-        function renderReviews() {
-            const container = document.getElementById('reviewsContainer');
-            container.innerHTML = reviews.map(r => `
-                <div class="review-card">
-                    <div class="review-header">
-                        <span><i class="fas fa-user-circle"></i> ${r.name}</span>
-                        <span style="color:#f1c40f;"><i class="fas fa-star"></i> 5.0</span>
+        function createProductCardHTML(product) {
+            const qty = cart[product.ID] || 0;
+            return `
+                <div class="product-card">
+                    <div class="product-img-wrapper">
+                        <img src="${product.image}" alt="${product.name}" class="product-img">
+                        <div class="product-price-badge">${product.price.toLocaleString()} د.ع</div>
                     </div>
+                    <div class="product-content">
+                        <div>
+                            <h3 class="product-title">${product.name}</h3>
+                            <p class="product-desc">${product.desc}</p>
+                        </div>
+                        <div>
+                            ${qty === 0 ? `
+                                <button class="add-to-cart-btn" onclick="updateCart(event, ${product.ID}, 1)">
+                                    <i class="fas fa-plus"></i> إضافة
+                                </button>
+                            ` : `
+                                <div class="qty-controls">
+                                    <button class="qty-btn" onclick="updateCart(event, ${product.ID}, ${qty - 1})">-</button>
+                                    <span>${qty}</span>
+                                    <button class="qty-btn" onclick="updateCart(event, ${product.ID}, ${qty + 1})">+</button>
+                                </div>
+                            `}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function updateCart(event, productId, newQty) {
+            if (event) {
+                event.stopPropagation();
+            }
+
+            if (newQty <= 0) {
+                delete cart[productId];
+            } else {
+                cart[productId] = newQty;
+            }
+            
+            renderPopularProducts();
+            
+            if (document.getElementById('searchResultsContainer').style.display !== 'none') {
+                handleSearch();
+            }
+
+            renderGlassCategories();
+            
+            if (document.getElementById('cartPage').classList.contains('active')) {
+                renderCartDetails();
+            }
+
+            updateFloatingBar();
+        }
+
+        function updateFloatingBar() {
+            let totalItems = 0;
+            for (let id in cart) totalItems += cart[id];
+
+            const bar = document.getElementById('cartNotificationBar');
+            if (totalItems > 0) {
+                bar.style.display = 'flex';
+                document.getElementById('notifyCount').textContent = totalItems;
+            } else {
+                bar.style.display = 'none';
+            }
+        }
+
+        function renderCartDetails() {
+            let listHTML = '';
+            let grandTotal = 0;
+            let totalItems = 0;
+
+            for (let id in cart) {
+                const product = rawProducts.find(p => p.ID == id);
+                if (product) {
+                    const qty = cart[id];
+                    const itemTotal = qty * product.price;
+                    grandTotal += itemTotal;
+                    totalItems += qty;
+                    listHTML += `
+                        <div class="cart-line-item">
+                            <div>
+                                <strong>${product.name}</strong> × ${qty}
+                            </div>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <span>${itemTotal.toLocaleString()} د.ع</span>
+                                <button class="qty-btn" onclick="updateCart(event, ${product.ID}, 0)">×</button>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+
+            if (totalItems === 0) {
+                document.getElementById('cartItemsList').innerHTML = '<p style="text-align:center; color:var(--text-muted); padding: 15px 0; font-size:0.85rem;">سلة الطلبات فارغة حالياً</p>';
+            } else {
+                document.getElementById('cartItemsList').innerHTML = listHTML;
+            }
+
+            document.getElementById('cartGrandTotal').textContent = grandTotal.toLocaleString() + ' د.ع';
+        }
+
+        function renderReviews() {
+            let savedReviews = JSON.parse(localStorage.getItem('almalaki_reviews')) || defaultReviews;
+            const container = document.getElementById('reviewsContainer');
+            container.innerHTML = savedReviews.map(r => `
+                <div class="review-card">
+                    <div class="review-header"><span>${r.name}</span> <span>${r.stars}</span></div>
                     <div class="review-text">${r.text}</div>
                 </div>
             `).join('');
         }
 
         function addReview() {
-            const nameInput = document.getElementById('reviewerName');
-            const commentInput = document.getElementById('reviewerComment');
-            
-            if (!nameInput.value.trim() || !commentInput.value.trim()) {
-                alert("يرجى ملء جميع الحقول للتصويت واضافة تعليقك");
+            const name = document.getElementById('reviewerName').value.trim();
+            const text = document.getElementById('reviewerComment').value.trim();
+
+            if (!name || !text) {
+                alert("يرجى إدخال اسمك وتعليقك.");
                 return;
             }
 
-            reviews.unshift({ name: nameInput.value.trim(), text: commentInput.value.trim() });
-            nameInput.value = '';
-            commentInput.value = '';
+            let savedReviews = JSON.parse(localStorage.getItem('almalaki_reviews')) || defaultReviews;
+            savedReviews.unshift({ name: name, stars: "⭐⭐⭐⭐⭐", text: text });
+            localStorage.setItem('almalaki_reviews', JSON.stringify(savedReviews));
+
             renderReviews();
-        }
 
-        function handleSearch() {
-            const query = document.getElementById('searchInput').value.trim().toLowerCase();
-            const resultsContainer = document.getElementById('searchResultsContainer');
-            const resultsGrid = document.getElementById('searchResultsGrid');
-            const mainContent = document.getElementById('homeMainContent');
-
-            if (!query) {
-                resultsContainer.style.display = 'none';
-                mainContent.style.display = 'block';
-                return;
-            }
-
-            const matched = rawProducts.filter(p => p.name.toLowerCase().includes(query) || p.Category.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query));
-            resultsGrid.innerHTML = matched.length > 0 ? matched.map(p => createProductCardHTML(p)).join('') : '<p style="grid-column:1/-1; text-align:center; color:var(--text-muted); font-size:0.85rem;">لا توجد وجبات تطابق بحثك</p>';
-            resultsContainer.style.display = 'block';
-            mainContent.style.display = 'none';
-        }
-
-        // Cart Actions
-        function updateCart(id, newQty) {
-            if (newQty <= 0) {
-                delete cart[id];
-            } else {
-                const item = rawProducts.find(p => p.ID === id);
-                cart[id] = { ...item, qty: newQty };
-            }
-            refreshAllViews();
-        }
-
-        function refreshAllViews() {
-            renderPopular();
-            renderCategories();
-            renderCart();
-            updateNotificationBar();
-            handleSearch();
-        }
-
-        function updateNotificationBar() {
-            const bar = document.getElementById('cartNotificationBar');
-            const totalQty = Object.values(cart).reduce((sum, item) => sum + item.qty, 0);
-            document.getElementById('notifyCount').innerText = totalQty;
-            bar.style.display = totalQty > 0 ? 'flex' : 'none';
-        }
-
-        function renderCart() {
-            const listContainer = document.getElementById('cartItemsList');
-            const items = Object.values(cart);
-
-            if (items.length === 0) {
-                listContainer.innerHTML = '<p style="text-align:center; color:var(--text-muted); font-size:0.85rem; padding: 15px 0;">السلة فارغة، اختر وجباتك المفضلة!</p>';
-                document.getElementById('cartGrandTotal').innerText = '0 د.ع';
-                return;
-            }
-
-            let total = 0;
-            listContainer.innerHTML = items.map(item => {
-                const subtotal = item.price * item.qty;
-                total += subtotal;
-                return `
-                    <div class="cart-line-item">
-                        <div>
-                            <strong>${item.name}</strong> × ${item.qty}
-                            <div style="font-size:0.7rem; color:var(--text-muted);">${item.price.toLocaleString()} د.ع</div>
-                        </div>
-                        <div style="display:flex; align-items:center; gap:8px;">
-                            <span style="color:var(--primary-gold); font-weight:bold;">${subtotal.toLocaleString()} د.ع</span>
-                            <button onclick="updateCart(${item.ID}, 0)" style="background:none; border:none; color:#e74c3c; cursor:pointer;"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-
-            document.getElementById('cartGrandTotal').innerText = `${total.toLocaleString()} د.ع`;
+            document.getElementById('reviewerName').value = '';
+            document.getElementById('reviewerComment').value = '';
         }
 
         function setOrderType(type) {
-            orderType = type;
-            document.getElementById('btnInHouse').classList.toggle('active', type === 'inhouse');
-            document.getElementById('btnDelivery').classList.toggle('active', type === 'delivery');
+            currentOrderType = type;
+            const btnInHouse = document.getElementById('btnInHouse');
+            const btnDelivery = document.getElementById('btnDelivery');
+            const formFields = document.getElementById('formFields');
 
-            const fields = document.getElementById('formFields');
             if (type === 'inhouse') {
-                fields.innerHTML = `<input type="text" id="tableNum" placeholder="رقم الطاولة (مثال: 5)">`;
+                btnInHouse.classList.add('active');
+                btnDelivery.classList.remove('active');
+                formFields.innerHTML = `<input type="text" id="tableNum" placeholder="رقم الطاولة (مثال: 5)">`;
             } else {
-                fields.innerHTML = `
+                btnDelivery.classList.add('active');
+                btnInHouse.classList.remove('active');
+                formFields.innerHTML = `
                     <input type="text" id="custName" placeholder="الاسم الكامل">
                     <input type="text" id="custPhone" placeholder="رقم الهاتف">
-                    <input type="text" id="custAddress" placeholder="العنوان التفصيلي (المنطقة / الشارع)">
+                    <input type="text" id="custAddress" placeholder="العنوان بالتفصيل">
                 `;
             }
         }
 
+        function callWaiter() {
+            const phoneNumber = "9647723681360";
+            const message = encodeURIComponent("مرحباً، أود نداء النادل إلى الطاولة يرجى المساعدة.");
+            window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+        }
+
         function sendOrder() {
-            const items = Object.values(cart);
-            if (items.length === 0) {
-                alert("السلة فارغة!");
+            const targetPhone = "9647723681360";
+            const cartIds = Object.keys(cart);
+            if (cartIds.length === 0) {
+                alert("يرجى اختيار وجبات وإضافتها للسلة أولاً قبل إرسال الطلب.");
                 return;
             }
 
-            let details = "🍔 *طلب جديد - مطعم الملكي* 🍔\n\n";
+            let message = "مرحباً مطعم الملكي، أود إرسال طلب جديد:\n\n📋 **تفاصيل الطلب:**\n";
             let grandTotal = 0;
 
-            items.forEach((item, i) => {
-                const sum = item.price * item.qty;
-                grandTotal += sum;
-                details += `${i+1}. ${item.name} × ${item.qty} = ${sum.toLocaleString()} د.ع\n`;
+            cartIds.forEach(id => {
+                const product = rawProducts.find(p => p.ID == id);
+                if (product) {
+                    const qty = cart[id];
+                    const itemTotal = qty * product.price;
+                    grandTotal += itemTotal;
+                    message += `• ${product.name} (عدد ${qty}) = ${itemTotal.toLocaleString()} د.ع\n`;
+                }
             });
 
-            details += `\n💰 *الإجمالي الكلي:* ${grandTotal.toLocaleString()} د.ع\n`;
+            message += `\n💰 **المجموع الكلي:** ${grandTotal.toLocaleString()} د.ع\n\n`;
 
-            if (orderType === 'inhouse') {
-                const table = document.getElementById('tableNum').value.trim();
+            if (currentOrderType === 'inhouse') {
+                const table = document.getElementById('tableNum') ? document.getElementById('tableNum').value : '';
                 if (!table) { alert("يرجى إدخال رقم الطاولة"); return; }
-                details += `🪑 *نوع الطلب:* داخل المطعم (طاولة رقم ${table})`;
+                message += `🪑 **نوع الطلب:** داخل المطعم\n📍 **رقم الطاولة:** ${table}`;
             } else {
-                const name = document.getElementById('custName').value.trim();
-                const phone = document.getElementById('custPhone').value.trim();
-                const addr = document.getElementById('custAddress').value.trim();
-
-                if (!name || !phone || !addr) {
-                    alert("يرجى ملء جميع معلومات التوصيل");
-                    return;
-                }
-                details += `🛵 *نوع الطلب:* توصيل\n👤 *الاسم:* ${name}\n📞 *الهاتف:* ${phone}\n📍 *العنوان:* ${addr}`;
+                const name = document.getElementById('custName') ? document.getElementById('custName').value : '';
+                const phone = document.getElementById('custPhone') ? document.getElementById('custPhone').value : '';
+                const address = document.getElementById('custAddress') ? document.getElementById('custAddress').value : '';
+                if (!name || !phone || !address) { alert("يرجى ملء جميع حقول بيانات التوصيل"); return; }
+                message += `🛵 **نوع الطلب:** دليفري / توصيل\n👤 **الاسم:** ${name}\n📞 **رقم الهاتف:** ${phone}\n📍 **العنوان:** ${address}`;
             }
 
-            const whatsappUrl = `https://wa.me/9647800000000?text=${encodeURIComponent(details)}`;
-            window.open(whatsappUrl, '_blank');
+            window.open(`https://wa.me/${targetPhone}?text=${encodeURIComponent(message)}`, '_blank');
         }
-
-        function callWaiter() {
-            const table = prompt("يرجى إدخال رقم الطاولة لطلب الويتر:");
-            if (table) {
-                alert(`تم إرسال طلب نداء الويتر إلى الطاولة رقم ${table}`);
-            }
-        }
-
-        // Navigation
-        function switchTab(tabName) {
-            document.querySelectorAll('.tab-page').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-
-            document.getElementById(`${tabName}Page`).classList.add('active');
-            document.getElementById(`nav-${tabName}`).classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Theme Toggle
-        function toggleTheme() {
-            const body = document.body;
-            body.classList.toggle('dark-mode');
-            const isDark = body.classList.contains('dark-mode');
-            
-            document.getElementById('themeText').innerText = isDark ? 'الفاتح' : 'الداكن';
-            document.querySelector('#themeToggleBtn i').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
-        }
-
-        // Initialize App
-        window.onload = function() {
-            renderPopular();
-            renderCategories();
-            renderReviews();
-            renderCart();
-        };
     </script>
 </body>
 </html>
