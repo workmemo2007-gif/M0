@@ -362,17 +362,17 @@
         }
 
         /* =========================================================
-           Folder Card 3D Component Styles (Vertically Stacked Files)
+           Folder Card 3D Component Styles (Grid Layout 2x2/3 cols)
            ========================================================= */
         .folder-card-wrapper {
             display: flex;
             justify-content: center;
-            margin: 240px 0 30px; /* توسيع المسافة العلوية لاستيعاب ارتضاع الملفات فوق بعضها */
+            margin: 270px 0 40px; /* مسافة علوية كافية لظهور الملفات بشكل شبكي متناسق */
             direction: ltr;
         }
 
         .folder-card {
-          width: 220px;
+          width: 260px;
           height: 140px;
           perspective: 1200px;
           cursor: pointer;
@@ -436,7 +436,7 @@
         }
 
         .folder-toggle:checked ~ .folder-container {
-          transform: translateY(50px) rotateX(20deg);
+          transform: translateY(60px) rotateX(15deg);
         }
 
         .folder-back {
@@ -472,8 +472,8 @@
 
         .counter {
           position: absolute;
-          top: -95px;
-          right: -60px;
+          top: -115px;
+          right: -45px;
           background-color: #a18cd1;
           padding: 4px 8px;
           border-radius: 50px;
@@ -529,15 +529,15 @@
           font-size: 12px;
           font-weight: 900;
           color: #ffffff;
-          text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+          text-shadow: 0 0 10px rgba(255, 255, 255, 1);
         }
 
+        /* --- تصميم الملفات بنظام الشبكة (Grid) --- */
         .file {
           position: absolute;
           bottom: 5px;
-          left: 5%;
-          width: 90%;
-          height: 75px;
+          width: 122px;
+          height: 60px;
           border-radius: 8px;
           overflow: hidden;
           box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3), 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -546,14 +546,18 @@
           direction: rtl;
         }
 
+        /* توزيع الأعمدة والصفوف بوضوح (يسار ويمين، 4 صفوف) */
+        .file-left { left: 6px; }
+        .file-right { right: 6px; }
+
         /* ألوان الأقسام الـ 7 */
-        .file-1 { background: linear-gradient(135deg, #ff416c, #ff4b2b); z-index: 27; transition-delay: 0.21s; }
-        .file-2 { background: linear-gradient(135deg, #f7971e, #ffd200); z-index: 26; transition-delay: 0.18s; }
-        .file-3 { background: linear-gradient(135deg, #56ab2f, #a8e063); z-index: 25; transition-delay: 0.15s; }
-        .file-4 { background: linear-gradient(135deg, #00c6ff, #0072ff); z-index: 24; transition-delay: 0.12s; }
-        .file-5 { background: linear-gradient(135deg, #f80759, #bc4e9c); z-index: 23; transition-delay: 0.09s; }
-        .file-6 { background: linear-gradient(135deg, #11998e, #38ef7d); z-index: 22; transition-delay: 0.06s; }
-        .file-7 { background: linear-gradient(135deg, #8e2de2, #4a00e0); z-index: 21; transition-delay: 0.03s; }
+        .file-1 { background: linear-gradient(135deg, #ff416c, #ff4b2b); z-index: 27; }
+        .file-2 { background: linear-gradient(135deg, #f7971e, #ffd200); z-index: 26; }
+        .file-3 { background: linear-gradient(135deg, #56ab2f, #a8e063); z-index: 25; }
+        .file-4 { background: linear-gradient(135deg, #00c6ff, #0072ff); z-index: 24; }
+        .file-5 { background: linear-gradient(135deg, #f80759, #bc4e9c); z-index: 23; }
+        .file-6 { background: linear-gradient(135deg, #11998e, #38ef7d); z-index: 22; }
+        .file-7 { background: linear-gradient(135deg, #8e2de2, #4a00e0); z-index: 21; width: 248px; left: 6px; } /* الملف السابع عريض في الأسفل */
 
         .shine {
           position: absolute;
@@ -572,17 +576,17 @@
 
         .file-text {
           font-family: "Tajawal", sans-serif;
-          font-size: 11px;
+          font-size: 10.5px;
           color: white;
-          padding: 8px 12px;
+          padding: 6px 8px;
           font-weight: 800;
-          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
           opacity: 0;
           transform: translateY(5px);
           transition: all 0.3s ease 0.4s;
           display: flex;
           align-items: center;
-          gap: 5px;
+          gap: 4px;
         }
 
         .folder-toggle:checked ~ .folder-container .file-text {
@@ -590,36 +594,43 @@
           transform: translateY(0);
         }
 
-        /* --- ترتيب الملفات بشكل مستقيم رأسياً واحدة فوق الأخرى بدقة --- */
-        .folder-toggle:checked ~ .folder-container .file-1 { transform: translateY(-245px); }
-        .folder-toggle:checked ~ .folder-container .file-2 { transform: translateY(-210px); }
-        .folder-toggle:checked ~ .folder-container .file-3 { transform: translateY(-175px); }
-        .folder-toggle:checked ~ .folder-container .file-4 { transform: translateY(-140px); }
-        .folder-toggle:checked ~ .folder-container .file-5 { transform: translateY(-105px); }
-        .folder-toggle:checked ~ .folder-container .file-6 { transform: translateY(-70px); }
-        .folder-toggle:checked ~ .folder-container .file-7 { transform: translateY(-35px); }
+        /* --- تحريك الملفات إلى مواضع الشبكة الدقيقة عند الفتح --- */
+        /* الصف الأول (فوق بعض: اليمين واليسار) */
+        .folder-toggle:checked ~ .folder-container .file-1 { transform: translateY(-240px); }
+        .folder-toggle:checked ~ .folder-container .file-2 { transform: translateY(-240px); }
+        
+        /* الصف الثاني */
+        .folder-toggle:checked ~ .folder-container .file-3 { transform: translateY(-172px); }
+        .folder-toggle:checked ~ .folder-container .file-4 { transform: translateY(-172px); }
 
-        /* التأثير عند التأشير/اللمس */
+        /* الصف الثالث */
+        .folder-toggle:checked ~ .folder-container .file-5 { transform: translateY(-104px); }
+        .folder-toggle:checked ~ .folder-container .file-6 { transform: translateY(-104px); }
+
+        /* الصف الرابع (ملف فردي عريض في الأسفل) */
+        .folder-toggle:checked ~ .folder-container .file-7 { transform: translateY(-36px); }
+
+        /* تأثير التمرير واللمس */
         .folder-toggle:checked ~ .folder-container .file:hover { cursor: pointer; filter: brightness(1.15); }
-        .folder-toggle:checked ~ .folder-container .file-1:hover { transform: translateY(-252px) scale(1.03); }
-        .folder-toggle:checked ~ .folder-container .file-2:hover { transform: translateY(-217px) scale(1.03); }
-        .folder-toggle:checked ~ .folder-container .file-3:hover { transform: translateY(-182px) scale(1.03); }
-        .folder-toggle:checked ~ .folder-container .file-4:hover { transform: translateY(-147px) scale(1.03); }
-        .folder-toggle:checked ~ .folder-container .file-5:hover { transform: translateY(-112px) scale(1.03); }
-        .folder-toggle:checked ~ .folder-container .file-6:hover { transform: translateY(-77px) scale(1.03); }
-        .folder-toggle:checked ~ .folder-container .file-7:hover { transform: translateY(-42px) scale(1.03); }
+        .folder-toggle:checked ~ .folder-container .file-1:hover { transform: translateY(-245px) scale(1.02); }
+        .folder-toggle:checked ~ .folder-container .file-2:hover { transform: translateY(-245px) scale(1.02); }
+        .folder-toggle:checked ~ .folder-container .file-3:hover { transform: translateY(-177px) scale(1.02); }
+        .folder-toggle:checked ~ .folder-container .file-4:hover { transform: translateY(-177px) scale(1.02); }
+        .folder-toggle:checked ~ .folder-container .file-5:hover { transform: translateY(-109px) scale(1.02); }
+        .folder-toggle:checked ~ .folder-container .file-6:hover { transform: translateY(-109px) scale(1.02); }
+        .folder-toggle:checked ~ .folder-container .file-7:hover { transform: translateY(-41px) scale(1.02); }
 
         .file-tag {
           position: absolute;
-          bottom: 6px; left: 8px;
+          bottom: 4px; left: 6px;
           background: rgba(0, 0, 0, 0.4);
           backdrop-filter: blur(4px);
           -webkit-backdrop-filter: blur(4px);
           color: #fff;
           font-family: "Inter", sans-serif;
-          font-size: 9px;
+          font-size: 8px;
           font-weight: 700;
-          padding: 2px 6px;
+          padding: 1px 4px;
           border-radius: 4px;
           opacity: 0;
           transition: all 0.3s ease;
@@ -998,38 +1009,38 @@
                   </svg>
                 </div>
 
-                <!-- 7 مرتبة بعناية ورأسياً فوق بعضها -->
-                <div class="file file-1" onclick="selectCategory('شاورما الدجاج')">
+                <!-- 7 أقسام مرتبة بنظام الشبكة المزدوجة (يمين ويسار) -->
+                <div class="file file-left file-1" onclick="selectCategory('شاورما الدجاج')">
                   <div class="shine"></div>
                   <span class="file-text"><i class="fas fa-drumstick-bite"></i> شاورما دجاج</span>
                   <div class="file-tag">7 أطباق</div>
                 </div>
-                <div class="file file-2" onclick="selectCategory('شاورما اللحم')">
+                <div class="file file-right file-2" onclick="selectCategory('شاورما اللحم')">
                   <div class="shine"></div>
                   <span class="file-text"><i class="fas fa-bacon"></i> شاورما لحم</span>
                   <div class="file-tag">6 أطباق</div>
                 </div>
-                <div class="file file-3" onclick="selectCategory('فروج')">
+                <div class="file file-left file-3" onclick="selectCategory('فروج')">
                   <div class="shine"></div>
                   <span class="file-text"><i class="fas fa-fire"></i> فروج مشوي</span>
                   <div class="file-tag">4 أطباق</div>
                 </div>
-                <div class="file file-4" onclick="selectCategory('ريزو')">
+                <div class="file file-right file-4" onclick="selectCategory('ريزو')">
                   <div class="shine"></div>
                   <span class="file-text"><i class="fas fa-bowl-rice"></i> أطباق ريزو</span>
                   <div class="file-tag">2 طبق</div>
                 </div>
-                <div class="file file-5" onclick="selectCategory('المقبلات')">
+                <div class="file file-left file-5" onclick="selectCategory('المقبلات')">
                   <div class="shine"></div>
                   <span class="file-text"><i class="fas fa-cheese"></i> المقبلات</span>
                   <div class="file-tag">7 أطباق</div>
                 </div>
-                <div class="file file-6" onclick="selectCategory('صلصات')">
+                <div class="file file-right file-6" onclick="selectCategory('صلصات')">
                   <div class="shine"></div>
                   <span class="file-text"><i class="fas fa-pepper-hot"></i> الصلصات</span>
                   <div class="file-tag">5 صلصات</div>
                 </div>
-                <div class="file file-7" onclick="selectCategory('المشروبات')">
+                <div class="file file-left file-7" onclick="selectCategory('المشروبات')">
                   <div class="shine"></div>
                   <span class="file-text"><i class="fas fa-glass-martini-alt"></i> المشروبات</span>
                   <div class="file-tag">4 عصائر</div>
