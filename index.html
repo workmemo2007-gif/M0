@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;700&family=Inter:wght@400;700;800;900&family=Lexend+Deca:wght@400;600&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Inter:wght@400;700;800;900&family=Lexend+Deca:wght@400;600&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -362,247 +362,290 @@
         }
 
         /* =========================================================
-           تنسيق خريطة المنيو الجديدة (أعمدة وجداول الأقسام والأطباق)
+           Folder Card 3D Component Styles (Grid Layout 2x2/3 cols)
            ========================================================= */
-        .categories-columns-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .category-column-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--card-radius);
-            overflow: hidden;
-            box-shadow: 0 4px 10px var(--shadow-color);
+        .folder-card-wrapper {
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+            margin: 270px 0 40px; /* مسافة علوية كافية لظهور الملفات بشكل شبكي متناسق */
+            direction: ltr;
         }
 
-        .category-column-header {
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            color: #ffffff;
-            padding: 10px 14px;
-            font-size: 0.95rem;
-            font-weight: 800;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
+        .folder-card {
+          width: 260px;
+          height: 140px;
+          perspective: 1200px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          -webkit-tap-highlight-color: transparent;
         }
 
-        .category-column-header:hover {
-            opacity: 0.95;
+        .folder-toggle { display: none; }
+
+        .hint-wrapper {
+          position: absolute;
+          top: -40px;
+          right: -40px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 2px;
+          transition: opacity 0.3s ease, transform 0.3s ease;
+          pointer-events: none;
+          z-index: 100;
+          animation: floatHint 2.5s ease-in-out infinite;
         }
 
-        .category-dishes-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.78rem;
+        .hint-text {
+          font-family: "Inter", -apple-system, sans-serif;
+          color: #60a5fa;
+          font-size: 10px;
+          font-weight: 900;
+          text-decoration: underline;
+          letter-spacing: 0.5px;
+          white-space: nowrap;
+          position: relative;
+          right: -25px;
+          top: 10px;
+          transform: rotate(45deg);
         }
 
-        .category-dishes-table th, 
-        .category-dishes-table td {
-            padding: 8px 12px;
-            text-align: right;
-            border-bottom: 1px solid var(--border-color);
+        .hint-arrow { height: 35px; width: 35px; }
+
+        @keyframes floatHint {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(6px); }
         }
 
-        .category-dishes-table th {
-            background: rgba(212, 175, 55, 0.1);
-            color: var(--primary-gold);
-            font-weight: 700;
+        .folder-toggle:checked ~ .hint-wrapper {
+          opacity: 0;
+          transform: translateY(-10px);
         }
 
-        .category-dishes-table tr:hover {
-            background: rgba(212, 175, 55, 0.04);
-            cursor: pointer;
+        .folder-container {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          transform-style: preserve-3d;
+          transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+          backface-visibility: hidden;
+          will-change: transform;
         }
 
-        .dish-row-name {
-            font-weight: 700;
-            color: var(--text-main);
+        .folder-toggle:checked ~ .folder-container {
+          transform: translateY(60px) rotateX(15deg);
         }
 
-        .dish-row-price {
-            color: var(--primary-gold);
-            font-weight: 800;
-            white-space: nowrap;
+        .folder-back {
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.4));
         }
 
-        .view-all-category-btn {
-            background: transparent;
-            border: none;
-            color: var(--primary-gold);
-            width: 100%;
-            padding: 8px;
-            font-weight: bold;
-            font-size: 0.78rem;
-            cursor: pointer;
-            text-align: center;
-            display: block;
-            border-top: 1px solid var(--border-color);
+        .folder-front-wrapper {
+          position: absolute;
+          bottom: -7px;
+          width: 100%;
+          z-index: 90;
+          transform-origin: bottom;
+          transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          border-radius: 12px;
         }
 
-        .view-all-category-btn:hover {
-            background: rgba(212, 175, 55, 0.1);
+        .folder-label {
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          width: 30px;
+          height: 4px;
+          background: rgba(255, 255, 255, 0.5);
+          border-radius: 10px;
         }
+
+        .folder-toggle:checked ~ .folder-container .folder-front-wrapper {
+          transform: rotateX(-75deg);
+        }
+
+        .counter {
+          position: absolute;
+          top: -115px;
+          right: -45px;
+          background-color: #a18cd1;
+          padding: 4px 8px;
+          border-radius: 50px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+          transform: scale(0) translateY(20px);
+          opacity: 0;
+          transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+          z-index: 100;
+          pointer-events: auto;
+        }
+
+        .folder-toggle:checked ~ .folder-container .counter {
+          transform: scale(1) translateY(0);
+          opacity: 1;
+          transition-delay: 0.2s;
+        }
+
+        .status-dot {
+          width: 6px; height: 6px;
+          background: #34d399;
+          border-radius: 50%;
+          position: relative;
+          box-shadow: 0 0 10px #34d399;
+        }
+
+        .status-dot::after {
+          content: "";
+          position: absolute;
+          top: 0; left: 0;
+          width: 100%; height: 100%;
+          background: #34d399;
+          border-radius: 50%;
+          animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+          0% { transform: scale(1); opacity: 1; }
+          100% { transform: scale(3); opacity: 0; }
+        }
+
+        .counter-label {
+          font-family: "Tajawal", sans-serif;
+          font-size: 10px;
+          font-weight: 800;
+          color: black;
+        }
+
+        .counter-number {
+          font-family: "Inter", sans-serif;
+          font-size: 12px;
+          font-weight: 900;
+          color: #ffffff;
+          text-shadow: 0 0 10px rgba(255, 255, 255, 1);
+        }
+
+        /* --- تصميم الملفات بنظام الشبكة (Grid) --- */
+        .file {
+          position: absolute;
+          bottom: 5px;
+          width: 122px;
+          height: 60px;
+          border-radius: 8px;
+          overflow: hidden;
+          box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3), 0 4px 12px rgba(0, 0, 0, 0.3);
+          transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+          z-index: 0;
+          direction: rtl;
+        }
+
+        /* توزيع الأعمدة والصفوف بوضوح (يسار ويمين، 4 صفوف) */
+        .file-left { left: 6px; }
+        .file-right { right: 6px; }
+
+        /* ألوان الأقسام الـ 7 */
+        .file-1 { background: linear-gradient(135deg, #ff416c, #ff4b2b); z-index: 27; }
+        .file-2 { background: linear-gradient(135deg, #f7971e, #ffd200); z-index: 26; }
+        .file-3 { background: linear-gradient(135deg, #56ab2f, #a8e063); z-index: 25; }
+        .file-4 { background: linear-gradient(135deg, #00c6ff, #0072ff); z-index: 24; }
+        .file-5 { background: linear-gradient(135deg, #f80759, #bc4e9c); z-index: 23; }
+        .file-6 { background: linear-gradient(135deg, #11998e, #38ef7d); z-index: 22; }
+        .file-7 { background: linear-gradient(135deg, #8e2de2, #4a00e0); z-index: 21; width: 248px; left: 6px; } /* الملف السابع عريض في الأسفل */
+
+        .shine {
+          position: absolute;
+          top: 0; left: -100%;
+          width: 50%; height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+          transform: skewX(-20deg);
+          transition: none;
+        }
+
+        .folder-toggle:checked ~ .folder-container .shine {
+          left: 150%;
+          transition: left 0.8s ease-in-out;
+          transition-delay: 0.3s;
+        }
+
+        .file-text {
+          font-family: "Tajawal", sans-serif;
+          font-size: 10.5px;
+          color: white;
+          padding: 6px 8px;
+          font-weight: 800;
+          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+          opacity: 0;
+          transform: translateY(5px);
+          transition: all 0.3s ease 0.4s;
+          display: flex;
+          align-items: center;
+          gap: 4px;
+        }
+
+        .folder-toggle:checked ~ .folder-container .file-text {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        /* --- تحريك الملفات إلى مواضع الشبكة الدقيقة عند الفتح --- */
+        /* الصف الأول (فوق بعض: اليمين واليسار) */
+        .folder-toggle:checked ~ .folder-container .file-1 { transform: translateY(-240px); }
+        .folder-toggle:checked ~ .folder-container .file-2 { transform: translateY(-240px); }
+        
+        /* الصف الثاني */
+        .folder-toggle:checked ~ .folder-container .file-3 { transform: translateY(-172px); }
+        .folder-toggle:checked ~ .folder-container .file-4 { transform: translateY(-172px); }
+
+        /* الصف الثالث */
+        .folder-toggle:checked ~ .folder-container .file-5 { transform: translateY(-104px); }
+        .folder-toggle:checked ~ .folder-container .file-6 { transform: translateY(-104px); }
+
+        /* الصف الرابع (ملف فردي عريض في الأسفل) */
+        .folder-toggle:checked ~ .folder-container .file-7 { transform: translateY(-36px); }
+
+        /* تأثير التمرير واللمس */
+        .folder-toggle:checked ~ .folder-container .file:hover { cursor: pointer; filter: brightness(1.15); }
+        .folder-toggle:checked ~ .folder-container .file-1:hover { transform: translateY(-245px) scale(1.02); }
+        .folder-toggle:checked ~ .folder-container .file-2:hover { transform: translateY(-245px) scale(1.02); }
+        .folder-toggle:checked ~ .folder-container .file-3:hover { transform: translateY(-177px) scale(1.02); }
+        .folder-toggle:checked ~ .folder-container .file-4:hover { transform: translateY(-177px) scale(1.02); }
+        .folder-toggle:checked ~ .folder-container .file-5:hover { transform: translateY(-109px) scale(1.02); }
+        .folder-toggle:checked ~ .folder-container .file-6:hover { transform: translateY(-109px) scale(1.02); }
+        .folder-toggle:checked ~ .folder-container .file-7:hover { transform: translateY(-41px) scale(1.02); }
+
+        .file-tag {
+          position: absolute;
+          bottom: 4px; left: 6px;
+          background: rgba(0, 0, 0, 0.4);
+          backdrop-filter: blur(4px);
+          -webkit-backdrop-filter: blur(4px);
+          color: #fff;
+          font-family: "Inter", sans-serif;
+          font-size: 8px;
+          font-weight: 700;
+          padding: 1px 4px;
+          border-radius: 4px;
+          opacity: 0;
+          transition: all 0.3s ease;
+          pointer-events: none;
+        }
+
+        .folder-toggle:checked ~ .folder-container .file-tag { opacity: 1; }
 
         .selected-category-dishes {
-            margin-top: 25px;
+            margin-top: 30px;
             display: none;
         }
         .selected-category-dishes.active {
             display: block;
         }
-
-        /* =========================================================
-           زر الخريطة العائم وتصاميم صفحة الخريطة التفاعلية
-           ========================================================= */
-        .map-float-btn {
-            position: fixed;
-            top: 15px;
-            left: 110px;
-            background-color: #d4a373;
-            color: white;
-            padding: 6px 14px;
-            border-radius: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: bold;
-            font-size: 0.75rem;
-            transition: background-color 0.3s, transform 0.2s;
-            z-index: 1000;
-            border: 1px solid rgba(255,255,255,0.4);
-        }
-
-        .map-float-btn:hover {
-            background-color: #bc8a5e;
-            transform: scale(1.05);
-        }
-
-        #map-page {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--bg-body);
-            z-index: 2000;
-            overflow-y: auto;
-            padding: 20px;
-        }
-
-        .map-container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: var(--bg-card);
-            border-radius: 20px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            position: relative;
-        }
-
-        .map-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .map-header h2 {
-            color: var(--primary-gold);
-            font-family: 'Aref Ruqaa', serif;
-            font-size: 1.8rem;
-            margin-bottom: 5px;
-        }
-
-        .map-header p {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        .back-btn {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--primary-gold);
-            background: rgba(212, 175, 55, 0.1);
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid var(--border-color);
-        }
-
-        .grill-map {
-            position: relative;
-            padding: 40px 0;
-            height: 420px;
-        }
-
-        .map-path {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 85%;
-            height: 4px;
-            background-color: var(--primary-gold);
-            opacity: 0.5;
-        }
-
-        .map-dish {
-            position: absolute;
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .map-dish:hover {
-            transform: scale(1.1);
-        }
-
-        .map-dish-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            border: 3px solid var(--primary-gold);
-            background-color: var(--bg-body);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 8px auto;
-            font-size: 1.8rem;
-            overflow: hidden;
-        }
-
-        .map-dish-label {
-            font-weight: bold;
-            color: var(--text-main);
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            padding: 2px 10px;
-            border-radius: 12px;
-            font-size: 0.78rem;
-            white-space: nowrap;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .dish-1 { top: 10%; left: 10%; }
-        .dish-2 { top: 65%; left: 32%; }
-        .dish-3 { top: 10%; left: 55%; }
-        .dish-4 { top: 65%; left: 78%; }
 
         .cart-notification-bar {
             position: fixed; bottom: 65px; left: 12px; right: 12px;
@@ -665,7 +708,7 @@
             color: var(--primary-gold); display: flex; align-items: center; gap: 6px;
         }
 
-        /* Interactive Checkout Button Styles */
+        /* --- Interactive Checkout Button Styles --- */
         .interactive-checkout-container {
             background-color: #ffffff;
             display: flex;
@@ -863,12 +906,6 @@
 </head>
 <body class="dark-mode">
 
-    <!-- زر الخريطة العائم -->
-    <div class="map-float-btn" onclick="showMap()">
-        <span style="font-size: 1.1rem;">🗺️</span>
-        <span>خريطة المنيو</span>
-    </div>
-
     <!-- Top Nav -->
     <div class="top-nav">
         <div class="social-icons">
@@ -944,13 +981,79 @@
         </div>
     </div>
 
-    <!-- PAGE 2: CATEGORIES (تم التعديل لتكون أعمدة وجداول للأطباق) -->
+    <!-- PAGE 2: CATEGORIES -->
     <div id="categoriesPage" class="tab-page">
-        <div class="section-title"><i class="fas fa-th-list"></i> خريطة الأقسام (أعمدة الأطباق والأسعار)</div>
+        <div class="section-title"><i class="fas fa-folder-open"></i> أقسام القائمة (انقر على المجلد للأصناف)</div>
         
-        <!-- حاوية أعمدة الأقسام -->
-        <div class="categories-columns-container" id="categoriesColumnsContainer">
-            <!-- سيتم توليد الأعمدة ديناميكياً بواسطة جافاسكريبت لضمان عرض جميع الأطباق وتصنيفها بدقة -->
+        <!-- Folder Card 3D Component -->
+        <div class="folder-card-wrapper">
+            <label class="folder-card">
+              <input class="folder-toggle" type="checkbox" id="folderCheckbox" />
+              <div class="hint-wrapper">
+                <span class="hint-text">اضغط لفتح الفايل</span>
+                <svg class="hint-arrow" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2">
+                  <path d="M12 5v14M19 12l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </div>
+
+              <div class="folder-container">
+                <div class="counter">
+                  <div class="status-dot"></div>
+                  <span class="counter-label">الأقسام:</span>
+                  <span class="counter-number">7</span>
+                </div>
+
+                <div class="folder-back">
+                  <svg viewBox="0 0 170 130" fill="none">
+                    <path d="M0 12C0 5.37258 5.37258 0 12 0H52.5C56.2093 0 59.7046 1.7101 62 4.65085L69.3333 14H158C164.627 14 170 19.3726 170 26V118C170 124.627 164.627 130 158 130H12C5.37258 130 0 124.627 0 118V12Z" fill="#3b82f6"></path>
+                  </svg>
+                </div>
+
+                <!-- 7 أقسام مرتبة بنظام الشبكة المزدوجة (يمين ويسار) -->
+                <div class="file file-left file-1" onclick="selectCategory('شاورما الدجاج')">
+                  <div class="shine"></div>
+                  <span class="file-text"><i class="fas fa-drumstick-bite"></i> شاورما دجاج</span>
+                  <div class="file-tag">7 أطباق</div>
+                </div>
+                <div class="file file-right file-2" onclick="selectCategory('شاورما اللحم')">
+                  <div class="shine"></div>
+                  <span class="file-text"><i class="fas fa-bacon"></i> شاورما لحم</span>
+                  <div class="file-tag">6 أطباق</div>
+                </div>
+                <div class="file file-left file-3" onclick="selectCategory('فروج')">
+                  <div class="shine"></div>
+                  <span class="file-text"><i class="fas fa-fire"></i> فروج مشوي</span>
+                  <div class="file-tag">4 أطباق</div>
+                </div>
+                <div class="file file-right file-4" onclick="selectCategory('ريزو')">
+                  <div class="shine"></div>
+                  <span class="file-text"><i class="fas fa-bowl-rice"></i> أطباق ريزو</span>
+                  <div class="file-tag">2 طبق</div>
+                </div>
+                <div class="file file-left file-5" onclick="selectCategory('المقبلات')">
+                  <div class="shine"></div>
+                  <span class="file-text"><i class="fas fa-cheese"></i> المقبلات</span>
+                  <div class="file-tag">7 أطباق</div>
+                </div>
+                <div class="file file-right file-6" onclick="selectCategory('صلصات')">
+                  <div class="shine"></div>
+                  <span class="file-text"><i class="fas fa-pepper-hot"></i> الصلصات</span>
+                  <div class="file-tag">5 صلصات</div>
+                </div>
+                <div class="file file-left file-7" onclick="selectCategory('المشروبات')">
+                  <div class="shine"></div>
+                  <span class="file-text"><i class="fas fa-glass-martini-alt"></i> المشروبات</span>
+                  <div class="file-tag">4 عصائر</div>
+                </div>
+
+                <div class="folder-front-wrapper">
+                  <svg class="folder-front" viewBox="0 0 170 115" fill="none">
+                    <path d="M0 12C0 5.37258 5.37258 0 12 0H158C164.627 0 170 5.37258 170 12V103C170 109.627 164.627 115 158 115H12C5.37258 115 0 109.627 0 103V12Z" fill="#60a5fa"></path>
+                  </svg>
+                  <div class="folder-label"></div>
+                </div>
+              </div>
+            </label>
         </div>
 
         <div id="selectedCategoryDishes" class="selected-category-dishes">
@@ -1002,44 +1105,6 @@
                 </div>
             </div>
 
-        </div>
-    </div>
-
-    <!-- صفحة خريطة المنيو التفاعلية -->
-    <div id="map-page">
-        <div class="map-container">
-            <div class="back-btn" onclick="hideMap()">
-                <i class="fas fa-arrow-right"></i>
-            </div>
-            <div class="map-header">
-                <h2>خريطة القائمة التفاعلية</h2>
-                <p>تجوّل عبر مسار أشهى الأطباق الرئيسية والمشويات لدينا</p>
-            </div>
-            
-            <div class="grill-map">
-                <div class="map-path"></div>
-
-                <div class="map-dish dish-1" onclick="hideMap(); selectCategory('شاورما اللحم'); switchTab('categories');">
-                    <div class="map-dish-icon">🍖</div>
-                    <div class="map-dish-label">شاورما لحم</div>
-                </div>
-
-                <div class="map-dish dish-2" onclick="hideMap(); selectCategory('شاورما الدجاج'); switchTab('categories');">
-                    <div class="map-dish-icon">🍗</div>
-                    <div class="map-dish-label">شاورما دجاج</div>
-                </div>
-
-                <div class="map-dish dish-3" onclick="hideMap(); selectCategory('فروج'); switchTab('categories');">
-                    <div class="map-dish-icon">🔥</div>
-                    <div class="map-dish-label">فروج مشوي</div>
-                </div>
-
-                <div class="map-dish dish-4" onclick="hideMap(); selectCategory('المقبلات'); switchTab('categories');">
-                    <div class="map-dish-icon">🥗</div>
-                    <div class="map-dish-label">المقبلات والصلصات</div>
-                </div>
-            </div>
-            <p style="text-align: center; color: var(--text-muted); font-size: 0.75rem; margin-top: 15px;">*انقر على أي طبق في الخريطة للانتقال المباشر إلى أصنافه في القائمة.*</p>
         </div>
     </div>
 
@@ -1115,20 +1180,9 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             renderPopularProducts();
-            renderCategoriesColumns();
             renderReviews();
             startCarousel();
         });
-
-        function showMap() {
-            document.getElementById('map-page').style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function hideMap() {
-            document.getElementById('map-page').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
 
         function toggleTheme() {
             document.body.classList.toggle('dark-mode');
@@ -1188,54 +1242,9 @@
             document.getElementById('popularGrid').innerHTML = popularItems.map(product => createProductCardHTML(product)).join('');
         }
 
-        // توليد أعضاء وجداول الأقسام والأطباق تلقائياً
-        function renderCategoriesColumns() {
-            const container = document.getElementById('categoriesColumnsContainer');
-            
-            // استخراج الأقسام الفريدة من قائمة المنتجات
-            const categories = [...new Set(rawProducts.map(p => p.Category))];
-            
-            let columnsHTML = '';
-            categories.forEach(category => {
-                const categoryProducts = rawProducts.filter(p => p.Category === category);
-                
-                columnsHTML += `
-                    <div class="category-column-card">
-                        <div class="category-column-header" onclick="selectCategory('${category}')">
-                            <span><i class="fas fa-folder-open"></i> ${category}</span>
-                            <span style="font-size: 0.75rem; background: rgba(0,0,0,0.2); padding: 2px 8px; border-radius: 10px;">${categoryProducts.length} أصناف</span>
-                        </div>
-                        <table class="category-dishes-table">
-                            <thead>
-                                <tr>
-                                    <th>اسم الطبق</th>
-                                    <th style="text-align: left;">السعر</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                `;
-                
-                categoryProducts.forEach(dish => {
-                    columnsHTML += `
-                        <tr onclick="selectCategory('${category}')">
-                            <td class="dish-row-name">${dish.name}</td>
-                            <td class="dish-row-price" style="text-align: left;">${dish.price.toLocaleString()} د.ع</td>
-                        </tr>
-                    `;
-                });
-
-                columnsHTML += `
-                            </tbody>
-                        </table>
-                        <button class="view-all-category-btn" onclick="selectCategory('${category}')">عرض الأطباق كبطاقات وصور <i class="fas fa-chevron-left"></i></button>
-                    </div>
-                `;
-            });
-
-            container.innerHTML = columnsHTML;
-        }
-
         function selectCategory(categoryName) {
+            document.getElementById('folderCheckbox').checked = true;
+
             currentSelectedCategory = categoryName;
             const filteredProducts = rawProducts.filter(p => p.Category === categoryName);
             
@@ -1250,7 +1259,7 @@
 
             setTimeout(() => {
                 container.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 200);
+            }, 350);
         }
 
         function createProductCardHTML(product) {
