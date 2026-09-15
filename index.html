@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Inter:wght@400;700;800;900&family=Lexend+Deca:wght@400;600&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;700&family=Inter:wght@400;700;800;900&family=Lexend+Deca:wght@400;600&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -362,12 +362,12 @@
         }
 
         /* =========================================================
-           Folder Card 3D Component Styles (Grid Layout 2x2/3 cols)
+           Folder Card 3D Component Styles
            ========================================================= */
         .folder-card-wrapper {
             display: flex;
             justify-content: center;
-            margin: 270px 0 40px; /* مسافة علوية كافية لظهور الملفات بشكل شبكي متناسق */
+            margin: 270px 0 40px;
             direction: ltr;
         }
 
@@ -532,7 +532,6 @@
           text-shadow: 0 0 10px rgba(255, 255, 255, 1);
         }
 
-        /* --- تصميم الملفات بنظام الشبكة (Grid) --- */
         .file {
           position: absolute;
           bottom: 5px;
@@ -546,18 +545,16 @@
           direction: rtl;
         }
 
-        /* توزيع الأعمدة والصفوف بوضوح (يسار ويمين، 4 صفوف) */
         .file-left { left: 6px; }
         .file-right { right: 6px; }
 
-        /* ألوان الأقسام الـ 7 */
         .file-1 { background: linear-gradient(135deg, #ff416c, #ff4b2b); z-index: 27; }
         .file-2 { background: linear-gradient(135deg, #f7971e, #ffd200); z-index: 26; }
         .file-3 { background: linear-gradient(135deg, #56ab2f, #a8e063); z-index: 25; }
         .file-4 { background: linear-gradient(135deg, #00c6ff, #0072ff); z-index: 24; }
         .file-5 { background: linear-gradient(135deg, #f80759, #bc4e9c); z-index: 23; }
         .file-6 { background: linear-gradient(135deg, #11998e, #38ef7d); z-index: 22; }
-        .file-7 { background: linear-gradient(135deg, #8e2de2, #4a00e0); z-index: 21; width: 248px; left: 6px; } /* الملف السابع عريض في الأسفل */
+        .file-7 { background: linear-gradient(135deg, #8e2de2, #4a00e0); z-index: 21; width: 248px; left: 6px; }
 
         .shine {
           position: absolute;
@@ -594,31 +591,15 @@
           transform: translateY(0);
         }
 
-        /* --- تحريك الملفات إلى مواضع الشبكة الدقيقة عند الفتح --- */
-        /* الصف الأول (فوق بعض: اليمين واليسار) */
         .folder-toggle:checked ~ .folder-container .file-1 { transform: translateY(-240px); }
         .folder-toggle:checked ~ .folder-container .file-2 { transform: translateY(-240px); }
-        
-        /* الصف الثاني */
         .folder-toggle:checked ~ .folder-container .file-3 { transform: translateY(-172px); }
         .folder-toggle:checked ~ .folder-container .file-4 { transform: translateY(-172px); }
-
-        /* الصف الثالث */
         .folder-toggle:checked ~ .folder-container .file-5 { transform: translateY(-104px); }
         .folder-toggle:checked ~ .folder-container .file-6 { transform: translateY(-104px); }
-
-        /* الصف الرابع (ملف فردي عريض في الأسفل) */
         .folder-toggle:checked ~ .folder-container .file-7 { transform: translateY(-36px); }
 
-        /* تأثير التمرير واللمس */
         .folder-toggle:checked ~ .folder-container .file:hover { cursor: pointer; filter: brightness(1.15); }
-        .folder-toggle:checked ~ .folder-container .file-1:hover { transform: translateY(-245px) scale(1.02); }
-        .folder-toggle:checked ~ .folder-container .file-2:hover { transform: translateY(-245px) scale(1.02); }
-        .folder-toggle:checked ~ .folder-container .file-3:hover { transform: translateY(-177px) scale(1.02); }
-        .folder-toggle:checked ~ .folder-container .file-4:hover { transform: translateY(-177px) scale(1.02); }
-        .folder-toggle:checked ~ .folder-container .file-5:hover { transform: translateY(-109px) scale(1.02); }
-        .folder-toggle:checked ~ .folder-container .file-6:hover { transform: translateY(-109px) scale(1.02); }
-        .folder-toggle:checked ~ .folder-container .file-7:hover { transform: translateY(-41px) scale(1.02); }
 
         .file-tag {
           position: absolute;
@@ -646,6 +627,156 @@
         .selected-category-dishes.active {
             display: block;
         }
+
+        /* =========================================================
+           زر الخريطة العائم وتصاميم صفحة الخريطة التفاعلية
+           ========================================================= */
+        .map-float-btn {
+            position: fixed;
+            top: 15px;
+            left: 110px; /* بجوار أزرار التبديل العلوية لتجنب التداخل */
+            background-color: #d4a373;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: bold;
+            font-size: 0.75rem;
+            transition: background-color 0.3s, transform 0.2s;
+            z-index: 1000;
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+
+        .map-float-btn:hover {
+            background-color: #bc8a5e;
+            transform: scale(1.05);
+        }
+
+        /* صفحة الخريطة التفاعلية (Full Page Overlay) */
+        #map-page {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-body);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .map-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            position: relative;
+        }
+
+        .map-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .map-header h2 {
+            color: var(--primary-gold);
+            font-family: 'Aref Ruqaa', serif;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .map-header p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-gold);
+            background: rgba(212, 175, 55, 0.1);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .grill-map {
+            position: relative;
+            padding: 40px 0;
+            height: 420px;
+        }
+
+        .map-path {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 85%;
+            height: 4px;
+            background-color: var(--primary-gold);
+            opacity: 0.5;
+        }
+
+        .map-dish {
+            position: absolute;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .map-dish:hover {
+            transform: scale(1.1);
+        }
+
+        .map-dish-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 3px solid var(--primary-gold);
+            background-color: var(--bg-body);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px auto;
+            font-size: 1.8rem;
+            overflow: hidden;
+        }
+
+        .map-dish-label {
+            font-weight: bold;
+            color: var(--text-main);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.78rem;
+            white-space: nowrap;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* مواقع النقاط في خريطة الطريق */
+        .dish-1 { top: 10%; left: 10%; }
+        .dish-2 { top: 65%; left: 32%; }
+        .dish-3 { top: 10%; left: 55%; }
+        .dish-4 { top: 65%; left: 78%; }
+
+        /* ========================================================= */
 
         .cart-notification-bar {
             position: fixed; bottom: 65px; left: 12px; right: 12px;
@@ -708,7 +839,7 @@
             color: var(--primary-gold); display: flex; align-items: center; gap: 6px;
         }
 
-        /* --- Interactive Checkout Button Styles --- */
+        /* Interactive Checkout Button Styles */
         .interactive-checkout-container {
             background-color: #ffffff;
             display: flex;
@@ -906,6 +1037,12 @@
 </head>
 <body class="dark-mode">
 
+    <!-- زر الخريطة العائم المضاف -->
+    <div class="map-float-btn" onclick="showMap()">
+        <span style="font-size: 1.1rem;">🗺️</span>
+        <span>خريطة المنيو</span>
+    </div>
+
     <!-- Top Nav -->
     <div class="top-nav">
         <div class="social-icons">
@@ -1009,7 +1146,6 @@
                   </svg>
                 </div>
 
-                <!-- 7 أقسام مرتبة بنظام الشبكة المزدوجة (يمين ويسار) -->
                 <div class="file file-left file-1" onclick="selectCategory('شاورما الدجاج')">
                   <div class="shine"></div>
                   <span class="file-text"><i class="fas fa-drumstick-bite"></i> شاورما دجاج</span>
@@ -1108,6 +1244,45 @@
         </div>
     </div>
 
+    <!-- صفحة خريطة المنيو التفاعلية (المضافة حديثاً وتفتح عند النقر على الزر العائم) -->
+    <div id="map-page">
+        <div class="map-container">
+            <div class="back-btn" onclick="hideMap()">
+                <i class="fas fa-arrow-right"></i>
+            </div>
+            <div class="map-header">
+                <h2>خريطة القائمة التفاعلية</h2>
+                <p>تجوّل عبر مسار أشهى الأطباق الرئيسية والمشويات لدينا</p>
+            </div>
+            
+            <div class="grill-map">
+                <div class="map-path"></div>
+
+                <!-- نقاط الخريطة (يمكن ربطها بالأقسام مباشرة) -->
+                <div class="map-dish dish-1" onclick="hideMap(); selectCategory('شاورما اللحم'); switchTab('categories');">
+                    <div class="map-dish-icon">🍖</div>
+                    <div class="map-dish-label">شاورما لحم</div>
+                </div>
+
+                <div class="map-dish dish-2" onclick="hideMap(); selectCategory('شاورما الدجاج'); switchTab('categories');">
+                    <div class="map-dish-icon">🍗</div>
+                    <div class="map-dish-label">شاورما دجاج</div>
+                </div>
+
+                <div class="map-dish dish-3" onclick="hideMap(); selectCategory('فروج'); switchTab('categories');">
+                    <div class="map-dish-icon">🔥</div>
+                    <div class="map-dish-label">فروج مشوي</div>
+                </div>
+
+                <div class="map-dish dish-4" onclick="hideMap(); selectCategory('المقبلات'); switchTab('categories');">
+                    <div class="map-dish-icon">🥗</div>
+                    <div class="map-dish-label">المقبلات والصلصات</div>
+                </div>
+            </div>
+            <p style="text-align: center; color: var(--text-muted); font-size: 0.75rem; margin-top: 15px;">*انقر على أي طبق في الخريطة للانتقال المباشر إلى أصنافه في القائمة.*</p>
+        </div>
+    </div>
+
     <!-- Floating Notification Bar -->
     <div class="cart-notification-bar" id="cartNotificationBar" onclick="switchTab('cart')">
         <span>عرض السلة (<span id="notifyCount">0</span> وجبات)</span>
@@ -1183,6 +1358,17 @@
             renderReviews();
             startCarousel();
         });
+
+        // دوال التحكم بفتح وإغلاق خريطة المنيو
+        function showMap() {
+            document.getElementById('map-page').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function hideMap() {
+            document.getElementById('map-page').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
 
         function toggleTheme() {
             document.body.classList.toggle('dark-mode');
