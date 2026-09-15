@@ -367,7 +367,7 @@
         .folder-card-wrapper {
             display: flex;
             justify-content: center;
-            margin: 270px 0 40px; /* مسافة علوية كافية لظهور الملفات بشكل شبكي متناسق */
+            margin: 270px 0 40px;
             direction: ltr;
         }
 
@@ -532,7 +532,6 @@
           text-shadow: 0 0 10px rgba(255, 255, 255, 1);
         }
 
-        /* --- تصميم الملفات بنظام الشبكة (Grid) --- */
         .file {
           position: absolute;
           bottom: 5px;
@@ -546,18 +545,16 @@
           direction: rtl;
         }
 
-        /* توزيع الأعمدة والصفوف بوضوح (يسار ويمين، 4 صفوف) */
         .file-left { left: 6px; }
         .file-right { right: 6px; }
 
-        /* ألوان الأقسام الـ 7 */
         .file-1 { background: linear-gradient(135deg, #ff416c, #ff4b2b); z-index: 27; }
         .file-2 { background: linear-gradient(135deg, #f7971e, #ffd200); z-index: 26; }
         .file-3 { background: linear-gradient(135deg, #56ab2f, #a8e063); z-index: 25; }
         .file-4 { background: linear-gradient(135deg, #00c6ff, #0072ff); z-index: 24; }
         .file-5 { background: linear-gradient(135deg, #f80759, #bc4e9c); z-index: 23; }
         .file-6 { background: linear-gradient(135deg, #11998e, #38ef7d); z-index: 22; }
-        .file-7 { background: linear-gradient(135deg, #8e2de2, #4a00e0); z-index: 21; width: 248px; left: 6px; } /* الملف السابع عريض في الأسفل */
+        .file-7 { background: linear-gradient(135deg, #8e2de2, #4a00e0); z-index: 21; width: 248px; left: 6px; }
 
         .shine {
           position: absolute;
@@ -594,31 +591,15 @@
           transform: translateY(0);
         }
 
-        /* --- تحريك الملفات إلى مواضع الشبكة الدقيقة عند الفتح --- */
-        /* الصف الأول (فوق بعض: اليمين واليسار) */
         .folder-toggle:checked ~ .folder-container .file-1 { transform: translateY(-240px); }
         .folder-toggle:checked ~ .folder-container .file-2 { transform: translateY(-240px); }
-        
-        /* الصف الثاني */
         .folder-toggle:checked ~ .folder-container .file-3 { transform: translateY(-172px); }
         .folder-toggle:checked ~ .folder-container .file-4 { transform: translateY(-172px); }
-
-        /* الصف الثالث */
         .folder-toggle:checked ~ .folder-container .file-5 { transform: translateY(-104px); }
         .folder-toggle:checked ~ .folder-container .file-6 { transform: translateY(-104px); }
-
-        /* الصف الرابع (ملف فردي عريض في الأسفل) */
         .folder-toggle:checked ~ .folder-container .file-7 { transform: translateY(-36px); }
 
-        /* تأثير التمرير واللمس */
         .folder-toggle:checked ~ .folder-container .file:hover { cursor: pointer; filter: brightness(1.15); }
-        .folder-toggle:checked ~ .folder-container .file-1:hover { transform: translateY(-245px) scale(1.02); }
-        .folder-toggle:checked ~ .folder-container .file-2:hover { transform: translateY(-245px) scale(1.02); }
-        .folder-toggle:checked ~ .folder-container .file-3:hover { transform: translateY(-177px) scale(1.02); }
-        .folder-toggle:checked ~ .folder-container .file-4:hover { transform: translateY(-177px) scale(1.02); }
-        .folder-toggle:checked ~ .folder-container .file-5:hover { transform: translateY(-109px) scale(1.02); }
-        .folder-toggle:checked ~ .folder-container .file-6:hover { transform: translateY(-109px) scale(1.02); }
-        .folder-toggle:checked ~ .folder-container .file-7:hover { transform: translateY(-41px) scale(1.02); }
 
         .file-tag {
           position: absolute;
@@ -646,6 +627,169 @@
         .selected-category-dishes.active {
             display: block;
         }
+
+        /* =========================================================
+           Map Glass Button & Modal Styles (تصميم زر الخريطة والنافذة المنبثقة)
+           ========================================================= */
+        .map-trigger-container {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+        }
+
+        .map-glass-btn {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            padding: 12px 24px;
+            border-radius: 30px;
+            color: var(--text-main);
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-glass-btn:hover {
+            transform: scale(1.05);
+            background: rgba(212, 175, 55, 0.25);
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 20px var(--gold-glow);
+        }
+
+        .map-glass-btn i {
+            color: var(--primary-gold);
+            font-size: 1.1rem;
+        }
+
+        /* Modal Overlay */
+        .map-modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .map-modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Map Card Container */
+        .map-modal-card {
+            width: 100%;
+            max-width: 500px;
+            max-height: 85vh;
+            background: rgba(22, 27, 34, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid var(--primary-gold);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 25px var(--gold-glow);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: scale(0.8) translateY(30px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .map-modal-overlay.active .map-modal-card {
+            transform: scale(1) translateY(0);
+        }
+
+        .map-modal-header {
+            padding: 12px 15px;
+            background: linear-gradient(135deg, rgba(212,175,55,0.2), rgba(0,0,0,0.4));
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .map-modal-title {
+            font-family: 'Aref Ruqaa', serif;
+            font-size: 1.2rem;
+            color: var(--primary-gold);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .map-close-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 30px; height: 30px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .map-close-btn:hover {
+            background: rgba(255,255,255,0.1);
+            color: var(--primary-gold);
+        }
+
+        .map-modal-body {
+            padding: 15px;
+            overflow-y: auto;
+            max-height: calc(85vh - 60px);
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-gold) transparent;
+        }
+
+        /* Table styling inside the Map Modal */
+        .map-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: right;
+            font-size: 0.8rem;
+        }
+
+        .map-table th {
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--primary-gold);
+            padding: 8px 10px;
+            font-weight: 800;
+            border-bottom: 2px solid var(--primary-gold);
+        }
+
+        .map-table td {
+            padding: 8px 10px;
+            border-bottom: 1px dashed var(--border-color);
+            color: var(--text-main);
+        }
+
+        .map-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .category-row-header {
+            background: rgba(255, 255, 255, 0.08);
+            font-weight: bold;
+            color: var(--primary-gold);
+        }
+
+        /* End Map Styles */
 
         .cart-notification-bar {
             position: fixed; bottom: 65px; left: 12px; right: 12px;
@@ -985,6 +1129,14 @@
     <div id="categoriesPage" class="tab-page">
         <div class="section-title"><i class="fas fa-folder-open"></i> أقسام القائمة (انقر على المجلد للأصناف)</div>
         
+        <!-- Map Glass Button Trigger -->
+        <div class="map-trigger-container">
+            <button class="map-glass-btn" onclick="openMapModal()">
+                <i class="fas fa-map-marked-alt"></i>
+                <span>خريطة المنيو والأقسام</span>
+            </button>
+        </div>
+
         <!-- Folder Card 3D Component -->
         <div class="folder-card-wrapper">
             <label class="folder-card">
@@ -1009,7 +1161,6 @@
                   </svg>
                 </div>
 
-                <!-- 7 أقسام مرتبة بنظام الشبكة المزدوجة (يمين ويسار) -->
                 <div class="file file-left file-1" onclick="selectCategory('شاورما الدجاج')">
                   <div class="shine"></div>
                   <span class="file-text"><i class="fas fa-drumstick-bite"></i> شاورما دجاج</span>
@@ -1061,6 +1212,33 @@
                 <i class="fas fa-utensils"></i> أطباق القسم
             </div>
             <div class="products-grid" id="categoryProductsGrid"></div>
+        </div>
+    </div>
+
+    <!-- MAP MODAL CONTAINER (نافذة خريطة المنيو الزجاجية) -->
+    <div class="map-modal-overlay" id="mapModalOverlay" onclick="closeMapModal(event)">
+        <div class="map-modal-card" onclick="event.stopPropagation()">
+            <div class="map-modal-header">
+                <div class="map-modal-title">
+                    <i class="fas fa-map-marked-alt"></i> خريطة المنيو والأقسام
+                </div>
+                <button class="map-close-btn" onclick="closeMapModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="map-modal-body">
+                <table class="map-table">
+                    <thead>
+                        <tr>
+                            <th>اسم القسم</th>
+                            <th>الصنف</th>
+                            <th>المكونات</th>
+                            <th>السعر</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mapTableBody">
+                        <!-- يتم تعبئتها ديناميكياً -->
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -1182,6 +1360,7 @@
             renderPopularProducts();
             renderReviews();
             startCarousel();
+            buildMapTable();
         });
 
         function toggleTheme() {
@@ -1201,6 +1380,40 @@
             if (tabName === 'cart') {
                 renderCartDetails();
             }
+        }
+
+        function openMapModal() {
+            document.getElementById('mapModalOverlay').classList.add('active');
+        }
+
+        function closeMapModal(event) {
+            if (!event || event.target.id === 'mapModalOverlay' || event.target.classList.contains('map-close-btn') || event.target.closest('.map-close-btn')) {
+                document.getElementById('mapModalOverlay').classList.remove('active');
+            }
+        }
+
+        function buildMapTable() {
+            const tbody = document.getElementById('mapTableBody');
+            let html = '';
+            
+            // تجميع الأطباق حسب الأقسام
+            const categories = [...new Set(rawProducts.map(p => p.Category))];
+            
+            categories.forEach(cat => {
+                const items = rawProducts.filter(p => p.Category === cat);
+                items.forEach((item, index) => {
+                    html += `
+                        <tr>
+                            ${index === 0 ? `<td rowspan="${items.length}" class="category-row-header" style="vertical-align: middle;">${cat}</td>` : ''}
+                            <td><strong>${item.name}</strong></td>
+                            <td>${item.desc}</td>
+                            <td style="color:var(--primary-gold); font-weight:bold;">${item.price.toLocaleString()} د.ع</td>
+                        </tr>
+                    `;
+                });
+            });
+
+            tbody.innerHTML = html;
         }
 
         function handleSearch() {
@@ -1450,13 +1663,13 @@
             message += `\n💰 **المجموع الكلي:** ${grandTotal.toLocaleString()} د.ع\n\n`;
 
             if (currentOrderType === 'inhouse') {
-                const table = document.getElementById('tableNum') ? document.getElementById('tableNum').value : '';
+                const table = document.getElementById('tableNum') ? document.getElementById('tableNum'].value : '';
                 if (!table) { alert("يرجى إدخال رقم الطاولة"); return; }
                 message += `🪑 **نوع الطلب:** داخل المطعم\n📍 **رقم الطاولة:** ${table}`;
             } else {
-                const name = document.getElementById('custName') ? document.getElementById('custName').value : '';
-                const phone = document.getElementById('custPhone') ? document.getElementById('custPhone').value : '';
-                const address = document.getElementById('custAddress') ? document.getElementById('custAddress').value : '';
+                const name = document.getElementById('custName') ? document.getElementById('custName'].value : '';
+                const phone = document.getElementById('custPhone') ? document.getElementById('custPhone'].value : '';
+                const address = document.getElementById('custAddress') ? document.getElementById('custAddress'].value : '';
                 if (!name || !phone || !address) { alert("يرجى ملء جميع حقول بيانات التوصيل"); return; }
                 message += `🛵 **نوع الطلب:** دليفري / توصيل\n👤 **الاسم:** ${name}\n📞 **رقم الهاتف:** ${phone}\n📍 **العنوان:** ${address}`;
             }
