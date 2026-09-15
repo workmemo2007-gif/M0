@@ -361,13 +361,126 @@
             cursor: pointer;
         }
 
+        /* --- زر خريطة المنيو والجدول المنبثق (مودال) --- */
+        .menu-map-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .menu-map-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+        }
+
+        /* تصميم المودال (النافذة المنبثقة للجدول) */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-content {
+            background: var(--bg-card);
+            border: 1px solid var(--primary-gold);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            left: 15px;
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid var(--primary-gold);
+            color: var(--primary-gold);
+            width: 30px; height: 30px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        .modal-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--primary-gold);
+            text-align: center;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        /* تصميم الجدول الزجاجي المستوحى من الصورة */
+        .menu-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.78rem;
+            text-align: center;
+            overflow: hidden;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+        .menu-table th, .menu-table td {
+            padding: 9px 6px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .menu-table th {
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--primary-gold);
+            font-weight: 800;
+        }
+        .menu-table tr:last-child td {
+            border-bottom: none;
+        }
+        .menu-table tbody tr:hover {
+            background: rgba(212, 175, 55, 0.05);
+        }
+
         /* =========================================================
            Folder Card 3D Component Styles (Grid Layout 2x2/3 cols)
            ========================================================= */
         .folder-card-wrapper {
             display: flex;
             justify-content: center;
-            margin: 270px 0 40px; /* مسافة علوية كافية لظهور الملفات بشكل شبكي متناسق */
+            margin: 270px 0 40px;
             direction: ltr;
         }
 
@@ -532,7 +645,6 @@
           text-shadow: 0 0 10px rgba(255, 255, 255, 1);
         }
 
-        /* --- تصميم الملفات بنظام الشبكة (Grid) --- */
         .file {
           position: absolute;
           bottom: 5px;
@@ -546,18 +658,16 @@
           direction: rtl;
         }
 
-        /* توزيع الأعمدة والصفوف بوضوح (يسار ويمين، 4 صفوف) */
         .file-left { left: 6px; }
         .file-right { right: 6px; }
 
-        /* ألوان الأقسام الـ 7 */
         .file-1 { background: linear-gradient(135deg, #ff416c, #ff4b2b); z-index: 27; }
         .file-2 { background: linear-gradient(135deg, #f7971e, #ffd200); z-index: 26; }
         .file-3 { background: linear-gradient(135deg, #56ab2f, #a8e063); z-index: 25; }
         .file-4 { background: linear-gradient(135deg, #00c6ff, #0072ff); z-index: 24; }
         .file-5 { background: linear-gradient(135deg, #f80759, #bc4e9c); z-index: 23; }
         .file-6 { background: linear-gradient(135deg, #11998e, #38ef7d); z-index: 22; }
-        .file-7 { background: linear-gradient(135deg, #8e2de2, #4a00e0); z-index: 21; width: 248px; left: 6px; } /* الملف السابع عريض في الأسفل */
+        .file-7 { background: linear-gradient(135deg, #8e2de2, #4a00e0); z-index: 21; width: 248px; left: 6px; }
 
         .shine {
           position: absolute;
@@ -594,23 +704,14 @@
           transform: translateY(0);
         }
 
-        /* --- تحريك الملفات إلى مواضع الشبكة الدقيقة عند الفتح --- */
-        /* الصف الأول (فوق بعض: اليمين واليسار) */
         .folder-toggle:checked ~ .folder-container .file-1 { transform: translateY(-240px); }
         .folder-toggle:checked ~ .folder-container .file-2 { transform: translateY(-240px); }
-        
-        /* الصف الثاني */
         .folder-toggle:checked ~ .folder-container .file-3 { transform: translateY(-172px); }
         .folder-toggle:checked ~ .folder-container .file-4 { transform: translateY(-172px); }
-
-        /* الصف الثالث */
         .folder-toggle:checked ~ .folder-container .file-5 { transform: translateY(-104px); }
         .folder-toggle:checked ~ .folder-container .file-6 { transform: translateY(-104px); }
-
-        /* الصف الرابع (ملف فردي عريض في الأسفل) */
         .folder-toggle:checked ~ .folder-container .file-7 { transform: translateY(-36px); }
 
-        /* تأثير التمرير واللمس */
         .folder-toggle:checked ~ .folder-container .file:hover { cursor: pointer; filter: brightness(1.15); }
         .folder-toggle:checked ~ .folder-container .file-1:hover { transform: translateY(-245px) scale(1.02); }
         .folder-toggle:checked ~ .folder-container .file-2:hover { transform: translateY(-245px) scale(1.02); }
@@ -983,6 +1084,12 @@
 
     <!-- PAGE 2: CATEGORIES -->
     <div id="categoriesPage" class="tab-page">
+        
+        <!-- زر خريطة المنيو الجديد -->
+        <button class="menu-map-btn" onclick="openMenuMapModal()">
+            <i class="fas fa-map-marked-alt"></i> خريطة المنيو والأقسام (عرض الجدول)
+        </button>
+
         <div class="section-title"><i class="fas fa-folder-open"></i> أقسام القائمة (انقر على المجلد للأصناف)</div>
         
         <!-- Folder Card 3D Component -->
@@ -1105,6 +1212,67 @@
                 </div>
             </div>
 
+        </div>
+    </div>
+
+    <!-- نافذة منبثقة (مودال) جدول خريطة المنيو -->
+    <div class="modal-overlay" id="menuMapModal" onclick="closeMenuMapModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-close" onclick="closeMenuMapModalDirect()"><i class="fas fa-times"></i></div>
+            <div class="modal-title"><i class="fas fa-map-marked-alt"></i> خريطة المنيو والأقسام</div>
+            
+            <table class="menu-table">
+                <thead>
+                    <tr>
+                        <th>اسم القسم</th>
+                        <th>الصنف</th>
+                        <th>المكونات</th>
+                        <th>السعر</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="2" style="font-weight:bold; color:var(--primary-gold);">المقبلات</td>
+                        <td>حمص بطحينية</td>
+                        <td>حمص ناعم وزيت زيتون</td>
+                        <td>1,500 د.ع</td>
+                    </tr>
+                    <tr>
+                        <td>فنكر</td>
+                        <td>بطاطا مقلية مقرمشة</td>
+                        <td>2,000 د.ع</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" style="font-weight:bold; color:var(--primary-gold);">شاورما الدجاج</td>
+                        <td>صاج دجاج</td>
+                        <td>خبز لبناني - دجاج - ثومية</td>
+                        <td>3,000 د.ع</td>
+                    </tr>
+                    <tr>
+                        <td>وجبة عربي</td>
+                        <td>صاج مقطع - بطاطا - بيبسي</td>
+                        <td>5,000 د.ع</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold; color:var(--primary-gold);">شاورما اللحم</td>
+                        <td>صاج لحم</td>
+                        <td>خبز لبناني - طرطور</td>
+                        <td>5,000 د.ع</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold; color:var(--primary-gold);">فروج مشوي</td>
+                        <td>فروج شريف مشوي</td>
+                        <td>دجاج شوي - بطاطا - ثومية</td>
+                        <td>13,000 د.ع</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold; color:var(--primary-gold);">المشروبات</td>
+                        <td>مشروب غازي علبة</td>
+                        <td>مشروب غازي بارد علبة</td>
+                        <td>500 د.ع</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -1450,18 +1618,29 @@
             message += `\n💰 **المجموع الكلي:** ${grandTotal.toLocaleString()} د.ع\n\n`;
 
             if (currentOrderType === 'inhouse') {
-                const table = document.getElementById('tableNum') ? document.getElementById('tableNum').value : '';
+                const table = document.getElementById('tableNum') ? document.getElementById('tableNum'].value : '';
                 if (!table) { alert("يرجى إدخال رقم الطاولة"); return; }
                 message += `🪑 **نوع الطلب:** داخل المطعم\n📍 **رقم الطاولة:** ${table}`;
             } else {
-                const name = document.getElementById('custName') ? document.getElementById('custName').value : '';
-                const phone = document.getElementById('custPhone') ? document.getElementById('custPhone').value : '';
-                const address = document.getElementById('custAddress') ? document.getElementById('custAddress').value : '';
+                const name = document.getElementById('custName') ? document.getElementById('custName'].value : '';
+                const phone = document.getElementById('custPhone') ? document.getElementById('custPhone'].value : '';
+                const address = document.getElementById('custAddress') ? document.getElementById('custAddress'].value : '';
                 if (!name || !phone || !address) { alert("يرجى ملء جميع حقول بيانات التوصيل"); return; }
                 message += `🛵 **نوع الطلب:** دليفري / توصيل\n👤 **الاسم:** ${name}\n📞 **رقم الهاتف:** ${phone}\n📍 **العنوان:** ${address}`;
             }
 
             window.open(`https://wa.me/${targetPhone}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        /* دوال التحكم بالنافذة المنبثقة لجدول خريطة المنيو */
+        function openMenuMapModal() {
+            document.getElementById('menuMapModal').classList.add('active');
+        }
+        function closeMenuMapModal(event) {
+            document.getElementById('menuMapModal').classList.remove('active');
+        }
+        function closeMenuMapModalDirect() {
+            document.getElementById('menuMapModal').classList.remove('active');
         }
     </script>
 </body>
